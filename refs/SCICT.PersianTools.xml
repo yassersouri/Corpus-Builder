@@ -99,6 +99,16 @@
             Persian Characters which are always seperate, and cannot stick to a next char
             </summary>
         </member>
+        <member name="F:SCICT.NLP.Persian.Constants.PersianAlphabets.PseudoPersianAlphabet">
+            <summary>
+             Pseudo letters like Shaddah and Fathatan
+            </summary>
+        </member>
+        <member name="F:SCICT.NLP.Persian.Constants.PersianAlphabets.Erabs">
+            <summary>
+            Erabs
+            </summary>
+        </member>
         <member name="M:SCICT.NLP.Persian.Constants.PersianAlphabets.Load">
             <summary>
             Loads this instance.
@@ -164,47 +174,47 @@
              Vowel letters
             </summary>
         </member>
-        <member name="T:SCICT.NLP.Persian.Constants.HomophoneLetters">
+        <member name="T:SCICT.NLP.Persian.Constants.PersianHomophoneLetters">
             <summary>
              Homophone letters in Persian, homophone words are those that can pronounce the same
             </summary>
         </member>
-        <member name="F:SCICT.NLP.Persian.Constants.HomophoneLetters.ZainFamily">
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomophoneLetters.ZainFamily">
             <summary>
              Zain homophone family
             </summary>
         </member>
-        <member name="F:SCICT.NLP.Persian.Constants.HomophoneLetters.SeenFamily">
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomophoneLetters.SeenFamily">
             <summary>
              Seen homophone family
             </summary>
         </member>
-        <member name="F:SCICT.NLP.Persian.Constants.HomophoneLetters.TehFamily">
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomophoneLetters.TehFamily">
             <summary>
              Teh homophone family
             </summary>
         </member>
-        <member name="F:SCICT.NLP.Persian.Constants.HomophoneLetters.GhainFamily">
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomophoneLetters.GhainFamily">
             <summary>
              Ghain homophone family
             </summary>
         </member>
-        <member name="F:SCICT.NLP.Persian.Constants.HomophoneLetters.HahFamily">
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomophoneLetters.HahFamily">
             <summary>
              Hah homophone family
             </summary>
         </member>
-        <member name="F:SCICT.NLP.Persian.Constants.HomophoneLetters.AlefFamily">
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomophoneLetters.AlefFamily">
             <summary>
              Alef homophone family
             </summary>
         </member>
-        <member name="F:SCICT.NLP.Persian.Constants.HomophoneLetters.HamzaFamily">
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomophoneLetters.HamzaFamily">
             <summary>
              Hamza homophone family
             </summary>
         </member>
-        <member name="M:SCICT.NLP.Persian.Constants.HomophoneLetters.AreHomophone(System.Char,System.Char)">
+        <member name="M:SCICT.NLP.Persian.Constants.PersianHomophoneLetters.AreHomophone(System.Char,System.Char)">
             <summary>
              Check if two letters are homophone
             </summary>
@@ -212,7 +222,85 @@
             <param name="c2">c2</param>
             <returns>True if c1 and c2 are homophone</returns>
         </member>
-        <member name="P:SCICT.NLP.Persian.Constants.HomophoneLetters.AllHomoPhones">
+        <member name="P:SCICT.NLP.Persian.Constants.PersianHomophoneLetters.AllHomophones">
+            <summary>
+             Get all homophone letters
+            </summary>
+        </member>
+        <member name="T:SCICT.NLP.Persian.Constants.PersianHomoshapeLetters">
+            <summary>
+             Homoshape letters in Persian, homophone words are those that can pronounce the same
+            </summary>
+        </member>
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomoshapeLetters.AlefFamily">
+            <summary>
+             Alef homoshape family
+            </summary>
+        </member>
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomoshapeLetters.BeFamily">
+            <summary>
+             Be homoshape family
+            </summary>
+        </member>
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomoshapeLetters.TehFamily">
+            <summary>
+             Teh homoshape family
+            </summary>
+        </member>
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomoshapeLetters.HahFamily">
+            <summary>
+             Hah homoshape family
+            </summary>
+        </member>
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomoshapeLetters.XahFamily">
+            <summary>
+             Xah homoshape family
+            </summary>
+        </member>
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomoshapeLetters.DalFamily">
+            <summary>
+             Dal homoshape family
+            </summary>
+        </member>
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomoshapeLetters.ZehFamily">
+            <summary>
+             Zeh homoshape family
+            </summary>
+        </member>
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomoshapeLetters.ZainFamily">
+            <summary>
+             Zain homoshape family
+            </summary>
+        </member>
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomoshapeLetters.ZathFamily">
+            <summary>
+             Zath homoshape family
+            </summary>
+        </member>
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomoshapeLetters.GhainFamily">
+            <summary>
+             Ghain homoshape family
+            </summary>
+        </member>
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomoshapeLetters.KafFamily">
+            <summary>
+             Kaf homoshape family
+            </summary>
+        </member>
+        <member name="F:SCICT.NLP.Persian.Constants.PersianHomoshapeLetters.GhafFamily">
+            <summary>
+             Ghaf homoshape family
+            </summary>
+        </member>
+        <member name="M:SCICT.NLP.Persian.Constants.PersianHomoshapeLetters.AreHomoshape(System.Char,System.Char)">
+            <summary>
+             Check if two letters are homoshape
+            </summary>
+            <param name="c1">c1</param>
+            <param name="c2">c2</param>
+            <returns>True if c1 and c2 are homoshape</returns>
+        </member>
+        <member name="P:SCICT.NLP.Persian.Constants.PersianHomoshapeLetters.AllHomoshapes">
             <summary>
              Get all homophone letters
             </summary>
@@ -289,7 +377,7 @@
         </member>
         <member name="F:SCICT.NLP.Persian.Constants.StandardCharacters.StandardHalfSpace">
             <summary>
-            The Standard Half Space code in Persian keyboard
+            The Standard Half Space code in Persian keyboard: 0x200C
             </summary>
         </member>
         <member name="F:SCICT.NLP.Persian.Constants.StandardCharacters.StandardTashdid">
@@ -1274,6 +1362,17 @@
             <returns>The button pressed</returns>
         </member>
         <member name="M:SCICT.Utility.GUI.PersianMessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton)">
+            <summary>
+            Opens a persian message box.
+            </summary>
+            <param name="text">The message to be shown.</param>
+            <param name="caption">The caption of the message box.</param>
+            <param name="buttons">The buttons of the message box.</param>
+            <param name="icon">The icon to be shown.</param>
+            <param name="defaultButton">The default button.</param>
+            <returns>The button pressed</returns>
+        </member>
+        <member name="M:SCICT.Utility.GUI.PersianMessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton)">
             <summary>
             Opens a persian message box.
             </summary>
@@ -3545,6 +3644,16 @@
             	<c>true</c> if the specified character is white space; otherwise, <c>false</c>.
             </returns>
         </member>
+        <member name="M:SCICT.NLP.Utility.StringUtil.MakeStringVisible(System.String)">
+            <summary>
+            Returns a visible version of the string, by making
+            its whitespace and control characters visible
+            using well known escape sequences, or the equivalant 
+            hexa decimal value.
+            </summary>
+            <param name="str">The string to be made visible.</param>
+            <returns></returns>
+        </member>
         <member name="M:SCICT.NLP.Utility.StringUtil.IsWhiteSpace(System.String)">
             <summary>
             Determines whether the specified string includes only white space characters.
@@ -3650,6 +3759,7 @@
             <summary>
             Returns the number of word in the expression in which or before which the index occurs
             Since it is a count it can be regarded as a 1-based index.
+            [Seemingly this method is not used]
             </summary>
         </member>
         <member name="M:SCICT.NLP.Utility.StringUtil.WordStartIndex(System.String,System.Int32)">
@@ -3709,7 +3819,14 @@
         </member>
         <member name="M:SCICT.NLP.Utility.StringUtil.RemoveErab(System.String)">
             <summary>
-            Removes the erab characters from the input string.
+            Removes the erab characters from the input string except tashdid and fathatan
+            </summary>
+            <param name="word">The word to remove erab from</param>
+            <returns>The copy of the input string with its erab removed</returns>
+        </member>
+        <member name="M:SCICT.NLP.Utility.StringUtil.RemoveErabIncludingFathatan(System.String)">
+            <summary>
+            Removes the erab characters from the input string including tashdid and fathatan
             </summary>
             <param name="word">The word to remove erab from</param>
             <returns>The copy of the input string with its erab removed</returns>
@@ -3729,7 +3846,47 @@
             It does NOT apply Persian Char Filters.
             </summary>
         </member>
+        <member name="M:SCICT.NLP.Utility.StringUtil.IsNonStickingPersianChar(System.Char)">
+            <summary>
+            Determines whether the specified character is a non-sticking persian character, 
+            such as "و", "ر" and so on.
+            </summary>
+            <param name="ch">The character to inspect.</param>
+            <returns>
+            	<c>true</c> if the specified character is a non-sticking persian character; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:SCICT.NLP.Utility.StringUtil.OldIndexInRefinedString(System.String,System.Int32)">
+            <summary>
+            What would be the char index in the refined version of the string
+            </summary>
+            <param name="str">The not refined string; string should be trimmed beforehand.</param>
+            <param name="index">index in the not refined string</param>
+            <returns>corresponding index in the refined string</returns>
+        </member>
+        <member name="M:SCICT.NLP.Utility.StringUtil.OldIndexInNotRefinedStringOld(System.String,System.Int32)">
+            <summary>
+            Gets the char index in the original not-refined version of the refined string
+            </summary>
+            <param name="strNotRefined">The NOT refined string; string should be trimmed beforehand.</param>
+            <param name="indexInRefined">index in the refined string</param>
+            <returns>corresponding index in the not refined string</returns>
+        </member>
+        <member name="M:SCICT.NLP.Utility.StringUtil.IndexInNotFilterAndRefinedString(System.String,System.Int32)">
+            <summary>
+            Gets the char index in the original not-refined version of the refined string
+            </summary>
+            <param name="strNotRefined">The NOT refined string; string should be trimmed beforehand.</param>
+            <param name="indexInRefined">index in the refined string</param>
+            <returns>corresponding index in the not refined string</returns>
+        </member>
         <member name="M:SCICT.NLP.Utility.StringUtil.RefineAndFilterPersianWord(System.String)">
+            <summary>
+            Trims and normalizes spaces and half-spaces and removes both Erab and Mid-Spaces
+            and applies Persian Char Filters.
+            </summary>
+        </member>
+        <member name="M:SCICT.NLP.Utility.StringUtil.OldRefineAndFilterPersianWord(System.String)">
             <summary>
             Trims and normalizes spaces and half-spaces and removes both Erab and Mid-Spaces
             and applies Persian Char Filters.
@@ -3763,22 +3920,6 @@
             <param name="word">The word</param>
             <param name="ignoreList">The set of characters to be ignored.</param>
             <param name="ignoreCats">The categories to IGNORE</param>
-        </member>
-        <member name="M:SCICT.NLP.Utility.StringUtil.IndexInRefinedString(System.String,System.Int32)">
-            <summary>
-            What would be the char index in the refined version of the string
-            </summary>
-            <param name="str">The not refined string; string should be trimmed beforehand.</param>
-            <param name="index">index in the not refined string</param>
-            <returns>corresponding index in the refined string</returns>
-        </member>
-        <member name="M:SCICT.NLP.Utility.StringUtil.IndexInNotRefinedString(System.String,System.Int32)">
-            <summary>
-            Gets the char index in the original not-refined version of the refined string
-            </summary>
-            <param name="strNotRefined">The NOT refined string; string should be trimmed beforehand.</param>
-            <param name="indexInRefined">index in the refined string</param>
-            <returns>corresponding index in the not refined string</returns>
         </member>
         <member name="M:SCICT.NLP.Utility.StringUtil.IsArabicLetter(System.Char)">
             <summary>
@@ -3982,6 +4123,24 @@
             <param name="ch"></param>
             <returns></returns>
         </member>
+        <member name="M:SCICT.NLP.Utility.StringUtil.IsDecimalSeparator(System.Char)">
+            <summary>
+            Determines whether the specified character is a decimal separator character.
+            </summary>
+            <param name="ch">The ch.</param>
+            <returns>
+            	<c>true</c> if the specified character is a decimal separator character; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:SCICT.NLP.Utility.StringUtil.IsThousandSeparator(System.Char)">
+            <summary>
+            Determines whether the specified character is thousand-separator.
+            </summary>
+            <param name="ch">The ch.</param>
+            <returns>
+            	<c>true</c> if the specified character is thousand-separator; otherwise, <c>false</c>.
+            </returns>
+        </member>
         <member name="M:SCICT.NLP.Utility.StringUtil.ExtractWords(System.String)">
             <summary>
             Extracts words from the specified string of words. This is a general word extraction method.
@@ -3991,20 +4150,17 @@
             <param name="line">string of words to extract words from</param>
             <returns></returns>
         </member>
-        <member name="M:SCICT.NLP.Utility.StringUtil.ApplyWordBuildignRules(System.String)">
+        <member name="M:SCICT.NLP.Utility.StringUtil.ExtractParagraphs(System.String)">
             <summary>
-            applies word building rules to words recognized by the ExtractWords algorithm, 
-            e.g. it removes dashes from the beginning of the words
+            Extracts paragraphs from a given text. "\n" and "\r" characters or both are paragraph delimiters.
             </summary>
-            <param name="word">the word to apply the rules to</param>
+            <param name="text">The text to extract Paragraphs from.</param>
             <returns></returns>
         </member>
-        <member name="M:SCICT.NLP.Utility.StringUtil.IsHappeningInWord(System.Char)">
+        <member name="T:SCICT.NLP.Utility.WordTokenizer">
             <summary>
-            Determines whehter the specified character is allowed to occur inside a word
+            A general purpose (English, or Persian), customizable, and fast word tokenizer
             </summary>
-            <param name="c"></param>
-            <returns></returns>
         </member>
     </members>
 </doc>

@@ -37,9 +37,6 @@
     <Reference Include="SCICT.PersianTools">
       <HintPath>..\refs\SCICT.PersianTools.dll</HintPath>
     </Reference>
-    <Reference Include="SCICT.Utility">
-      <HintPath>..\refs\SCICT.Utility.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
