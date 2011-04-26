@@ -14,10 +14,11 @@ namespace Corpus_Builder
 
             try
             {
-				string dir = "D:\\crawler\\sites\\mehrnews\\";
+				string dir = "D:\\sample\\";
 
-
-				RefineAllFiles(dir);
+				string file = dir + "1143.txt";
+				PrintAllSentenses(file);
+				
             }
             catch (Exception e)
             {
@@ -26,6 +27,23 @@ namespace Corpus_Builder
                 Console.WriteLine(e.Message);
             }
         }
+
+		static void PrintAllSentenses(String file)
+		{
+			StreamReader sr = new StreamReader(file);
+			String line = sr.ReadToEnd();
+			sr.Close();
+			String[] sentences;
+			sentences = StringUtil.ExtractPersianSentences(line);
+			StreamWriter sw = new StreamWriter("test.txt");
+			for(int i = 0; i < sentences.Length; i++)
+			{
+				sw.WriteLine(sentences[i]);
+				Console.WriteLine(sentences[i]);
+			}
+			sw.Flush();
+			sw.Close();
+		}
 
 
         static void RefineAllFiles(String dir)
