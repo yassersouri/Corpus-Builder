@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SCICT.NLP.Utility;
+using SCICT.NLP.Persian;
 using System.IO;
 
 namespace Corpus_Builder
@@ -16,11 +17,10 @@ namespace Corpus_Builder
             {
 				string dir = "D:\\sample\\";
 				string file = "1143.txt";
-				string sourceFile = dir + file;
 				string destinationDir = dir + "corpus\\";
 				string destinationFile = destinationDir + file;
 
-				SeparateAllSentences(dir, destinationDir);
+				SeparateAllSentencesAndWords(dir,destinationDir);
 				
             }
             catch (Exception e)
@@ -31,7 +31,16 @@ namespace Corpus_Builder
             }
         }
 
-		static void SeparateAllSentences(String sourceDir, String destinationDir){
+		static WordPatternInfo[] SeparateWords(string sentence){
+			
+			WordTokenizerOptions wto = WordTokenizerOptions.ReturnPunctuations;
+			WordTokenizer st = new WordTokenizer(wto);
+			
+			WordPatternInfo[] wpi = st.ExtractWords(sentence).ToArray();
+			return wpi;
+		}
+
+		static void SeparateAllSentencesAndWords(String sourceDir, String destinationDir){
 			string[] sourcefiles = Directory.GetFiles(sourceDir);
 			Directory.CreateDirectory(destinationDir);
 
@@ -51,14 +60,14 @@ namespace Corpus_Builder
 
 				destinationfile = destinationDir + fileName;
 
-				SeparateSentences(sourcefile, destinationfile);
+				SeparateSentencesAndWords(sourcefile, destinationfile);
 
 				Console.WriteLine("Extracted sentences of: " + sourcefile);
 			}
 
 		}
 
-		static void SeparateSentences(String sourceFile, String destinationFile)
+		static void SeparateSentencesAndWords(String sourceFile, String destinationFile)
 		{
 			StreamReader sr = new StreamReader(sourceFile);
 			String line = sr.ReadToEnd();
@@ -66,15 +75,23 @@ namespace Corpus_Builder
 			String[] sentences;
 			sentences = StringUtil.ExtractPersianSentences(line);
 			StreamWriter sw = new StreamWriter(destinationFile);
+			string sentence;
+			WordPatternInfo[] wpi;
 			for(int i = 0; i < sentences.Length; i++)
 			{
-				sw.WriteLine(sentences[i]);
-				sw.WriteLine();
+				sentence = sentences[i];
+				wpi = SeparateWords(sentence);
+
+				for(int j = 0; j < wpi.Length; j++)
+				{
+					sw.Write((j+1) + "\t");
+					sw.Write(wpi[j].Word + "\n");
+				}
+
+				sw.Write("\n");
 			}
-			sw.Flush();
 			sw.Close();
 		}
-
 
         static void RefineAllFiles(String dir)
         {
@@ -96,7 +113,6 @@ namespace Corpus_Builder
 
 			TextWriter tw = new StreamWriter(file);
 			tw.Write(line);
-			tw.Flush();
 			tw.Close();
         }
     }
