@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corpus Builder", "Corpus Builder\Corpus Builder.csproj", "{64E8CD9C-EAB2-4A86-91DF-3131C6EE4B48}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagger", "Tagger\Tagger.csproj", "{75547E0A-6BB4-4202-9C6C-8F24070C8891}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,6 +15,10 @@ Global
 		{64E8CD9C-EAB2-4A86-91DF-3131C6EE4B48}.Debug|x86.Build.0 = Debug|x86
 		{64E8CD9C-EAB2-4A86-91DF-3131C6EE4B48}.Release|x86.ActiveCfg = Release|x86
 		{64E8CD9C-EAB2-4A86-91DF-3131C6EE4B48}.Release|x86.Build.0 = Release|x86
+		{75547E0A-6BB4-4202-9C6C-8F24070C8891}.Debug|x86.ActiveCfg = Debug|x86
+		{75547E0A-6BB4-4202-9C6C-8F24070C8891}.Debug|x86.Build.0 = Debug|x86
+		{75547E0A-6BB4-4202-9C6C-8F24070C8891}.Release|x86.ActiveCfg = Release|x86
+		{75547E0A-6BB4-4202-9C6C-8F24070C8891}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
