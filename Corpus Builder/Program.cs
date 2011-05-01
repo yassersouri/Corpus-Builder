@@ -12,7 +12,6 @@ namespace Corpus_Builder
     {
         static void Main(string[] args)
         {
-
             try
             {
 				string dir = "D:\\sample\\";
@@ -20,12 +19,12 @@ namespace Corpus_Builder
 				string destinationDir = dir + "corpus\\";
 				string destinationFile = destinationDir + file;
 
+				RefineAllFiles(dir);
 				SeparateAllSentencesAndWords(dir,destinationDir);
 				
             }
             catch (Exception e)
             {
-                // Let the user know what went wrong.
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);
             }
@@ -55,8 +54,8 @@ namespace Corpus_Builder
 				sourcefile = sourcefiles[i];
 
 				lastIndex = sourcefile.LastIndexOf('\\');
-				len = sourcefile.ToString().Length;
-				fileName = sourcefile.ToString().Substring(lastIndex+1, len-lastIndex-1);
+				len = sourcefile.Length;
+				fileName = sourcefile.Substring(lastIndex+1, len-lastIndex-1);
 
 				destinationfile = destinationDir + fileName;
 
@@ -98,7 +97,7 @@ namespace Corpus_Builder
 			string[] files = Directory.GetFiles(dir);
 			for(int i = 0; i < files.Length; i++){
 				RefineFile(files[i]);
-				Console.WriteLine("Refined file: " + files[i].ToString());
+				Console.WriteLine("Refined file: " + files[i]);
 			}
         }
 
