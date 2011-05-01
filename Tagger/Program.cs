@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Tagger;
 using System.IO;
+using SCICT.NLP.Utility.Verbs;
 
 namespace Tagger
 {
@@ -57,6 +58,8 @@ namespace Tagger
 			string line;
 			string word;
 			int pos;
+			string tense_person_string;
+			string token_number_string;
 			
 			for(int i = 0; i < words.Length-1; i++){
 				line = words[i];
@@ -66,8 +69,14 @@ namespace Tagger
 
 					token = tagger.TaggerHelper(word);
 
-					line += "\t" + token.Lemma + "\t" + token.POSTag + "\t" + token.Person + "\t" + token.Number;
+					//if INVALID print "_" instead
+					if(token.Person == ENUM_TENSE_PERSON.INVALID) tense_person_string = "_";
+					else tense_person_string = token.Person.ToString();
+					//if INVALID print "_" instead
+					if(token.Number.ToString() == "INVALID") token_number_string = "_";
+					else token_number_string = token.Number.ToString();
 
+					line += "\t" + token.Lemma + "\t" + token.POSTag + "\t" + tense_person_string + "\t" + token_number_string;
 				}
 				sw.Write(line + "\n");
 			}
