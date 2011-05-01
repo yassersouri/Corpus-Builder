@@ -34,11 +34,35 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SCICT.NLP.MorphologyAnalyser">
+      <HintPath>refs\SCICT.NLP.MorphologyAnalyser.dll</HintPath>
+    </Reference>
+    <Reference Include="SCICT.NLP.TextProofing.Punctuation">
+      <HintPath>refs\SCICT.NLP.TextProofing.Punctuation.dll</HintPath>
+    </Reference>
+    <Reference Include="SCICT.NLP.TextProofing.SpellChecker">
+      <HintPath>refs\SCICT.NLP.TextProofing.SpellChecker.dll</HintPath>
+    </Reference>
+    <Reference Include="SCICT.NLP.Utility.LanguageModel">
+      <HintPath>refs\SCICT.NLP.Utility.LanguageModel.dll</HintPath>
+    </Reference>
     <Reference Include="SCICT.NLP.Utility.Lemmatization">
       <HintPath>refs\SCICT.NLP.Utility.Lemmatization.dll</HintPath>
     </Reference>
+    <Reference Include="SCICT.NLP.Utility.PinglishConverter">
+      <HintPath>refs\SCICT.NLP.Utility.PinglishConverter.dll</HintPath>
+    </Reference>
+    <Reference Include="SCICT.NLP.Utility.StringDistance">
+      <HintPath>refs\SCICT.NLP.Utility.StringDistance.dll</HintPath>
+    </Reference>
     <Reference Include="SCICT.NLP.Utility.Verbs">
       <HintPath>refs\SCICT.NLP.Utility.Verbs.dll</HintPath>
+    </Reference>
+    <Reference Include="SCICT.NLP.Utility.WordContainer">
+      <HintPath>refs\SCICT.NLP.Utility.WordContainer.dll</HintPath>
+    </Reference>
+    <Reference Include="SCICT.NLP.Utility.WordGenerator">
+      <HintPath>refs\SCICT.NLP.Utility.WordGenerator.dll</HintPath>
     </Reference>
     <Reference Include="SCICT.PersianTools">
       <HintPath>refs\SCICT.PersianTools.dll</HintPath>
@@ -52,6 +76,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="YAXLib">
+      <HintPath>refs\YAXLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
