@@ -15,9 +15,7 @@ namespace Corpus_Builder
             try
             {
 				string dir = "D:\\sample\\";
-				string file = "1143.txt";
 				string destinationDir = dir + "corpus\\";
-				string destinationFile = destinationDir + file;
 
 				RefineAllFiles(dir);
 				SeparateAllSentencesAndWords(dir,destinationDir);
