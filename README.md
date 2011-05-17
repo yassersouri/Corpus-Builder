@@ -15,7 +15,7 @@ Check [here](https://github.com/yassersouri/Corpus-Builder/blob/master/Corpus%20
 ####References
 This project uses lots of SCICT.NLP DLLs which is built by [SCICT](http://SCICT.ir) and is opensource under GPL.
 You can find the source code [here](http://sourceforge.net/projects/virastyar/). It also uses YAXLib.
-[Tagger.cs](https://github.com/yassersouri/Corpus-Builder/blob/master/Tagger/Tagger.cs) and [Token.cs](https://github.com/yassersouri/Corpus-Builder/blob/master/Tagger/Token.cs) is written by ?.
+[Tagger.cs](https://github.com/yassersouri/Corpus-Builder/blob/master/Tagger/Tagger.cs) and [Token.cs](https://github.com/yassersouri/Corpus-Builder/blob/master/Tagger/Token.cs) is written by [Mohammad Hedayati](mhedayati@ce.sharif.edu).
 ####What it does
 Output of the [Corpus Builder poject](https://github.com/yassersouri/Corpus-Builder/tree/master/Corpus%20Builder) is a set of words in each line where each sentence ends with an empty line at the end.
 Each word then is tagged with the tagger and its Lemma POStag person and number is extracted. these information is then placed at the same line of the word with tab separated.
