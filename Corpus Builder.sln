@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corpus Builder", "Corpus Bu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagger", "Tagger\Tagger.csproj", "{75547E0A-6BB4-4202-9C6C-8F24070C8891}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerbInflector", "VerbInflector\VerbInflector.csproj", "{59167913-EB7C-41FB-806B-390D964FD605}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -19,6 +21,10 @@ Global
 		{75547E0A-6BB4-4202-9C6C-8F24070C8891}.Debug|x86.Build.0 = Debug|x86
 		{75547E0A-6BB4-4202-9C6C-8F24070C8891}.Release|x86.ActiveCfg = Release|x86
 		{75547E0A-6BB4-4202-9C6C-8F24070C8891}.Release|x86.Build.0 = Release|x86
+		{59167913-EB7C-41FB-806B-390D964FD605}.Debug|x86.ActiveCfg = Debug|x86
+		{59167913-EB7C-41FB-806B-390D964FD605}.Debug|x86.Build.0 = Debug|x86
+		{59167913-EB7C-41FB-806B-390D964FD605}.Release|x86.ActiveCfg = Release|x86
+		{59167913-EB7C-41FB-806B-390D964FD605}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
