@@ -1,0 +1,838 @@
+1	òÌ›Ì 	òÌ›Ì 	N	-	SINGULAR
+2	¬À«—	¬À«—	N	-	SINGULAR
+3	”Ì‰„«Ì	”Ì‰„«	AJ	-	-
+4	«Ì—«‰	«Ì—«‰	N	-	SINGULAR
+5	—«	—«	POSTP	-	-
+6	œ—	œ—	P	-	-
+7	”«·Â«Ì	”«·Â«	AJ	-	-
+8	«ŒÌ—	«ŒÌ—	AJ	-	-
+9	çêÊ‰Â	çêÊ‰Â	ADV	-	-
+10	«—“Ì«»Ì	«—“Ì«»	AJ	-	-
+11	„Ì	„Ì	AJ	-	-
+12	ò‰Ìœ	ò‰Ìœ	V	-	-
+13	ø	ø	PUNC	-	-
+
+
+1	œ—	œ—	P	-	-
+2	Ìò	Ìò	NUM	-	-
+3	‰ê«Â	‰ê«Â	N	-	SINGULAR
+4	ò·Ì	ò·Ì	AJ	-	-
+5	„Ì	„Ì	AJ	-	-
+6	 Ê«‰	 Ê«‰	N	-	SINGULAR
+7	ê› 	ê› 	V	-	-
+8	¬À«—Ì	¬À«—	AJ	-	-
+9	òÂ	òÂ	CONJ	-	-
+10	œ—	œ—	P	-	-
+11	”«·Â«Ì	”«·Â«	AJ	-	-
+12	ê–‘ Â	ê–‘ Â	AJ	-	-
+13	«—«ÌÂ	«—«ÌÂ	N	-	SINGULAR
+14	‘œÂ	‘œÂ	V	-	-
+15	«‰œ	«‰œ	N	-	SINGULAR
+16	«“	«“	P	-	-
+17	òÌ›Ì 	òÌ›Ì 	N	-	SINGULAR
+18	»Â —Ì	»Â —	AJ	-	-
+19	»—ŒÊ—œ«—	»—ŒÊ—œ«—	AJ	-	-
+20	Â” ‰œ	Â” 	V	-	-
+21	.	.	PUNC	-	-
+
+1	«Ì‰	«Ì‰	DET	-	-
+2	„”∆·Â	„”∆·Â	N	-	SINGULAR
+3	«“	«“	P	-	-
+4	œÊ	œÊ	NUM	-	-
+5	ÃÂ 	ÃÂ 	N	-	SINGULAR
+6	ﬁ«»·	ﬁ«»·	AJ	-	-
+7	»——”Ì	»——”Ì	N	-	SINGULAR
+8	«” 	«” 	V	-	-
+9	.	.	PUNC	-	-
+
+1	‰Œ” 	‰Œ” 	NUM	-	-
+2	«Ì‰òÂ	«Ì‰òÂ	CONJ	-	-
+3	 Ê·Ìœ« 	 Ê·Ìœ	N	-	SINGULAR
+4	”«·Â«Ì	”«·Â«	AJ	-	-
+5	ÅÌ‘	ÅÌ‘	ADV	-	-
+6	«“	«“	P	-	-
+7	›Ì·„»—œ«—Ì	›Ì·„»—œ«—Ì	N	-	SINGULAR
+8	Â«Ì	Â«Ì	N	-	SINGULAR
+9	ÂÊ‘„‰œ«‰Â	ÂÊ‘„‰œ«‰Â	AJ	-	-
+10	»Â—Â	»Â—Â	N	-	SINGULAR
+11	„‰œ	„‰œ	N	-	SINGULAR
+12	»Êœ‰œÊ	»Êœ‰œÊ	UserPOS	-	-
+13	»Ì‰‰œÂ	»Ì‰‰œÂ	N	-	SINGULAR
+14	«“	«“	P	-	-
+15	ÿ—Ìﬁ	ÿ—Ìﬁ	N	-	SINGULAR
+16	„‘«ÂœÂ	„‘«ÂœÂ	N	-	SINGULAR
+17	 ’«ÊÌ—	 ’«ÊÌ—	N	-	SINGULAR
+18	»Â	»Â	P	-	-
+19	„›«ÂÌ„	„›«ÂÌ„	N	-	SINGULAR
+20	⁄„Ìﬁ	⁄„Ìﬁ	AJ	-	-
+21	œ” 	œ” 	N	-	SINGULAR
+22	„Ì	„Ì	AJ	-	-
+23	Ì«› 	Ì«› 	V	-	-
+24	°	°	PUNC	-	-
+25	œÊ„	œÊ„	NUM	-	-
+26	«Ì‰òÂ	«Ì‰òÂ	CONJ	-	-
+27	„÷„Ê‰	„÷„Ê‰	N	-	SINGULAR
+28	›Ì·„Â«	›Ì·„	N	-	PLURAL
+29	»”Ì«—	»”Ì«—	ADV	-	-
+30	ﬁÊÌ	ﬁÊÌ	AJ	-	-
+31	»Êœ‰œ	»Êœ‰œ	V	-	-
+32	.	.	PUNC	-	-
+
+1	ò«—ê—œ«‰Â«Ì	ò«—ê—œ«‰Â	AJ	-	-
+2	«Ì—«‰Ì	«Ì—«‰Ì	AJ	-	-
+3	Â„Ê«—Â	Â„Ê«—Â	ADV	-	-
+4	À«» 	À«» 	AJ	-	-
+5	ò—œÂ	ò—œÂ	V	-	-
+6	«‰œ	«‰œ	N	-	SINGULAR
+7	òÂ	òÂ	CONJ	-	-
+8	‰ê«ÂÌ	‰ê«Â	AJ	-	-
+9	Õ«òÌ	Õ«òÌ	AJ	-	-
+10	«“	«“	P	-	-
+11	‰ﬁœ	‰ﬁœ	N	-	SINGULAR
+12	œ«—‰œ	œ«—‰œ	V	-	-
+13	Ê	Ê	CONJ	-	-
+14	œ—	œ—	P	-	-
+15	„”«∆·	„”«∆·	N	-	SINGULAR
+16	„Â„	„Â„	AJ	-	-
+17	«Ã „«⁄Ì	«Ã „«⁄	AJ	-	-
+18	«ŸÂ«—	«ŸÂ«—	N	-	SINGULAR
+19	‰Ÿ—„Ì	‰Ÿ—	N	-	SINGULAR
+20	ò‰‰œ«„«	ò‰‰œ«„«	UserPOS	-	-
+21	«Ì‰	«Ì‰	DET	-	-
+22	«„—	«„—	N	-	SINGULAR
+23	œ—	œ—	P	-	-
+24	„Õ’Ê·« 	„Õ’Ê·« 	N	-	SINGULAR
+25	«„”«·	«„”«·	ADV	-	-
+26	œÌœÂ	œÌœÂ	V	-	-
+27	‰„Ì	‰„	AJ	-	-
+28	‘Êœ	‘Êœ	V	-	-
+29	.	.	PUNC	-	-
+
+1	«Ì‰êÊ‰Â	«Ì‰êÊ‰Â	ADV	-	-
+2	»Â	»Â	P	-	-
+3	‰Ÿ—	‰Ÿ—	N	-	SINGULAR
+4	„Ì	„Ì	AJ	-	-
+5	—”œ	—”œ	V	-	-
+6	òÂ	òÂ	CONJ	-	-
+7	Â„êÌ	Â„êÌ	PRO	-	-
+8	Â„	Â„	CONJ	-	-
+9	ÅÌ„«‰	ÅÌ„«‰	N	-	SINGULAR
+10	‘œÂ	‘œÂ	V	-	-
+11	«‰œ	«‰œ	N	-	SINGULAR
+12	 «	 «	P	-	-
+13	»—	»—	P	-	-
+14	—ÊÌ	—ÊÌ	N	-	SINGULAR
+15	Å—ÊéÂ	Å—ÊéÂ	N	-	SINGULAR
+16	Â«Ì	Â«Ì	N	-	SINGULAR
+17	„‘«»Â	„‘«»Â	AJ	-	-
+18	ò«—	ò«—	N	-	SINGULAR
+19	ò‰‰œ	ò‰‰œ	V	-	-
+20	.	.	PUNC	-	-
+
+1	”Ì‰„«Ì	”Ì‰„«	AJ	-	-
+2	«Ì—«‰	«Ì—«‰	N	-	SINGULAR
+3	œ—	œ—	P	-	-
+4	”«·	”«·	N	-	SINGULAR
+5	ê–‘ Â	ê–‘ Â	AJ	-	-
+6	¬À«—Ì	¬À«—	AJ	-	-
+7	—«	—«	POSTP	-	-
+8	çÊ‰	çÊ‰	CONJ	-	-
+9	"	"	PUNC	-	-
+10	Œ«‰Â	Œ«‰Â	N	-	SINGULAR
+11	«Ì	«Ì	INT	-	-
+12	»Â	»Â	P	-	-
+13	—ÊÌ	—ÊÌ	N	-	SINGULAR
+14	¬»	¬»	N	-	SINGULAR
+15	"	"	PUNC	-	-
+16	Ê	Ê	CONJ	-	-
+17	"	"	PUNC	-	-
+18	«— ›«⁄	«— ›«⁄	N	-	SINGULAR
+19	Å” 	Å” 	N	-	SINGULAR
+20	"	"	PUNC	-	-
+21	«—«∆Â	«—«∆Â	N	-	SINGULAR
+22	œ«œ	œ«œ	V	-	-
+23	.	.	PUNC	-	-
+
+1	«Ì‰	«Ì‰	DET	-	-
+2	›Ì·„Â«	›Ì·„	N	-	PLURAL
+3	œ—	œ—	P	-	-
+4	⁄Ì‰	⁄Ì‰	N	-	SINGULAR
+5	Õ«·	Õ«·	N	-	SINGULAR
+6	òÂ	òÂ	CONJ	-	-
+7	„ ›«Ê 	„ ›«Ê 	AJ	-	-
+8	Â” ‰œ	Â” 	V	-	-
+9	œÌœê«ÂÂ«Ì	œÌœê«Â	N	-	PLURAL
+10	’«œﬁ«‰Â	’«œﬁ«‰Â	AJ	-	-
+11	›Ì·„”«“«‰	›Ì·„”«“«‰	N	-	SINGULAR
+12	—«	—«	POSTP	-	-
+13	»Â	»Â	P	-	-
+14	‰„«Ì‘	‰„«Ì‘	N	-	SINGULAR
+15	„Ì	„Ì	AJ	-	-
+16	ê–«—‰œ	ê–«—‰œ	V	-	-
+17	.	.	PUNC	-	-
+
+1	«Ì‰	«Ì‰	DET	-	-
+2	«„—	«„—	N	-	SINGULAR
+3	œ—	œ—	P	-	-
+4	 Ê·Ìœ« 	 Ê·Ìœ	N	-	SINGULAR
+5	«„”«·	«„”«·	ADV	-	-
+6	»—Ê“	»—Ê“	N	-	SINGULAR
+7	ç‰œ«‰Ì	ç‰œ«‰	ADV	-	-
+8	‰œ«—œ	‰œ«—œ	V	-	-
+9	.	.	PUNC	-	-
+
+1	œ—	œ—	P	-	-
+2	Ìò	Ìò	NUM	-	-
+3	ò·«„	ò·«„	N	-	SINGULAR
+4	„Ì	„Ì	AJ	-	-
+5	 Ê«‰	 Ê«‰	N	-	SINGULAR
+6	ê› 	ê› 	V	-	-
+7	òÂ	òÂ	CONJ	-	-
+8	„Œ«ÿ»	„Œ«ÿ»	N	-	SINGULAR
+9	—«	—«	POSTP	-	-
+10	 Õ 	 Õ 	P	-	-
+11	 «ÀÌ—	 «ÀÌ—	N	-	SINGULAR
+12	ﬁ—«—	ﬁ—«—	N	-	SINGULAR
+13	‰„Ì	‰„	AJ	-	-
+14	œÂ‰œ	œÂ‰œ	V	-	-
+15	.	.	PUNC	-	-
+
+
+1	«„«	«„«	CONJ	-	-
+2	»«Ìœ	»«Ìœ	V	-	-
+3	»Â	»Â	P	-	-
+4	«Ì‰	«Ì‰	DET	-	-
+5	‰ò Â	‰ò Â	N	-	SINGULAR
+6	 ÊÃÂ	 ÊÃÂ	N	-	SINGULAR
+7	ò—œ	ò—œ	V	-	-
+8	òÂ	òÂ	CONJ	-	-
+9	¬À«—	¬À«—	N	-	SINGULAR
+10	«Ì—«‰Ì	«Ì—«‰Ì	AJ	-	-
+11	«Ì‰	«Ì‰	DET	-	-
+12	—Ê“Â«	—Ê“	N	-	PLURAL
+13	«“	«“	P	-	-
+14	„Õ»Ê»Ì 	„Õ»Ê»Ì 	N	-	SINGULAR
+15	»Ì‘ —Ì	»Ì‘ —Ì	AJ	-	-
+16	œ—	œ—	P	-	-
+17	›” ÌÊ«·Â«Ì	›” ÌÊ«·Â«Ì	N	-	SINGULAR
+18	ÃÂ«‰Ì	ÃÂ«‰	AJ	-	-
+19	»—ŒÊ—œ«—	»—ŒÊ—œ«—	AJ	-	-
+20	Â” ‰œ	Â” 	V	-	-
+21	ø	ø	PUNC	-	-
+
+1	œ—	œ—	P	-	-
+2	«Ì‰	«Ì‰	DET	-	-
+3	„Ì«‰	„Ì«‰	N	-	SINGULAR
+4	Ì«› ‰	Ì«› ‰	N	-	SINGULAR
+5	¬À«—	¬À«—	N	-	SINGULAR
+6	ﬁ«»·	ﬁ«»·	AJ	-	-
+7	 ÊÃÂ	 ÊÃÂ	N	-	SINGULAR
+8	ò«—	ò«—	N	-	SINGULAR
+9	œ‘Ê«—Ì	œ‘Ê«—	AJ	-	-
+10	‰Ì” 	‰Ì” 	V	-	-
+11	.	.	PUNC	-	-
+
+1	»Â	»Â	P	-	-
+2	⁄‰Ê«‰	⁄‰Ê«‰	N	-	SINGULAR
+3	„À«·	„À«·	N	-	SINGULAR
+4	„‰	„‰	PRO	SINGULAR_FIRST	SINGULAR
+5	›Ì·„	›Ì·„	N	-	SINGULAR
+6	"	"	PUNC	-	-
+7	»Â‘ 	»Â‘ 	N	-	SINGULAR
+8	Ã«Ì	Ã«	AJ	-	-
+9	œÌê—Ì	œÌê—	PRO	-	-
+10	«” 	«” 	V	-	-
+11	"°	"°	UserPOS	-	-
+12	"	"	PUNC	-	-
+13	›—‘	›—‘	N	-	SINGULAR
+14	»«œ	»«œ	N	-	SINGULAR
+15	"	"	PUNC	-	-
+16	°"	°"	UserPOS	-	-
+17	‰›”	‰›”	N	-	SINGULAR
+18	⁄„Ìﬁ	⁄„Ìﬁ	AJ	-	-
+19	"	"	PUNC	-	-
+20	Ê	Ê	CONJ	-	-
+21	"	"	PUNC	-	-
+22	œ‰Ì«	œ‰Ì«	N	-	SINGULAR
+23	"	"	PUNC	-	-
+24	—«	—«	POSTP	-	-
+25	»”Ì«—	»”Ì«—	ADV	-	-
+26	œÊ” 	œÊ” 	N	-	SINGULAR
+27	œ«—„	œ«—„	V	-	-
+28	.	.	PUNC	-	-
+
+1	‰ò Â	‰ò Â	N	-	SINGULAR
+2	„À» 	„À» 	AJ	-	-
+3	›Ì·„	›Ì·„	N	-	SINGULAR
+4	"	"	PUNC	-	-
+5	»Â‘ 	»Â‘ 	N	-	SINGULAR
+6	Ã«Ì	Ã«	AJ	-	-
+7	œÌê—Ì	œÌê—	PRO	-	-
+8	«” 	«” 	V	-	-
+9	"	"	PUNC	-	-
+10	«Ì‰	«Ì‰	DET	-	-
+11	«” 	«” 	V	-	-
+12	òÂ	òÂ	CONJ	-	-
+13	Êﬁ«Ì⁄	Êﬁ«Ì⁄	N	-	SINGULAR
+14	œ—	œ—	P	-	-
+15	Ìò	Ìò	NUM	-	-
+16	Ã«„⁄Â	Ã«„⁄Â	N	-	SINGULAR
+17	”‰ Ì	”‰ 	AJ	-	-
+18	—Œ	—Œ	N	-	SINGULAR
+19	„Ì	„Ì	AJ	-	-
+20	œÂœÊ ÷«œ	œÂœÊ ÷«œ	UserPOS	-	-
+21	„Ì«‰	„Ì«‰	N	-	SINGULAR
+22	”‰ 	”‰ 	AJ	-	-
+23	Ê	Ê	CONJ	-	-
+24	„œ—‰Ì Â	„œ—‰Ì Â	N	-	SINGULAR
+25	ﬁ«»·	ﬁ«»·	AJ	-	-
+26	 ÊÃÂ	 ÊÃÂ	N	-	SINGULAR
+27	«” 	«” 	V	-	-
+28	.	.	PUNC	-	-
+
+1	œ—	œ—	P	-	-
+2	ò·	ò·	N	-	SINGULAR
+3	„Ì	„Ì	AJ	-	-
+4	 Ê«‰	 Ê«‰	N	-	SINGULAR
+5	ê› 	ê› 	V	-	-
+6	òÂ	òÂ	CONJ	-	-
+7	›Ì·„Ì	›Ì·„	AJ	-	-
+8	ŒÊ‘	ŒÊ‘	AJ	-	-
+9	”«Œ 	”«Œ 	N	-	SINGULAR
+10	«” 	«” 	V	-	-
+11	.	.	PUNC	-	-
+
+1	«“	«“	P	-	-
+2	œÌê—¬À«—	œÌê—¬À«—	UserPOS	-	-
+3	«—“‘„‰œ	«—“‘„‰œ	AJ	-	-
+4	«„”«·	«„”«·	ADV	-	-
+5	„Ì	„Ì	AJ	-	-
+6	 Ê«‰	 Ê«‰	N	-	SINGULAR
+7	»Â	»Â	P	-	-
+8	›Ì·„	›Ì·„	N	-	SINGULAR
+9	"	"	PUNC	-	-
+10	—«Ì	—«Ì	N	-	SINGULAR
+11	»«“	»«“	AJ	-	-
+12	"	"	PUNC	-	-
+13	«‘«—Â	«‘«—Â	N	-	SINGULAR
+14	ò—œ	ò—œ	V	-	-
+15	.	.	PUNC	-	-
+
+1	«Ì‰	«Ì‰	DET	-	-
+2	«À—	«À—	N	-	SINGULAR
+3	œ—	œ—	P	-	-
+4	⁄Ì‰	⁄Ì‰	N	-	SINGULAR
+5	Õ«·	Õ«·	N	-	SINGULAR
+6	òÂ	òÂ	CONJ	-	-
+7	»”Ì«—	»”Ì«—	ADV	-	-
+8	ﬁÊÌ	ﬁÊÌ	AJ	-	-
+9	«” 	«” 	V	-	-
+10	°	°	PUNC	-	-
+11	‰„«Ì«‰ê—	‰„«Ì«‰ê—	N	-	SINGULAR
+12	‰Ê⁄	‰Ê⁄	N	-	SINGULAR
+13	œÌœê«Â	œÌœê«Â	N	-	SINGULAR
+14	ò«—ê—œ«‰‘	ò«—ê—œ«‰	N	-	SINGULAR
+15	«” 	«” 	V	-	-
+16	Ê«“	Ê«“	AJ	-	-
+17	«Ì‰	«Ì‰	DET	-	-
+18	‰Ÿ—	‰Ÿ—	N	-	SINGULAR
+19	›Ì·„Ì	›Ì·„	AJ	-	-
+20	‘Œ’Ì	‘Œ’Ì	AJ	-	-
+21	»Â	»Â	P	-	-
+22	‰Ÿ—	‰Ÿ—	N	-	SINGULAR
+23	„Ì	„Ì	AJ	-	-
+24	—”œ	—”œ	V	-	-
+25	.	.	PUNC	-	-
+
+1	»Â —Ì‰	»Â	P	-	-
+2	„“Ì 	„“Ì 	N	-	SINGULAR
+3	›Ì·„	›Ì·„	N	-	SINGULAR
+4	«Ì‰	«Ì‰	DET	-	-
+5	«” 	«” 	V	-	-
+6	òÂ	òÂ	CONJ	-	-
+7	Â—	Â—	DET	-	-
+8	ò”	ò”	N	-	SINGULAR
+9	„Ì	„Ì	AJ	-	-
+10	 Ê«‰œ	 Ê«‰œ	V	-	-
+11	»—	»—	P	-	-
+12	œ«‘ 	œ«‘ 	V	-	-
+13	‘Œ’Ì	‘Œ’Ì	AJ	-	-
+14	«‘	«‘	UserPOS	-	-
+15	—«	—«	POSTP	-	-
+16	«“	«“	P	-	-
+17	¬‰	¬‰	PRO	-	-
+18	œ«‘ Â	œ«‘ Â	V	-	-
+19	»«‘œ	»«‘œ	V	-	-
+20	.	.	PUNC	-	-
+
+
+1	çÂ	çÂ	DET	-	-
+2	⁄Ê«„·Ì	⁄Ê«„·	AJ	-	-
+3	»«⁄À	»«⁄À	AJ	-	-
+4	‘œÂ	‘œÂ	V	-	-
+5	òÂ	òÂ	CONJ	-	-
+6	›Ì·„Â«Ì	›Ì·„	N	-	PLURAL
+7	"	"	PUNC	-	-
+8	›—‘	›—‘	N	-	SINGULAR
+9	»«œ	»«œ	N	-	SINGULAR
+10	"	"	PUNC	-	-
+11	°"	°"	UserPOS	-	-
+12	‰›”	‰›”	N	-	SINGULAR
+13	⁄„Ìﬁ	⁄„Ìﬁ	AJ	-	-
+14	"	"	PUNC	-	-
+15	Ê	Ê	CONJ	-	-
+16	"	"	PUNC	-	-
+17	œ‰Ì«	œ‰Ì«	N	-	SINGULAR
+18	"	"	PUNC	-	-
+19	œ—	œ—	P	-	-
+20	“„—Â	“„—Â	N	-	SINGULAR
+21	¬À«—	¬À«—	N	-	SINGULAR
+22	„Ê—œ	„Ê—œ	N	-	SINGULAR
+23	 ÊÃÂ	 ÊÃÂ	N	-	SINGULAR
+24	 «‰	 «‰	N	-	SINGULAR
+25	ﬁ—«—	ﬁ—«—	N	-	SINGULAR
+26	êÌ—‰œ	êÌ—‰œ	V	-	-
+27	ø	ø	PUNC	-	-
+
+
+1	"	"	PUNC	-	-
+2	›—‘	›—‘	N	-	SINGULAR
+3	»«œ	»«œ	N	-	SINGULAR
+4	"	"	PUNC	-	-
+5	›Ì·„	›Ì·„	N	-	SINGULAR
+6	ŒÊ‘	ŒÊ‘	AJ	-	-
+7	”«Œ Ì	”«Œ Ì	AJ	-	-
+8	«” 	«” 	V	-	-
+9	°"	°"	UserPOS	-	-
+10	ò„«·	ò„«·	N	-	SINGULAR
+11	 »—Ì“Ì	 »—Ì“	AJ	-	-
+12	"	"	PUNC	-	-
+13	œ—	œ—	P	-	-
+14	„ﬁ«„	„ﬁ«„	N	-	SINGULAR
+15	ò«—ê—œ«‰	ò«—ê—œ«‰	N	-	SINGULAR
+16	„Ì	„Ì	AJ	-	-
+17	œ«‰œ	œ«‰œ	V	-	-
+18	òÂ	òÂ	CONJ	-	-
+19	«“	«“	P	-	-
+20	›Ì·„‘	›Ì·„	N	-	SINGULAR
+21	çÂ	çÂ	DET	-	-
+22	„Ì	„Ì	AJ	-	-
+23	ŒÊ«Âœ	ŒÊ«Âœ	V	-	-
+24	.	.	PUNC	-	-
+
+1	”«Œ «—	”«Œ «—	N	-	SINGULAR
+2	›Ì·„	›Ì·„	N	-	SINGULAR
+3	”‰ Ì	”‰ 	AJ	-	-
+4	«” 	«” 	V	-	-
+5	Ê	Ê	CONJ	-	-
+6	‘»«Â 	‘»«Â 	N	-	SINGULAR
+7	»”Ì«—Ì	»”Ì«—	ADV	-	-
+8	»Â	»Â	P	-	-
+9	¬À«—	¬À«—	N	-	SINGULAR
+10	«›”«‰Â	«›”«‰Â	N	-	SINGULAR
+11	«Ì	«Ì	INT	-	-
+12	œ«—œ	œ«—œ	V	-	-
+13	⁄·«ÊÂ	⁄·«ÊÂ	N	-	SINGULAR
+14	»—	»—	P	-	-
+15	«Ì‰	«Ì‰	DET	-	-
+16	òÂ	òÂ	CONJ	-	-
+17	»Â	»Â	P	-	-
+18	Ê÷ÊÕ	Ê÷ÊÕ	AJ	-	-
+19	„Ì	„Ì	AJ	-	-
+20	 Ê«‰	 Ê«‰	N	-	SINGULAR
+21	œ—Ì«› 	œ—Ì«› 	N	-	SINGULAR
+22	òÂ	òÂ	CONJ	-	-
+23	›Ì·„	›Ì·„	N	-	SINGULAR
+24	„Õ’Ê·	„Õ’Ê·	N	-	SINGULAR
+25	„‘ —ò	„‘ —ò	AJ	-	-
+26	«” 	«” 	V	-	-
+27	.	.	PUNC	-	-
+
+1	°"	°"	UserPOS	-	-
+2	‰›”	‰›”	N	-	SINGULAR
+3	⁄„Ìﬁ	⁄„Ìﬁ	AJ	-	-
+4	"	"	PUNC	-	-
+5	»”Ì«—	»”Ì«—	ADV	-	-
+6	“Ì»«” 	“Ì»«	AJ	-	-
+7	ç—«	ç—«	ADV	-	-
+8	òÂ	òÂ	CONJ	-	-
+9	«“	«“	P	-	-
+10	”ÊéÂ	”ÊéÂ	N	-	SINGULAR
+11	ÃœÌœÌ	ÃœÌœÌ	AJ	-	-
+12	»—ŒÊ—œ«—	»—ŒÊ—œ«—	AJ	-	-
+13	«” 	«” 	V	-	-
+14	«„«	«„«	CONJ	-	-
+15	”«œêÌ	”«œêÌ	N	-	SINGULAR
+16	›Ì·„	›Ì·„	N	-	SINGULAR
+17	»«	»«	P	-	-
+18	 Ã„·« 	 Ã„·	N	-	SINGULAR
+19	ò«—«ò —	ò«—«ò —	N	-	SINGULAR
+20	Â«	Â«	N	-	SINGULAR
+21	Â„	Â„	CONJ	-	-
+22	ŒÊ«‰Ì	ŒÊ«‰Ì	V	-	-
+23	‰œ«—œ	‰œ«—œ	V	-	-
+24	.	.	PUNC	-	-
+
+1	œ—	œ—	P	-	-
+2	„Ê—œ	„Ê—œ	N	-	SINGULAR
+3	›Ì·„	›Ì·„	N	-	SINGULAR
+4	"	"	PUNC	-	-
+5	œ‰Ì«	œ‰Ì«	N	-	SINGULAR
+6	"	"	PUNC	-	-
+7	»«Ìœ	»«Ìœ	V	-	-
+8	»êÊÌ„	»êÊÌ„	V	-	-
+9	òÂ	òÂ	CONJ	-	-
+10	«Ì‰	«Ì‰	DET	-	-
+11	›Ì·„	›Ì·„	N	-	SINGULAR
+12	Õ”	Õ”	N	-	SINGULAR
+13	ﬁ‘‰êÌ	ﬁ‘‰ê	AJ	-	-
+14	«“	«“	P	-	-
+15	ÿ‰“	ÿ‰“	N	-	SINGULAR
+16	œ«—œ«“	œ«—œ«“	UserPOS	-	-
+17	Â„Ì‰	Â„Ì‰	DET	-	-
+18	—Ê	—Ê	N	-	SINGULAR
+19	 Ê«‰” Â	 Ê«‰” Â	V	-	-
+20	«ÌœÂ	«ÌœÂ	N	-	SINGULAR
+21	Â«Ì	Â«Ì	N	-	SINGULAR
+22	“Ì»«ÌÌ	“Ì»«	AJ	-	-
+23	—«	—«	POSTP	-	-
+24	œ—	œ—	P	-	-
+25	„Ê—œ	„Ê—œ	N	-	SINGULAR
+26	“‰œêÌ	“‰œêÌ	N	-	SINGULAR
+27	«—«ÌÂ	«—«ÌÂ	N	-	SINGULAR
+28	œÂœ	œÂœ	V	-	-
+29	.	.	PUNC	-	-
+
+1	”«Œ ‰	”«Œ ‰	N	-	SINGULAR
+2	¬À«—	¬À«—	N	-	SINGULAR
+3	ÿ‰“	ÿ‰“	N	-	SINGULAR
+4	œ—	œ—	P	-	-
+5	”—«”—	”—«”—	N	-	SINGULAR
+6	œ‰Ì«	œ‰Ì«	N	-	SINGULAR
+7	ò«—	ò«—	N	-	SINGULAR
+8	œ‘Ê«—Ì	œ‘Ê«—	AJ	-	-
+9	«” 	«” 	V	-	-
+10	.	.	PUNC	-	-
+
+
+1	‘„«	‘„«	PRO	PLURAL_SECOND	PLURAL
+2	Â„Ê«—Â	Â„Ê«—Â	ADV	-	-
+3	ÌòÌ	Ìò	NUM	-	-
+4	«“	«“	P	-	-
+5	»“—ê —Ì‰	»“—ê	AJ	-	-
+6	Õ«„Ì«‰	Õ«„Ì	N	-	PLURAL
+7	”Ì‰„«Ì	”Ì‰„«	AJ	-	-
+8	"	"	PUNC	-	-
+9	 Â„Ì‰Â	 Â„Ì‰Â	N	-	SINGULAR
+10	„Ì·«‰Ì	„Ì·«‰Ì	N	-	SINGULAR
+11	"	"	PUNC	-	-
+12	»ÊœÂ	»ÊœÂ	V	-	-
+13	«Ìœ	«Ìœ	N	-	SINGULAR
+14	°	°	PUNC	-	-
+15	‰ò Â	‰ò Â	N	-	SINGULAR
+16	«Ì	«Ì	INT	-	-
+17	òÂ	òÂ	CONJ	-	-
+18	Ã·»	Ã·»	N	-	SINGULAR
+19	‰Ÿ—	‰Ÿ—	N	-	SINGULAR
+20	„Ì	„Ì	AJ	-	-
+21	ò‰œ	ò‰œ	V	-	-
+22	«Ì‰	«Ì‰	DET	-	-
+23	«” 	«” 	V	-	-
+24	òÂ	òÂ	CONJ	-	-
+25	Ê«Å”Ì‰	Ê«Å”Ì‰	AJ	-	-
+26	”«Œ Â	”«Œ Â	V	-	-
+27	«Ì‰	«Ì‰	DET	-	-
+28	›Ì·„”«“	›Ì·„”«“	N	-	SINGULAR
+29	 Õ 	 Õ 	P	-	-
+30	⁄‰Ê«‰	⁄‰Ê«‰	N	-	SINGULAR
+31	"	"	PUNC	-	-
+32	Ê«ò‰‘	Ê«ò‰‘	N	-	SINGULAR
+33	Å‰Ã„	Å‰Ã„	NUM	-	-
+34	"	"	PUNC	-	-
+35	œ—	œ—	P	-	-
+36	›Â—” 	›Â—” 	N	-	SINGULAR
+37	¬À«—	¬À«—	N	-	SINGULAR
+38	»—ê“ÌœÂ	»—ê“ÌœÂ	AJ	-	-
+39	 «‰	 «‰	N	-	SINGULAR
+40	‰Ì” 	‰Ì” 	V	-	-
+41	ø	ø	PUNC	-	-
+
+
+1	”«Œ 	”«Œ 	N	-	SINGULAR
+2	¬À«—Ì	¬À«—	AJ	-	-
+3	òÂ	òÂ	CONJ	-	-
+4	„‘ò·« 	„‘ò·« 	N	-	SINGULAR
+5	“‰«‰	“‰«‰	N	-	SINGULAR
+6	—«	—«	POSTP	-	-
+7	 —”Ì„	 —”Ì„	N	-	SINGULAR
+8	„Ì	„Ì	AJ	-	-
+9	ò‰‰œ	ò‰‰œ	V	-	-
+10	‰Â	‰Â	ADV	-	-
+11	 ‰Â«	 ‰Â«	ADV	-	-
+12	œ—	œ—	P	-	-
+13	«Ì—«‰	«Ì—«‰	N	-	SINGULAR
+14	»·òÂ	»·òÂ	CONJ	-	-
+15	œ—	œ—	P	-	-
+16	 „«„Ì	 „«„	DET	-	-
+17	ò‘Ê—Â«	ò‘Ê—	N	-	PLURAL
+18	÷—Ê—Ì	÷—Ê—Ì	AJ	-	-
+19	«” 	«” 	V	-	-
+20	.	.	PUNC	-	-
+
+1	œ—	œ—	P	-	-
+2	«Ì‰	«Ì‰	DET	-	-
+3	„Ì«‰	„Ì«‰	N	-	SINGULAR
+4	 „«„Ì	 „«„	DET	-	-
+5	—”«‰Â	—”«‰Â	N	-	SINGULAR
+6	Â«	Â«	N	-	SINGULAR
+7	»«Ìœ	»«Ìœ	V	-	-
+8	œ” 	œ” 	N	-	SINGULAR
+9	œ—	œ—	P	-	-
+10	œ” 	œ” 	N	-	SINGULAR
+11	”Ì‰„«	”Ì‰„«	N	-	SINGULAR
+12	œÂ‰œ	œÂ‰œ	V	-	-
+13	 «	 «	P	-	-
+14	„⁄÷·« 	„⁄÷·« 	N	-	SINGULAR
+15	“‰«‰	“‰«‰	N	-	SINGULAR
+16	—«	—«	POSTP	-	-
+17	«‰⁄ò«”	«‰⁄ò«”	N	-	SINGULAR
+18	œÂ‰œ	œÂ‰œ	V	-	-
+19	.	.	PUNC	-	-
+
+1	"	"	PUNC	-	-
+2	 Â„Ì‰Â	 Â„Ì‰Â	N	-	SINGULAR
+3	„Ì·«‰Ì	„Ì·«‰Ì	N	-	SINGULAR
+4	"	"	PUNC	-	-
+5	«“	«“	P	-	-
+6	Ã„·Â	Ã„·Â	N	-	SINGULAR
+7	ò—ê—œ«‰Â«Ì	ò—ê—œ«‰Â«Ì	N	-	SINGULAR
+8	„ÿ—Õ	„ÿ—Õ	AJ	-	-
+9	«Ì—«‰	«Ì—«‰	N	-	SINGULAR
+10	«” 	«” 	V	-	-
+11	.	.	PUNC	-	-
+
+1	«Ê	«Ê	PRO	SINGULAR_THIRD	SINGULAR
+2	«ÌœÂ	«ÌœÂ	N	-	SINGULAR
+3	Â«Ì	Â«Ì	N	-	SINGULAR
+4	ŒÊ»Ì	ŒÊ»	AJ	-	-
+5	œ«—œ	œ«—œ	V	-	-
+6	Ê	Ê	CONJ	-	-
+7	„«	„«	PRO	PLURAL_FIRST	PLURAL
+8	»«—Â«	»«—	N	-	PLURAL
+9	œ—	œ—	P	-	-
+10	„Ê—œ	„Ê—œ	N	-	SINGULAR
+11	¬‰Â«	¬‰	PRO	-	-
+12	»«	»«	P	-	-
+13	Â„	Â„	CONJ	-	-
+14	’Õ» 	’Õ» 	N	-	SINGULAR
+15	ò—œÂ	ò—œÂ	V	-	-
+16	«Ì„	«Ì„	N	-	SINGULAR
+17	«„«	«„«	CONJ	-	-
+18	ÕﬁÌﬁ 	ÕﬁÌﬁ 	N	-	SINGULAR
+19	«„—	«„—	N	-	SINGULAR
+20	«Ì‰	«Ì‰	DET	-	-
+21	«” 	«” 	V	-	-
+22	òÂ	òÂ	CONJ	-	-
+23	"	"	PUNC	-	-
+24	Ê«ò‰‘	Ê«ò‰‘	N	-	SINGULAR
+25	Å‰Ã„	Å‰Ã„	NUM	-	-
+26	"	"	PUNC	-	-
+27	»«	»«	P	-	-
+28	«” «‰œ«—œÂ«Ì	«” «‰œ«—œ	N	-	PLURAL
+29	«Ì‰	«Ì‰	DET	-	-
+30	ò«—ê—œ«‰	ò«—ê—œ«‰	N	-	SINGULAR
+31	„ÿ«»ﬁ 	„ÿ«»ﬁ 	N	-	SINGULAR
+32	‰œ«—œ	‰œ«—œ	V	-	-
+33	.	.	PUNC	-	-
+
+1	›Ì·„Â«	›Ì·„	N	-	PLURAL
+2	œ—	œ—	P	-	-
+3	”— «”—	”— «”—	N	-	SINGULAR
+4	œ‰Ì«	œ‰Ì«	N	-	SINGULAR
+5	«»“«—Ì	«»“«—	AJ	-	-
+6	»—«Ì	»—«Ì	P	-	-
+7	«‰⁄ò«”	«‰⁄ò«”	N	-	SINGULAR
+8	«Ê÷«⁄	«Ê÷«⁄	N	-	SINGULAR
+9	«Ã „«⁄Ì	«Ã „«⁄	AJ	-	-
+10	Â” ‰œ	Â” 	V	-	-
+11	.	.	PUNC	-	-
+
+1	«—«∆Â	«—«∆Â	N	-	SINGULAR
+2	«ÌœÂ	«ÌœÂ	N	-	SINGULAR
+3	Â«	Â«	N	-	SINGULAR
+4	»«Ìœ	»«Ìœ	V	-	-
+5	»Â	»Â	P	-	-
+6	êÊ‰Â	êÊ‰Â	CL	-	-
+7	«Ì	«Ì	INT	-	-
+8	»«‘œ	»«‘œ	V	-	-
+9	òÂ	òÂ	CONJ	-	-
+10	„Œ«ÿ»	„Œ«ÿ»	N	-	SINGULAR
+11	—«	—«	POSTP	-	-
+12	»Â	»Â	P	-	-
+13	 ›ò—	 ›ò—	N	-	SINGULAR
+14	Ê«œ«—œ	Ê«œ«—œ	V	-	-
+15	.	.	PUNC	-	-
+
+1	ê«ÂÌ	ê«Â	ADV	-	-
+2	«Êﬁ« 	«Êﬁ« 	N	-	SINGULAR
+3	Õ”	Õ”	N	-	SINGULAR
+4	Â„–« 	Â„–« 	N	-	SINGULAR
+5	Å‰œ«—Ì	Å‰œ«—	AJ	-	-
+6	»«	»«	P	-	-
+7	ò«—«ò —	ò«—«ò —	N	-	SINGULAR
+8	Â«Ì	Â«Ì	N	-	SINGULAR
+9	›Ì·„	›Ì·„	N	-	SINGULAR
+10	»Â	»Â	P	-	-
+11	ÕœÌ	ÕœÌ	N	-	SINGULAR
+12	«›“«Ì‘	«›“«Ì‘	N	-	SINGULAR
+13	„Ì	„Ì	AJ	-	-
+14	Ì«»œ	Ì«»œ	V	-	-
+15	òÂ	òÂ	CONJ	-	-
+16	»Ì‰‰œÂ	»Ì‰‰œÂ	N	-	SINGULAR
+17	 «	 «	P	-	-
+18	”«⁄ Â«	”«⁄ 	N	-	PLURAL
+19	ÅÌ—«„Ê‰	ÅÌ—«„Ê‰	P	-	-
+20	”—‰Ê‘ 	”—‰Ê‘ 	N	-	SINGULAR
+21	¬‰Â«	¬‰	PRO	-	-
+22	„Ì	„Ì	AJ	-	-
+23	«‰œÌ‘œ	«‰œÌ‘œ	V	-	-
+24	.	.	PUNC	-	-
+
+1	«Ì‰	«Ì‰	DET	-	-
+2	« ›«ﬁÌ	« ›«ﬁ	AJ	-	-
+3	»Êœ	»Êœ	V	-	-
+4	òÂ	òÂ	CONJ	-	-
+5	œ—	œ—	P	-	-
+6	›Ì·„	›Ì·„	N	-	SINGULAR
+7	"	"	PUNC	-	-
+8	œÊ	œÊ	NUM	-	-
+9	“‰	“‰	N	-	SINGULAR
+10	"	"	PUNC	-	-
+11	—Œ	—Œ	N	-	SINGULAR
+12	œ«œ	œ«œ	V	-	-
+13	«„«	«„«	CONJ	-	-
+14	„ «”›«‰Â	„ «”›«‰Â	ADV	-	-
+15	‰„Ì	‰„	AJ	-	-
+16	 Ê«‰	 Ê«‰	N	-	SINGULAR
+17	¬‰	¬‰	PRO	-	-
+18	—«	—«	POSTP	-	-
+19	»Â	»Â	P	-	-
+20	"	"	PUNC	-	-
+21	Ê«ò‰‘	Ê«ò‰‘	N	-	SINGULAR
+22	Å‰Ã„	Å‰Ã„	NUM	-	-
+23	"	"	PUNC	-	-
+24	 ⁄„Ì„	 ⁄„Ì„	N	-	SINGULAR
+25	œ«œ	œ«œ	V	-	-
+26	.	.	PUNC	-	-
+
+1	›” ÌÊ«·	›” ÌÊ«·	N	-	SINGULAR
+2	›Ã—	›Ã—	N	-	SINGULAR
+3	 ‰Â«	 ‰Â«	ADV	-	-
+4	›” ÌÊ«·	›” ÌÊ«·	N	-	SINGULAR
+5	»Ì‰	»Ì‰	P	-	-
+6	«·„··Ì	«·„··Ì	N	-	SINGULAR
+7	«Ì—«‰	«Ì—«‰	N	-	SINGULAR
+8	«” 	«” 	V	-	-
+9	°	°	PUNC	-	-
+10	ò«—ò—œ	ò«—ò—œ	N	-	SINGULAR
+11	¬‰	¬‰	PRO	-	-
+12	—«	—«	POSTP	-	-
+13	çêÊ‰Â	çêÊ‰Â	ADV	-	-
+14	»——”Ì	»——”Ì	N	-	SINGULAR
+15	„Ì	„Ì	AJ	-	-
+16	ò‰Ìœ	ò‰Ìœ	V	-	-
+17	ø	ø	PUNC	-	-
+
+
+1	›” ÌÊ«·	›” ÌÊ«·	N	-	SINGULAR
+2	›Ã—	›Ã—	N	-	SINGULAR
+3	„œÌ—Ì 	„œÌ—Ì 	N	-	SINGULAR
+4	ŒÊ»Ì	ŒÊ»	AJ	-	-
+5	œ«—œ	œ«—œ	V	-	-
+6	Ê	Ê	CONJ	-	-
+7	Â„Â	Â„Â	DET	-	-
+8	çÌ“	çÌ“	N	-	SINGULAR
+9	«“	«“	P	-	-
+10	ÅÌ‘	ÅÌ‘	ADV	-	-
+11	»—‰«„Â	»—‰«„Â	N	-	SINGULAR
+12	—Ì“Ì	—Ì“	AJ	-	-
+13	‘œÂ	‘œÂ	V	-	-
+14	«” 	«” 	V	-	-
+15	«„«	«„«	CONJ	-	-
+16	¬‰çÂ	¬‰çÂ	PRO	-	-
+17	òÂ	òÂ	CONJ	-	-
+18	„«	„«	PRO	PLURAL_FIRST	PLURAL
+19	œÊ” 	œÊ” 	N	-	SINGULAR
+20	œ«—Ì„	œ«—Ì„	V	-	-
+21	œ—›” ÌÊ«·	œ—›” ÌÊ«·	UserPOS	-	-
+22	Â«Ì	Â«Ì	N	-	SINGULAR
+23	ÃÂ«‰Ì	ÃÂ«‰	AJ	-	-
+24	—⁄«Ì 	—⁄«Ì 	N	-	SINGULAR
+25	‘Êœ	‘Êœ	V	-	-
+26	°	°	PUNC	-	-
+27	«„ò«‰	«„ò«‰	N	-	SINGULAR
+28	„‘«ÂœÂ	„‘«ÂœÂ	N	-	SINGULAR
+29	›Ì·„	›Ì·„	N	-	SINGULAR
+30	œ—	œ—	P	-	-
+31	ò‰«—	ò‰«—	ADV	-	-
+32	„Œ«ÿ»«‰	„Œ«ÿ»	N	-	PLURAL
+33	Êÿ‰Ì	Êÿ‰	AJ	-	-
+34	«” 	«” 	V	-	-
+35	.	.	PUNC	-	-
+
+1	⁄ò”	⁄ò”	N	-	SINGULAR
+2	«·⁄„·	«·⁄„·	RES	-	-
+3	„Œ«ÿ»«‰	„Œ«ÿ»	N	-	PLURAL
+4	œ—	œ—	P	-	-
+5	ò‘Ê—Â«ÌÌ	ò‘Ê—	N	-	PLURAL
+6	òÂ	òÂ	CONJ	-	-
+7	«“	«“	P	-	-
+8	Å‘ Ê«‰Â	Å‘ Ê«‰Â	N	-	SINGULAR
+9	€‰Ì	€‰Ì	AJ	-	-
+10	›—Â‰êÌ	›—Â‰ê	AJ	-	-
+11	»—ŒÊ—œ«—‰œ	»—ŒÊ—œ«—	AJ	-	-
+12	»—«Ì	»—«Ì	P	-	-
+13	„«	„«	PRO	PLURAL_FIRST	PLURAL
+14	»”Ì«—	»”Ì«—	ADV	-	-
+15	Ã–«»	Ã–«»	AJ	-	-
+16	«” 	«” 	V	-	-
+17	.	.	PUNC	-	-
+
+1	„«	„«	PRO	PLURAL_FIRST	PLURAL
+2	œ—	œ—	P	-	-
+3	Ã‘‰Ê«—Â	Ã‘‰Ê«—Â	N	-	SINGULAR
+4	›Ã—	›Ã—	N	-	SINGULAR
+5	›Ì·„Â«	›Ì·„	N	-	PLURAL
+6	—«	—«	POSTP	-	-
+7	œ—	œ—	P	-	-
+8	„ÕÌÿÌ	„ÕÌÿ	AJ	-	-
+9	»” Â	»” Â	V	-	-
+10	 „«‘«	 „«‘«	N	-	SINGULAR
+11	„Ì	„Ì	AJ	-	-
+12	ò‰Ì„	ò‰Ì„	V	-	-
+13	Ê	Ê	CONJ	-	-
+14	ê«ÂÌ	ê«Â	ADV	-	-
+15	«Êﬁ« 	«Êﬁ« 	N	-	SINGULAR
+16	ﬁ«œ—	ﬁ«œ—	AJ	-	-
+17	»Â	»Â	P	-	-
+18	œ—ò	œ—ò	N	-	SINGULAR
+19	¬‰Â«	¬‰	PRO	-	-
+20	‰Ì” Ì„	‰Ì” Ì„	V	-	-
+21	«ê—	«ê—	CONJ	-	-
+22	«Ì‰	«Ì‰	DET	-	-
+23	«„ò«‰	«„ò«‰	N	-	SINGULAR
+24	›—«Â„	›—«Â„	N	-	SINGULAR
+25	‘Êœ	‘Êœ	V	-	-
+26	òÂ	òÂ	CONJ	-	-
+27	›Ì·„Â«	›Ì·„	N	-	PLURAL
+28	—«	—«	POSTP	-	-
+29	»«	»«	P	-	-
+30	Õ÷Ê—	Õ÷Ê—	N	-	SINGULAR
+31	«Ì—«‰Ì«‰	«Ì—«‰Ì	AJ	-	-
+32	»»Ì‰Ì„	»»Ì‰Ì„	V	-	-
+33	»”Ì«—	»”Ì«—	ADV	-	-
+34	ŒÊ»	ŒÊ»	AJ	-	-
+35	ŒÊ«Âœ	ŒÊ«Âœ	V	-	-
+36	»Êœ	»Êœ	V	-	-
+37	.	.	PUNC	-	-
+
