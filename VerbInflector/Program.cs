@@ -9,6 +9,7 @@ namespace VerbInflector
 	{
 		static void Main(string[] args)
 		{
+			
 		}
 	}
 }
