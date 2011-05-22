@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace VerbInflector
 {
 	class Article
 	{
-		ArrayList sentences;
+		List<Sentence> sentences;
 
 		public Article(){
-			sentences = new ArrayList(10);
+			sentences = new List<Sentence>(10);
 		}
 
 		public void addSentence(Sentence s){
@@ -16,13 +16,13 @@ namespace VerbInflector
 		}
 
 		public Sentence[] getSentences(){
-			sentences.TrimToSize();
-			return (Sentence[]) sentences.ToArray();
+			sentences.TrimExcess();
+			return sentences.ToArray();
 		}
 
 		public Sentence getSentence(int index)
 		{
-			return (Sentence) sentences[index];
+			return sentences[index];
 		}
 	}
 }

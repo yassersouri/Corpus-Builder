@@ -1,48 +1,48 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace VerbInflector
 {
 	class Sentence
 	{
-		ArrayList words;
+		List<Word> words;
 		
 		public Sentence()
 		{
-			words = new ArrayList(60);
+			words = new List<Word>(60);
 		}
 
 		public string[] getLexeme(){
 			string[] sentence;
-			ArrayList al = new ArrayList(this.words.Count);
+			List<string> al = new List<string>(this.words.Count);
 			
 			for(int i = 0; i < this.words.Count; i++){
-				al.Add(((Word)this.words[i]).lexeme);
+				al.Add((this.words[i]).lexeme);
 			}
-			sentence = (string[]) al.ToArray();
+			sentence = al.ToArray();
 
 			return sentence;
 		}
 
 		public string[] getPOSTag(){
 			string[] postag;
-			ArrayList al = new ArrayList(this.words.Count);
+			List<string> al = new List<string>(this.words.Count);
 			for (int i = 0; i < this.words.Count; i++)
 			{
-				al.Add(((Word)this.words[i]).postag);
+				al.Add((this.words[i]).postag);
 			}
-			postag = (string[])al.ToArray();
+			postag =al.ToArray();
 
 			return postag;
 		}
 
 		public Word[] getWords(){
-			return (Word[]) words.ToArray();
+			return words.ToArray();
 		}
 
 		public Word getWord(int index)
 		{
-			return (Word) words[index];
+			return words[index];
 		}
 
 		public void addWord(Word w)

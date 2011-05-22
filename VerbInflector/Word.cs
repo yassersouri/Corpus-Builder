@@ -14,6 +14,6 @@ namespace VerbInflector
 		public string person;
 		public string number;
 		public int parentId = -1;
-		public string parentRelation;
+		public string parentRelation = null;
 	}
 }
