@@ -76,7 +76,9 @@ namespace Tagger
 					if(token.Number.ToString() == "INVALID") token_number_string = "_";
 					else token_number_string = token.Number.ToString();
 
-					line += "\t" + token.Lemma + "\t" + token.POSTag + "\t" + tense_person_string + "\t" + token_number_string;
+					String FPOS = "_";
+
+					line += "\t" + token.Lemma + "\t" + token.POSTag + "\t" + FPOS + "\t" + tense_person_string + "\t" + token_number_string;
 				}
 				sw.Write(line + "\n");
 			}
