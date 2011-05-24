@@ -53,9 +53,9 @@ namespace VerbInflector
 		{
 			string verbStr;
 			if (Pishvand != "")
-				verbStr = HarfeEzafeh + " " + Felyar + " " + Pishvand + "#" + HastehMazi + "---" + HastehMozareh;
+				verbStr = HarfeEzafeh + " " + Felyar + " " + Pishvand + "#" + HastehMazi + "#" + HastehMozareh;
 			else
-				verbStr = HarfeEzafeh + " " + Felyar + " " + HastehMazi + "---" + HastehMozareh;
+				verbStr = HarfeEzafeh + " " + Felyar + " " + HastehMazi + "#" + HastehMozareh;
 			verbStr = verbStr.Trim();
 			return verbStr;
 		}

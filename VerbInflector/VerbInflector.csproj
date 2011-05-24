@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Article.cs" />
+    <Compile Include="ArticleUtils.cs" />
     <Compile Include="InflectorManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -53,6 +54,9 @@
     <Compile Include="VerbList.cs" />
     <Compile Include="VerbPartTagger.cs" />
     <Compile Include="Word.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DependencyBasedToken.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

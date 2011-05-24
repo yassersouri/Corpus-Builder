@@ -12,100 +12,42 @@ namespace VerbInflector
 		{
 			string verbDicPath = "../../VerbList.txt";
 
-			string sourceDir = "D:\\sample\\corpus_changed\\";
+			string sourceDir = "D:\\sample\\corpus_tagged\\";
 			string destinationDir = sourceDir + "again\\";
-			string file = "2623.txt";
+			string file = "1088245.txt";
 
 			Directory.CreateDirectory(destinationDir);
 			string sourceFile = sourceDir + file;
 			string destinationFile = destinationDir + file;
 
-			VerbInflector_OneFile(sourceFile);
+			VerbInflector_OneFile(sourceFile, verbDicPath);
 		}
 
-		public static Article getArticle(string file)
-		{
-			Article article = new Article();
+		
 
-			StreamReader sr = new StreamReader(file);
-			string content = sr.ReadToEnd();
-			sr.Close();
-
-			addSentencesToArticle(content, article);
-
-
-			return article;
-		}
-
-		private static void addSentencesToArticle(string file, Article article)
-		{
-			Sentence current = new Sentence();
-			string sentence = null;
-			string[] words = file.Split('\n');
-			for(int i = 0; i< words.Length; i++)
+		public static void VerbInflector_OneFile(string file, string verbDicPath){
+			Article article = ArticleUtils.getArticle(file);
+			Sentence s = null;
+			String[] lexemes = null;
+			String[] postags = null;
+			for(int i = 0; i < article.getSentences().Length; i++)
 			{
-				if(words[i] == ""){
-					//now we are at the end of a sentence
-					if(sentence != null){
-						addWordsToSentence(sentence, current); 
-						sentence = null;
-						article.addSentence(current); //add sentence to the article
-						current = new Sentence(); //empty the sentence;
-					}
-				}
-				else
-				{
-					sentence += (words[i] + '\n'.ToString());
-				}
+				s = article.getSentence(i);
+				lexemes = s.getLexeme();
+				postags = s.getPOSTag();
+
+				string[] testSentence = "به گردش درآمده است این مسائل".Split(" ".ToCharArray(),
+																	 StringSplitOptions.RemoveEmptyEntries);
+				string[] testPos = "P N V V PR N".Split(" ".ToCharArray(),
+																	   StringSplitOptions.RemoveEmptyEntries);
+
+				//testPos = postags;
+				//testSentence = lexemes;
+				var dic = VerbPartTagger.MakePartialDependencyTree(testSentence, testPos, verbDicPath);
+
+				System.Console.WriteLine(dic);
+
 			}
-			if(sentence != null) //maybe the last sentence
-			{
-				addWordsToSentence(sentence, current);
-				article.addSentence(current);
-			}
-		}
-
-		private static void addWordsToSentence(string sentenceString, Sentence sentence)
-		{
-			Word current;
-			string word = null;
-			string[] words = sentenceString.Split('\n');
-			for(int i = 0; i < words.Length; i++)
-			{
-				if(words[i] == "")
-				{
-					break;
-				}
-				else
-				{
-					word = words[i];
-					current = getWord(word);
-					sentence.addWord(current);
-				}
-			}
-		}
-
-		private static Word getWord(string word)
-		{
-			Word result = new Word();
-
-			string[] parts = word.Split('\t');
-			
-			if(parts.Length != 6) throw new Exception("Word is not recognized!");
-			for(int i = 0; i < parts.Length; i++) if(parts[i] == "") throw new Exception("Word part is empty");	
-			
-			result.num = Convert.ToInt32(parts[0]);
-			result.lexeme = parts[1];
-			result.lemma = parts[2];
-			result.postag = parts[3];
-			result.person = parts[4];
-			result.number = parts[5];
-
-			return result;
-		}
-
-		public static void VerbInflector_OneFile(string file){
-			Article article = getArticle(file);
 		}
 	}
 }

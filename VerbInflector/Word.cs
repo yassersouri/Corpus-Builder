@@ -10,7 +10,8 @@ namespace VerbInflector
 		public int num;
 		public string lexeme;
 		public string lemma;
-		public string postag;
+		public string cpos;
+		public string fpos;
 		public string person;
 		public string number;
 		public int parentId = -1;

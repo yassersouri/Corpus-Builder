@@ -16,7 +16,7 @@ namespace Tagger
 		static void Main(string[] args)
 		{
 			string sDir = "D:\\sample\\corpus\\";
-			string dDir = "D:\\sample\\corpus_changed\\";
+			string dDir = "D:\\sample\\corpus_tagged\\";
 			string file = "1244.txt";
 			string sFile = sDir + file;
 			string dFile = dDir + file;

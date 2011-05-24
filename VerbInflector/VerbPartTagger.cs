@@ -436,7 +436,7 @@ namespace VerbInflector
 		/// <param name="posSentence">pos of the words</param>
 		/// <param name="posTokens">pos of words after verb finding</param>
 		/// <returns></returns>
-		public static Dictionary<int, KeyValuePair<string, KeyValuePair<int, object>>> MakePartialDependencyTree(string[] sentence, string[] posSentence, out string[] posTokens, string verbDicPath)
+		public static Dictionary<int, KeyValuePair<string, KeyValuePair<int, object>>> MakePartialTree(string[] sentence, string[] posSentence, out string[] posTokens, string verbDicPath)
 		{
 			var dic = ManageConsiderCompoundVerbs(sentence, posSentence, out posTokens, verbDicPath);
 			var partialTree = new Dictionary<int, KeyValuePair<string, KeyValuePair<int, object>>>();
@@ -460,7 +460,7 @@ namespace VerbInflector
 																								new KeyValuePair
 																									<int, object>(
 																									key - 1,
-																									newValue.Key)));
+																								   "POSDEP")));
 						else
 						{
 
@@ -488,13 +488,120 @@ namespace VerbInflector
 			return partialTree;
 		}
 
+		public static List<DependencyBasedToken> MakePartialDependencyTree(string[] sentence, string verbDicPath)
+		{
+			var tree = new List<DependencyBasedToken>();
+			var dic = MakePartialTree(sentence, verbDicPath);
+			foreach (KeyValuePair<int, KeyValuePair<string, KeyValuePair<int, object>>> keyValuePair in dic)
+			{
+				int position = keyValuePair.Key + 1;
+				string wordForm = keyValuePair.Value.Key;
+				int head = keyValuePair.Value.Value.Key;
+				string deprel = "_";
+				object obj = keyValuePair.Value.Value.Value;
+				string lemma = "_";
+				int wordCount = wordForm.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Length;
+				ShakhsType person = ShakhsType.Shakhs_NONE;
+				NumberType number = NumberType.INVALID;
+				TenseFormationType tma = TenseFormationType.TenseFormationType_NONE;
+				if (obj is VerbInflection)
+				{
+					var newObj = (VerbInflection)obj;
+					tma = newObj.TenseForm;
+					var personType = newObj.Shakhs;
+					person = personType;
+					number = NumberType.SINGULAR;
+					if (personType == ShakhsType.AVALSHAKHS_JAM || personType == ShakhsType.DOVVOMSHAKHS_JAM || personType == ShakhsType.SEVVOMSHAKHS_JAM)
+					{
+						number = NumberType.PLURAL;
+					}
+					lemma = newObj.VerbStem.SimpleToString();
+				}
+				if (obj is string)
+				{
+					var newObj = (string)obj;
+					if (newObj == "POSDEP")
+					{
+						deprel = newObj;
+					}
+					else if (newObj == "VERBAL-PREPOSIOTION")
+					{
+						deprel = "VPRT";
+					}
+					else if (newObj == "NON-VERBAL-ELEMENT")
+					{
+						deprel = "NVE";
+					}
+				}
+
+				var mfeat = new MorphoSyntacticFeatures(number, person, tma);
+				var dependencyToken = new DependencyBasedToken(position, wordForm, lemma, "_", "_", head, deprel, wordCount,
+															   mfeat);
+				tree.Add(dependencyToken);
+			}
+			return tree;
+		}
+		public static List<DependencyBasedToken> MakePartialDependencyTree(string[] sentence, string[] posSentence, string verbDicPath)
+		{
+			var tree = new List<DependencyBasedToken>();
+			string[] outpos;
+			var dic = MakePartialTree(sentence, posSentence, out outpos, verbDicPath);
+			foreach (KeyValuePair<int, KeyValuePair<string, KeyValuePair<int, object>>> keyValuePair in dic)
+			{
+				int position = keyValuePair.Key + 1;
+				string wordForm = keyValuePair.Value.Key;
+				int head = keyValuePair.Value.Value.Key;
+				string deprel = "_";
+				object obj = keyValuePair.Value.Value.Value;
+				string lemma = "_";
+				int wordCount = wordForm.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Length;
+				ShakhsType person = ShakhsType.Shakhs_NONE;
+				NumberType number = NumberType.INVALID;
+				TenseFormationType tma = TenseFormationType.TenseFormationType_NONE;
+				if (obj is VerbInflection)
+				{
+					var newObj = (VerbInflection)obj;
+					tma = newObj.TenseForm;
+					var personType = newObj.Shakhs;
+					person = personType;
+					number = NumberType.SINGULAR;
+					if (personType == ShakhsType.AVALSHAKHS_JAM || personType == ShakhsType.DOVVOMSHAKHS_JAM || personType == ShakhsType.SEVVOMSHAKHS_JAM)
+					{
+						number = NumberType.PLURAL;
+					}
+					lemma = newObj.VerbStem.SimpleToString();
+				}
+				if (obj is string)
+				{
+					var newObj = (string)obj;
+					if (newObj == "POSDEP")
+					{
+						deprel = newObj;
+					}
+					else if (newObj == "VERBAL-PREPOSIOTION")
+					{
+						deprel = "VPRT";
+					}
+					else if (newObj == "NON-VERBAL-ELEMENT")
+					{
+						deprel = "NVE";
+					}
+				}
+
+				var mfeat = new MorphoSyntacticFeatures(number, person, tma);
+				var dependencyToken = new DependencyBasedToken(position, wordForm, lemma, outpos[position - 1], "_", head, deprel, wordCount,
+															   mfeat);
+				tree.Add(dependencyToken);
+			}
+			return tree;
+		}
 		/// <summary>
 		/// returns a partial  dependency tree
 		/// </summary>
 		/// <param name="sentence">sentence words</param>
 		/// <param name="verbDicPath">path to the verb dictionary</param>
 		/// <returns></returns>
-		public static Dictionary<int, KeyValuePair<string, KeyValuePair<int, object>>> MakePartialDependencyTree(string[] sentence, string verbDicPath)
+		public static Dictionary<int, KeyValuePair<string, KeyValuePair<int, object>>> MakePartialTree(string[] sentence, string verbDicPath)
 		{
 			var dic = ManageConsiderCompoundVerbs(sentence, verbDicPath);
 			var partialTree = new Dictionary<int, KeyValuePair<string, KeyValuePair<int, object>>>();
@@ -518,7 +625,7 @@ namespace VerbInflector
 																								new KeyValuePair
 																									<int, object>(
 																									key - 1,
-																									newValue.Key)));
+																									"POSDEP")));
 						else
 						{
 

@@ -29,7 +29,7 @@ namespace VerbInflector
 			List<string> al = new List<string>(this.words.Count);
 			for (int i = 0; i < this.words.Count; i++)
 			{
-				al.Add((this.words[i]).postag);
+				al.Add((this.words[i]).cpos);
 			}
 			postag =al.ToArray();
 

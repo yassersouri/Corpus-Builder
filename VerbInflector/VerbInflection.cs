@@ -174,6 +174,7 @@ namespace VerbInflector
 	[Flags]
 	public enum TenseFormationType
 	{
+		TenseFormationType_NONE = 0,
 		HAAL_SAADEH_EKHBARI = 1,
 		HAAL_ELTEZAMI = 2,
 		HAAL_SAADEH = 4,
@@ -199,5 +200,13 @@ namespace VerbInflector
 	{
 		ACTIVE = 1,
 		PASSIVE = 2
+	}
+
+	[Flags]
+	public enum NumberType
+	{
+		INVALID = 0,
+		SINGULAR = 1,
+		PLURAL = 2
 	}
 }
