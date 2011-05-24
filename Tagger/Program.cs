@@ -70,10 +70,10 @@ namespace Tagger
 					token = tagger.TaggerHelper(word);
 
 					//if INVALID print "_" instead
-					if(token.Person == ENUM_TENSE_PERSON.INVALID) tense_person_string = "-";
+					if(token.Person == ENUM_TENSE_PERSON.INVALID) tense_person_string = "_";
 					else tense_person_string = token.Person.ToString();
 					//if INVALID print "_" instead
-					if(token.Number.ToString() == "INVALID") token_number_string = "-";
+					if(token.Number.ToString() == "INVALID") token_number_string = "_";
 					else token_number_string = token.Number.ToString();
 
 					line += "\t" + token.Lemma + "\t" + token.POSTag + "\t" + tense_person_string + "\t" + token_number_string;
