@@ -459,7 +459,7 @@ namespace VerbInflector
 											new KeyValuePair<string, KeyValuePair<int, object>>(value,
 																								new KeyValuePair
 																									<int, object>(
-																									prevValue.Value - 1,
+																									key - 1,
 																									newValue.Key)));
 						else
 						{
@@ -517,7 +517,7 @@ namespace VerbInflector
 											new KeyValuePair<string, KeyValuePair<int, object>>(value,
 																								new KeyValuePair
 																									<int, object>(
-																									prevValue.Value - 1,
+																									key - 1,
 																									newValue.Key)));
 						else
 						{
