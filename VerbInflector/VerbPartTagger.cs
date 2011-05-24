@@ -453,21 +453,24 @@ namespace VerbInflector
 					var newValue = (KeyValuePair<string, int>)dic[key].Value;
 					if (key > 0 && dic[key - 1].Value is KeyValuePair<string, int>)
 					{
-						var prevValue = (KeyValuePair<string, int>)dic[key].Value;
+						var prevValue = (KeyValuePair<string, int>)dic[key - 1].Value;
 						if (prevValue.Key == "VERBAL-PREPOSIOTION")
 							partialTree.Add(key,
 											new KeyValuePair<string, KeyValuePair<int, object>>(value,
 																								new KeyValuePair
 																									<int, object>(
-																									newValue.Value - 1,
+																									prevValue.Value - 1,
 																									newValue.Key)));
 						else
+						{
+
 							partialTree.Add(key,
 											new KeyValuePair<string, KeyValuePair<int, object>>(value,
 																								new KeyValuePair
 																									<int, object>(
 																									newValue.Value - 1,
 																									newValue.Key)));
+						}
 
 					}
 					else
@@ -508,21 +511,24 @@ namespace VerbInflector
 					var newValue = (KeyValuePair<string, int>)dic[key].Value;
 					if (key > 0 && dic[key - 1].Value is KeyValuePair<string, int>)
 					{
-						var prevValue = (KeyValuePair<string, int>)dic[key].Value;
+						var prevValue = (KeyValuePair<string, int>)dic[key - 1].Value;
 						if (prevValue.Key == "VERBAL-PREPOSIOTION")
 							partialTree.Add(key,
 											new KeyValuePair<string, KeyValuePair<int, object>>(value,
 																								new KeyValuePair
 																									<int, object>(
-																									newValue.Value - 1,
+																									prevValue.Value - 1,
 																									newValue.Key)));
 						else
+						{
+
 							partialTree.Add(key,
 											new KeyValuePair<string, KeyValuePair<int, object>>(value,
 																								new KeyValuePair
 																									<int, object>(
 																									newValue.Value - 1,
 																									newValue.Key)));
+						}
 
 					}
 					else
