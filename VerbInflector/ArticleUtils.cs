@@ -19,6 +19,11 @@ namespace VerbInflector
 			return article;
 		}
 
+		public static void putArticle(string file)
+		{
+			
+		}
+
 		private static void addSentencesToArticle(string file, Article article)
 		{
 			Sentence current = new Sentence();
