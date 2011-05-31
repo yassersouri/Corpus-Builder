@@ -29,6 +29,15 @@ namespace VerbInflector
 		public string DependencyRelation { set; get; }
 		public int TokenCount { set; get; }
 		public MorphoSyntacticFeatures MorphoSyntacticFeats { set; get; }
+
+		public string ToString(){
+			string result = "";
+
+			result += "position: " + Position.ToString() + " # ";
+			result += "lemma: " + Lemma.ToString() + " # ";
+			result += "count: " + TokenCount.ToString();
+			return result;
+		}
 	}
 
 	public class MorphoSyntacticFeatures
@@ -43,4 +52,6 @@ namespace VerbInflector
 		public ShakhsType Person { set; get; }
 		public TenseFormationType TenseMoodAspect { set; get; }
 	}
+
+	
 }
