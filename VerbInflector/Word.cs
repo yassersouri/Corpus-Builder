@@ -14,6 +14,7 @@ namespace VerbInflector
 		public string fpos;
 		public string person;
 		public string number;
+		public string tma = null; //tense mood aspect
 		public int parentId = -1;
 		public string parentRelation = null;
 	}
