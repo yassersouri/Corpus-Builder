@@ -30,13 +30,16 @@ namespace VerbInflector
 		public int TokenCount { set; get; }
 		public MorphoSyntacticFeatures MorphoSyntacticFeats { set; get; }
 
-		public string ToString(){
-			string result = "";
-
-			result += "position: " + Position.ToString() + " # ";
-			result += "lemma: " + Lemma.ToString() + " # ";
-			result += "count: " + TokenCount.ToString();
-			return result;
+		public override string ToString()
+		{
+			StringBuilder result = new StringBuilder(200);
+			result.Append("word: ")			.Append(WordForm.ToString())		.Append(" | ");
+			result.Append("position: ")		.Append(Position.ToString())		.Append(" | ");
+			result.Append("lemma: ")		.Append(Lemma.ToString())			.Append(" | ");
+			result.Append("cpos: ")			.Append(CPOSTag.ToString())			.Append(" | ");
+			result.Append("parent: ")		.Append(HeadNumber.ToString())		.Append(" | ");
+			result.Append("count: ")		.Append(TokenCount.ToString());
+			return result.ToString();
 		}
 	}
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace VerbInflector
 {
@@ -48,6 +49,18 @@ namespace VerbInflector
 		public void addWord(Word w)
 		{
 			words.Add(w);
+		}
+
+		public override string ToString()
+		{
+			StringBuilder result = new StringBuilder(500);
+
+			for(int i = 0; i < words.Count; i++)
+			{
+				result.Append(words[i].lexeme).Append(" ");
+			}
+
+			return result.ToString();
 		}
 
 	}
