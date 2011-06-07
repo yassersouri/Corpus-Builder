@@ -47,11 +47,15 @@ namespace VerbInflector
 				//test input, 
 				string[] testSentence = "به گردش درآمده است این مسائل".Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 				string[] testPos = "P N V V PR N".Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-				//currentLexemes = testSentence;
-				//currentPOSTags = testPos;
+				//currentLexemes = testSentence; currentPOSTags = testPos;
 
 				//MakePartialDependencyTree for the current sentence.
-				List<DependencyBasedToken> list = VerbPartTagger.MakePartialDependencyTree(currentLexemes, currentPOSTags, verbDicPath);
+				List<DependencyBasedToken> list;
+				//list = VerbPartTagger.MakePartialDependencyTree(currentLexemes, currentPOSTags, verbDicPath);
+				
+				VerbBasedSentence vbs = SentenceAnalyzer.MakeVerbBasedSentence(currentLexemes, currentPOSTags, verbDicPath);
+				list = vbs.SentenceTokens;
+				
 
 				//word index pointer in the current sentence
 				int sentenceIndex = 0;

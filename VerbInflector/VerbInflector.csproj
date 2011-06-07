@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="Article.cs" />
     <Compile Include="ArticleUtils.cs" />
-    <Compile Include="Enums.cs" />
     <Compile Include="InflectorManager.cs" />
     <Compile Include="MorphoSyntacticFeatures.cs" />
     <Compile Include="Program.cs" />
