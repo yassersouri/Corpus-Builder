@@ -4,7 +4,7 @@ using System.Text;
 
 namespace VerbInflector
 {
-	class Sentence
+	public class Sentence
 	{
 		List<Word> words;
 		

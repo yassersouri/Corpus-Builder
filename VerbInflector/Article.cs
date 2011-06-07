@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace VerbInflector
 {
-	class Article
+	public class Article
 	{
 		List<Sentence> sentences;
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace VerbInflector
 {
-	class Word
+	public class Word
 	{
 		public int num;
 		public string lexeme;
