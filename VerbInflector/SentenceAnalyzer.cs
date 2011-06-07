@@ -10,7 +10,7 @@ namespace VerbInflector
 		public static List<DependencyBasedToken> MakePartialDependencyTree(string[] sentence, string verbDicPath)
 		{
 			var tree = new List<DependencyBasedToken>();
-			string[] outpos;
+			
 			var dic = VerbPartTagger.MakePartialTree(sentence, verbDicPath);
 			foreach (KeyValuePair<int, KeyValuePair<string, KeyValuePair<int, object>>> keyValuePair in dic)
 			{
