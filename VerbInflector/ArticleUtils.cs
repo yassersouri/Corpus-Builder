@@ -80,9 +80,10 @@ namespace VerbInflector
 
 			string[] parts = word.Split('\t');
 
-			if (parts.Length != 7) throw new Exception("Word is not recognized!");
+			if (parts.Length < 7) throw new Exception("Word is not recognized!");
 			for (int i = 0; i < parts.Length; i++) if (parts[i] == "") throw new Exception("Word part is empty");
-
+			
+			//the first 7 elements are mandatory and must exist
 			result.num = Convert.ToInt32(parts[0]);
 			result.lexeme = parts[1];
 			result.lemma = parts[2];
@@ -90,6 +91,15 @@ namespace VerbInflector
 			result.fpos = parts[4];
 			result.person = parts[5];
 			result.number = parts[6];
+
+			if(parts.Length > 7)
+				result.tma = parts[7];
+
+			if(parts.Length > 8)
+				result.parentId = Convert.ToInt32(parts[8]);
+
+			if(parts.Length > 9)
+				result.parentRelation = parts[9];
 
 
 			return result;
