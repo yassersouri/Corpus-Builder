@@ -70,7 +70,7 @@ namespace VerbInflector
 
 		public new string ToString()
 		{
-			return LightVerbIndex + "\t" + NonVerbalElementIndex + "\t" + VerbalPrepositionIndex;
+			return LightVerbIndex + "|" + NonVerbalElementIndex + "|" + VerbalPrepositionIndex;
 		}
 
 		public int CompareTo(object obj)
