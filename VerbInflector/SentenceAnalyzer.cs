@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DependencyBasedSentenceAnalyzer;
-using VerbInflector;
 
-namespace DependencyBasedSentenceAnalyzer
+namespace VerbInflector
 {
 	public class SentenceAnalyzer
 	{

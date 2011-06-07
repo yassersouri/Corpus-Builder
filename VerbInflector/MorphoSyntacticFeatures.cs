@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using VerbInflector;
 
-namespace DependencyBasedSentenceAnalyzer
+namespace VerbInflector
 {
 	public class MorphoSyntacticFeatures
 	{

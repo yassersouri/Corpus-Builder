@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace DependencyBasedSentenceAnalyzer
+namespace VerbInflector
 {
 	public class DependencyBasedToken
 	{

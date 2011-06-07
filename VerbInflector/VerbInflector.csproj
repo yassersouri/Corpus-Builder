@@ -45,10 +45,14 @@
   <ItemGroup>
     <Compile Include="Article.cs" />
     <Compile Include="ArticleUtils.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="InflectorManager.cs" />
+    <Compile Include="MorphoSyntacticFeatures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sentence.cs" />
+    <Compile Include="SentenceAnalyzer.cs" />
     <Compile Include="Verb.cs" />
+    <Compile Include="VerbBasedSentence.cs" />
     <Compile Include="VerbInflection.cs" />
     <Compile Include="VerbList.cs" />
     <Compile Include="VerbPartTagger.cs" />

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DependencyBasedSentenceAnalyzer
+namespace VerbInflector
 {
 	[Flags]
 	public enum NumberType
