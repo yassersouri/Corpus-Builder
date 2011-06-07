@@ -3,7 +3,7 @@ using System.IO;
 
 namespace VerbInflector
 {
-	class ArticleUtils
+	public class ArticleUtils
 	{
 		public static Article getArticle(string file)
 		{

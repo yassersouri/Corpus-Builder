@@ -46,7 +46,6 @@
     <Compile Include="Article.cs" />
     <Compile Include="ArticleUtils.cs" />
     <Compile Include="InflectorManager.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sentence.cs" />
     <Compile Include="Verb.cs" />

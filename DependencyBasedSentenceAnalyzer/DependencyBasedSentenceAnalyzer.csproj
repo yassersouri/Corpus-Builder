@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{64E8CD9C-EAB2-4A86-91DF-3131C6EE4B48}</ProjectGuid>
+    <ProjectGuid>{EC042F65-6EFB-4DD7-B394-81DB34217180}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Corpus_Builder</RootNamespace>
-    <AssemblyName>Corpus Builder</AssemblyName>
+    <RootNamespace>DependencyBasedSentenceAnalyzer</RootNamespace>
+    <AssemblyName>DependencyBasedSentenceAnalyzer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SCICT.PersianTools">
-      <HintPath>..\refs\SCICT.PersianTools.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,8 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="DependencyBasedToken.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="MorphoSyntacticFeatures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SentenceAnalyzer.cs" />
+    <Compile Include="VerbBasedSentence.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VerbInflector\VerbInflector.csproj">
