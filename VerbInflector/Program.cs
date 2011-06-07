@@ -80,21 +80,24 @@ namespace VerbInflector
 						newWord.person = currentDBT.MorphoSyntacticFeats.Person.ToString();
 						newWord.number = currentDBT.MorphoSyntacticFeats.Number.ToString();
 						newWord.tma = currentDBT.MorphoSyntacticFeats.TenseMoodAspect.ToString();
-						newWord.parentId = currentDBT.HeadNumber;
-						newWord.parentRelation = currentDBT.DependencyRelation;
 					}
 					else{
 						//lemma is unchanged
 						currentWord = currentSentence.getWord(sentenceIndex);
+
 						newWord.lemma = currentWord.lemma;
 						newWord.cpos = currentWord.cpos;
 						newWord.fpos = currentWord.fpos;
 						newWord.person = currentWord.person;
 						newWord.number = currentWord.number;
 						newWord.tma = "_";
-						newWord.parentId = currentWord.parentId;
-						newWord.parentRelation = currentWord.parentRelation;
 					}
+
+					//are changed any way
+					newWord.parentId = currentDBT.HeadNumber;
+					newWord.parentRelation = currentDBT.DependencyRelation;
+
+
 					newSentence.addWord(newWord);
 					sentenceIndex += currentDBT.TokenCount;
 				}
