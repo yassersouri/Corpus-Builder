@@ -16,18 +16,33 @@ namespace VerbInflector
 			string destinationDir = sourceDir + "again\\";
 			string file = "1088245.txt";
 
-			Directory.CreateDirectory(destinationDir);
+			//Directory.CreateDirectory(destinationDir);
 			string sourceFile = sourceDir + file;
 			string destinationFile = destinationDir + file;
 
-			VerbInflector_OneFile(sourceFile, verbDicPath);
+			//VerbInflector_OneFile(sourceFile, destinationFile, verbDicPath);
+
+			Article currentA = ArticleUtils.getArticle(destinationFile);
+
+			Article newA = ArticleUtils.getArticle(sourceFile);
+			newA = generateNewArticle(newA, verbDicPath);
+
+			Console.Write(currentA.Equals(newA));
 		}
 
 		
 
-		public static void VerbInflector_OneFile(string sourceFile, string verbDicPath){
+		public static void VerbInflector_OneFile(string sourceFile, string destinationFile, string verbDicPath){
 			Article currentArticle = ArticleUtils.getArticle(sourceFile);
 
+			Article newArticle = generateNewArticle(currentArticle, verbDicPath);
+
+			ArticleUtils.putArticle(newArticle, destinationFile);
+			System.Console.WriteLine(newArticle);
+		}
+
+		private static Article generateNewArticle(Article currentArticle, string verbDicPath)
+		{
 			Article newArticle = new Article();
 
 			Sentence currentSentence = null;
@@ -77,8 +92,17 @@ namespace VerbInflector
 						newWord.lemma = currentDBT.Lemma;
 						newWord.cpos = currentDBT.CPOSTag;
 						newWord.fpos = currentDBT.FPOSTag;
-						newWord.person = currentDBT.MorphoSyntacticFeats.Person.ToString();
-						newWord.number = currentDBT.MorphoSyntacticFeats.Number.ToString();
+
+						if(currentDBT.MorphoSyntacticFeats.Person != ShakhsType.Shakhs_NONE)
+							newWord.person = currentDBT.MorphoSyntacticFeats.Person.ToString();
+						else
+							newWord.person = "_";
+
+						if(currentDBT.MorphoSyntacticFeats.Number != NumberType.INVALID)
+							newWord.number = currentDBT.MorphoSyntacticFeats.Number.ToString();
+						else
+							newWord.number = "_";
+						
 						newWord.tma = currentDBT.MorphoSyntacticFeats.TenseMoodAspect.ToString();
 					}
 					else{
@@ -97,16 +121,13 @@ namespace VerbInflector
 					newWord.parentId = currentDBT.HeadNumber;
 					newWord.parentRelation = currentDBT.DependencyRelation;
 
-
 					newSentence.addWord(newWord);
 					sentenceIndex += currentDBT.TokenCount;
 				}
-
 				newArticle.addSentence(newSentence);
-
-				System.Console.WriteLine(list);
-
 			}
+
+			return newArticle;
 		}
 	}
 }

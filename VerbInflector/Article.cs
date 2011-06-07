@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace VerbInflector
 {
-	public class Article
+	public class Article : IEquatable<Article>
 	{
 		List<Sentence> sentences;
 
@@ -23,6 +23,18 @@ namespace VerbInflector
 		public Sentence getSentence(int index)
 		{
 			return sentences[index];
+		}
+
+		public bool Equals(Article other)
+		{
+			if(this.sentences.Count != other.sentences.Count) return false;
+
+			for(int i = 0; i < this.sentences.Count; i++)
+			{
+				if(!this.getSentence(i).Equals(other.getSentence(i))) return false;
+			}
+
+			return true;
 		}
 	}
 }

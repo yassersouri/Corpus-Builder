@@ -19,9 +19,46 @@ namespace VerbInflector
 			return article;
 		}
 
-		public static void putArticle(string file)
+		public static void putArticle(Article currentArticle, string file)
 		{
+			StreamWriter sw = new StreamWriter(file);
 			
+			Sentence currentSentece;
+			Sentence[] sentences;
+			Word currentWord;
+			Word[] words;
+
+			String format;
+
+			sentences = currentArticle.getSentences();
+			for(int i = 0; i < sentences.Length; i++)
+			{
+				currentSentece = sentences[i];
+				words = currentSentece.getWords();
+
+				for(int j = 0; j < words.Length; j++)
+				{
+					currentWord = words[j];
+					//print each word
+					format = "{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\t{9}\n";
+					
+					sw.Write(String.Format(format,	currentWord.num.ToString(),
+													currentWord.lexeme,
+													currentWord.lemma,
+													currentWord.cpos,
+													currentWord.fpos,
+													currentWord.person,
+													currentWord.number,
+													currentWord.tma,
+													currentWord.parentId.ToString(),
+													currentWord.parentRelation
+											));
+					
+				}
+				//print new line at the end of each sentence
+				sw.Write("\n");
+			}
+			sw.Close();
 		}
 
 		private static void addSentencesToArticle(string file, Article article)

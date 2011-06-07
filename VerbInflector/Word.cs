@@ -5,7 +5,7 @@ using System.Text;
 
 namespace VerbInflector
 {
-	public class Word
+	public class Word : IEquatable<Word>
 	{
 		public int num;
 		public string lexeme;
@@ -27,6 +27,21 @@ namespace VerbInflector
 			result.Append("cpos: ").Append(cpos).Append(" | ");
 			result.Append("parent: ").Append(parentId);
 			return result.ToString();
+		}
+
+		public bool Equals(Word other)
+		{
+			if (this.num != other.num) return false;
+			if (this.lexeme != other.lexeme) return false;
+			if (this.lemma != other.lemma) return false;
+			if (this.cpos != other.cpos) return false;
+			if (this.fpos != other.fpos) return false;
+			if (this.person != other.person) return false;
+			if (this.number != other.number) return false;
+			if (this.tma != other.tma) return false;
+			if (this.parentId != other.parentId) return false;
+			if (this.parentRelation != other.parentRelation) return false;
+			return true;
 		}
 	}
 }

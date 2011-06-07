@@ -4,7 +4,7 @@ using System.Text;
 
 namespace VerbInflector
 {
-	public class Sentence
+	public class Sentence : IEquatable<Sentence>
 	{
 		List<Word> words;
 		
@@ -63,5 +63,16 @@ namespace VerbInflector
 			return result.ToString();
 		}
 
+		public bool Equals(Sentence other)
+		{
+			if(this.words.Count != other.words.Count) return false;
+
+			for(int i = 0; i < this.words.Count; i++)
+			{
+				if(!this.getWord(i).Equals(other.getWord(i))) return false;
+			}
+
+			return true;
+		}
 	}
 }
