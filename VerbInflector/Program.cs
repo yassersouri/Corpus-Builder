@@ -20,14 +20,7 @@ namespace VerbInflector
 			string sourceFile = sourceDir + file;
 			string destinationFile = destinationDir + file;
 
-			//VerbInflector_OneFile(sourceFile, destinationFile, verbDicPath);
-
-			Article currentA = ArticleUtils.getArticle(destinationFile);
-
-			Article newA = ArticleUtils.getArticle(sourceFile);
-			newA = generateNewArticle(newA, verbDicPath);
-
-			Console.Write(currentA.Equals(newA));
+			VerbInflector_OneFile(sourceFile, destinationFile, verbDicPath);
 		}
 
 		
