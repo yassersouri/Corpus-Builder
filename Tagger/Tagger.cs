@@ -19,14 +19,14 @@ namespace Tagger
 		public Tagger()
 		{
 			var dic = new Dictionary();
-			dic.LoadVerbEntries(@"../../../FarsiVerbs.dat");
+			dic.LoadVerbEntries(@"../../FarsiVerbs.dat");
 			//if (Finder == null)
 			//    Finder = new Finder(dic, ENUM_FIND_MODE.DATABASE);
 			m_LemmaDic = new Dictionary<string, KeyValuePair<string, PersianPOSTag>>();
 
 			_lemmatizer = new PersianSuffixRecognizer(false);
 			Mapper = new Dictionary<string, PersianPOSTag>();
-			const string mapperfile = @"../../../words.dat";
+			const string mapperfile = @"../../words.dat";
 
 			var reader = new StreamReader(mapperfile);
 			while (!reader.EndOfStream)
