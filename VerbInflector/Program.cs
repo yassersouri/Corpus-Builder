@@ -5,6 +5,8 @@ using System.Text;
 using System.IO;
 using VerbInflector;
 using SentenceRecognizer;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace VerbInflector
 {
@@ -70,6 +72,7 @@ namespace VerbInflector
 				List<DependencyBasedToken> list = currentSentenceVBS.SentenceTokens;
 
 
+				//for each verb in sentence
 				foreach(var currentVerbInSentence in currentSentenceVBS.VerbsInSentence)
 				{
 					//special string representation of the verb
@@ -79,18 +82,20 @@ namespace VerbInflector
 					{
 						List<BaseStructure> baseStructuresForTheCurrentVerb = ValencyDicManager.BaseStrucDic[currentVerbString];
 						List<BaseStructure> satisfiedBaseStructures = new List<BaseStructure>();
-						foreach (var baseStructure in baseStructuresForTheCurrentVerb)
+						foreach (var currentBaseStructure in baseStructuresForTheCurrentVerb)
 						{
-							bool istrue = baseStructure.Satisfy(currentSentenceVBS, currentVerbInSentence);
+							if(currentBaseStructure.Satisfy(currentSentenceVBS, currentVerbInSentence))
+							{
+								satisfiedBaseStructures.Add(currentBaseStructure);
+							}
 						}
 					}
+					//counting the verb in sentence
 				}
-				
-				//Counting the verbs
-				//++++++++++++++++++++++++++++++++
 
-				//++++++++++++++++++++++++++++++++
-				//\\Counting the verbs
+				//fitting one base structure
+				//adding the fitted base structure to the database as the main verb
+				
 
 				//word index pointer in the current sentence
 				int wordIndexInCurrentSentence = 0;
