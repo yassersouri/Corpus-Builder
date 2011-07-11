@@ -20,6 +20,9 @@ namespace VerbInflector
 
 			string sourceFile = sourceDir + file;
 			string destinationFile = destinationDir + file;
+			
+			//load the corpus
+			//this line takes time
 			ValencyDicManager.RefreshVerbList("../../VerbList.txt", "../../valency list.txt");
 						
 			VerbInflector_OneFile(sourceFile, destinationFile, verbDicPath);
@@ -47,6 +50,7 @@ namespace VerbInflector
 			String[] currentLemmas = null;
 			MorphoSyntacticFeatures[] currentFeatures = null;
 
+			//generating new Sentence
 			for(int i = 0; i < currentArticle.getSentences().Length; i++) //for each sentence in this article.
 			{
 				//initialize the new sentence
@@ -54,46 +58,32 @@ namespace VerbInflector
 
 				//load the current sentence
 				currentSentence = currentArticle.getSentence(i);
+
+				//load info about that sentence
 				currentLexemes = currentSentence.getLexemes();
 				currentPOSTags = currentSentence.getPOSTags();
 				currentLemmas = currentSentence.getLemmas();
 				currentFeatures = currentSentence.getFeatures();
 
-				//test input, 
-				string[] testSentence = "به گردش درآمده است این مسائل".Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-				string[] testPos = "P N V V PR N".Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-				//currentLexemes = testSentence; currentPOSTags = testPos;
-
-				//MakePartialDependencyTree for the current sentence.
-				List<DependencyBasedToken> list;
-				//list = VerbPartTagger.MakePartialDependencyTree(currentLexemes, currentPOSTags, verbDicPath);
 				
 				VerbBasedSentence vbs = SentenceAnalyzer.MakeVerbBasedSentence(currentLexemes, currentPOSTags, currentLemmas, currentFeatures, verbDicPath);
-				list = vbs.SentenceTokens;
+				List<DependencyBasedToken> list = vbs.SentenceTokens;
 
-
-				////////////////////////////////////
-				//           TEST CODE
-				////////////////////////////////////
 
 				foreach(var verbInSentence in vbs.VerbsInSentence)
 				{
 					//special string representation of the verb
 					String currentVerbString = ValencyDicManager.GetVerbString(ref vbs, verbInSentence); 
 
-					List<BaseStructure> basestruct = new List<BaseStructure>();
 					if (ValencyDicManager.BaseStrucDic.ContainsKey(currentVerbString))
 					{
-						basestruct = ValencyDicManager.BaseStrucDic[currentVerbString];
+						List<BaseStructure> basestruct = ValencyDicManager.BaseStrucDic[currentVerbString];
 						foreach (var baseStructure in basestruct)
 						{
 							bool istrue = baseStructure.Satisfy(vbs, verbInSentence);
-							//if true then 
 						}
 					}
 				}
-
-				////////////////////////////////////
 				
 				//Counting the verbs
 				//++++++++++++++++++++++++++++++++
