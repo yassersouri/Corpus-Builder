@@ -9,13 +9,19 @@ namespace VerbInflector
 		{
 			Article article = new Article();
 
+			int lastIndexOfSlash = file.LastIndexOf('\\');
+			int lastIndexOfDot = file.LastIndexOf('.');
+			string articleNumberString = file.Substring(lastIndexOfSlash + 1, lastIndexOfDot - lastIndexOfSlash - 1);
+
+			long articleNumber = Int64.Parse(articleNumberString);
+
 			StreamReader sr = new StreamReader(file);
 			string content = sr.ReadToEnd();
 			sr.Close();
 
 			addSentencesToArticle(content, article);
 
-
+			article.setArticleNumber(articleNumber);
 			return article;
 		}
 

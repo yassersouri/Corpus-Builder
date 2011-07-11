@@ -6,6 +6,7 @@ namespace VerbInflector
 	public class Article : IEquatable<Article>
 	{
 		List<Sentence> sentences;
+		long articleNumber;
 
 		public Article(){
 			sentences = new List<Sentence>(10);
@@ -35,6 +36,16 @@ namespace VerbInflector
 			}
 
 			return true;
+		}
+
+		public void setArticleNumber(long articleNumber)
+		{
+			this.articleNumber = articleNumber;
+		}
+
+		public long getArticleNumber()
+		{
+			return this.articleNumber;
 		}
 	}
 }
