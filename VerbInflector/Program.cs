@@ -7,6 +7,7 @@ using VerbInflector;
 using SentenceRecognizer;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 
 namespace VerbInflector
 {
@@ -26,8 +27,53 @@ namespace VerbInflector
 			//load the corpus
 			//this line takes time
 			ValencyDicManager.RefreshVerbList("../../VerbList.txt", "../../valency list.txt");
-						
+			
+
+			//testMongo();
+
 			VerbInflector_OneFile(sourceFile, destinationFile, verbDicPath);
+		}
+
+		private static void testMongo()
+		{
+			string connectionString = "mongodb://localhost";
+			MongoServer server = MongoServer.Create(connectionString);
+
+			string[] databaseNames = server.GetDatabaseNames().ToArray();
+
+			
+			
+			MongoDatabase db = server.GetDatabase("crawler");
+			string[] collectionNames = db.GetCollectionNames().ToArray();
+
+			MongoCollection<BsonDocument> collection = db.GetCollection<BsonDocument>("verbs");
+
+			BsonDocument seenOn1 = new BsonDocument().Add("article", 4563456663).Add("sentence_index", 13).Add("verb_index", 3);
+			BsonDocument seenOn2 = new BsonDocument().Add("article", 345345345).Add("sentence_index", 12).Add("verb_index", 0);
+			BsonDocument seenOn3 = new BsonDocument().Add("article", 5656).Add("sentence_index", 34).Add("verb_index", 1);
+
+			BsonArray seenOn = new BsonArray();
+			seenOn.Add(seenOn1).Add(seenOn2);
+
+			BsonDocument bd = new BsonDocument { { "verb", "رفت#رو~_~_" }, {"count" , 0}, {"seen_on_sentence", seenOn}};
+
+			//collection.Insert(bd);
+
+			
+
+			QueryComplete qc = Query.EQ("verb", "sdfsdfws");
+			
+			//UpdateDocument ua = new UpdateDocument("$set", new BsonDocument("count", 2));
+			UpdateBuilder ua = Update.Inc("count", 1).Push("seen_on_sentence", seenOn3);
+
+			collection.Update(qc, ua, UpdateFlags.Upsert);
+
+			MongoCursor<BsonDocument> mc = collection.Find(qc);
+			BsonDocument[] bds = mc.ToArray<BsonDocument>();
+
+			
+
+			Console.WriteLine("End of monogDB test");
 		}
 		
 
