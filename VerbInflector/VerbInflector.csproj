@@ -49,6 +49,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\refs\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\refs\MongoDB.Driver.dll</HintPath>
+    </Reference>
     <Reference Include="SCICT.PersianTools">
       <HintPath>..\refs\SCICT.PersianTools.dll</HintPath>
     </Reference>
