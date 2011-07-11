@@ -66,21 +66,22 @@ namespace VerbInflector
 				currentFeatures = currentSentence.getFeatures();
 
 				
-				VerbBasedSentence vbs = SentenceAnalyzer.MakeVerbBasedSentence(currentLexemes, currentPOSTags, currentLemmas, currentFeatures, verbDicPath);
-				List<DependencyBasedToken> list = vbs.SentenceTokens;
+				VerbBasedSentence currentSentenceVBS = SentenceAnalyzer.MakeVerbBasedSentence(currentLexemes, currentPOSTags, currentLemmas, currentFeatures, verbDicPath);
+				List<DependencyBasedToken> list = currentSentenceVBS.SentenceTokens;
 
 
-				foreach(var verbInSentence in vbs.VerbsInSentence)
+				foreach(var currentVerbInSentence in currentSentenceVBS.VerbsInSentence)
 				{
 					//special string representation of the verb
-					String currentVerbString = ValencyDicManager.GetVerbString(ref vbs, verbInSentence); 
+					String currentVerbString = ValencyDicManager.GetVerbString(ref currentSentenceVBS, currentVerbInSentence); 
 
 					if (ValencyDicManager.BaseStrucDic.ContainsKey(currentVerbString))
 					{
-						List<BaseStructure> basestruct = ValencyDicManager.BaseStrucDic[currentVerbString];
-						foreach (var baseStructure in basestruct)
+						List<BaseStructure> baseStructuresForTheCurrentVerb = ValencyDicManager.BaseStrucDic[currentVerbString];
+						List<BaseStructure> satisfiedBaseStructures = new List<BaseStructure>();
+						foreach (var baseStructure in baseStructuresForTheCurrentVerb)
 						{
-							bool istrue = baseStructure.Satisfy(vbs, verbInSentence);
+							bool istrue = baseStructure.Satisfy(currentSentenceVBS, currentVerbInSentence);
 						}
 					}
 				}
@@ -92,7 +93,7 @@ namespace VerbInflector
 				//\\Counting the verbs
 
 				//word index pointer in the current sentence
-				int sentenceIndex = 0;
+				int wordIndexInCurrentSentence = 0;
 				
 				Word currentWord = null;
 				Word newWord = null;
@@ -126,7 +127,7 @@ namespace VerbInflector
 					}
 					else{
 						//lemma is unchanged
-						currentWord = currentSentence.getWord(sentenceIndex);
+						currentWord = currentSentence.getWord(wordIndexInCurrentSentence);
 
 						newWord.lemma = currentWord.lemma;
 						newWord.cpos = currentWord.cpos;
@@ -141,7 +142,7 @@ namespace VerbInflector
 					newWord.parentRelation = currentDBT.DependencyRelation;
 
 					newSentence.addWord(newWord);
-					sentenceIndex += currentDBT.TokenCount;
+					wordIndexInCurrentSentence += currentDBT.TokenCount;
 				}
 				newArticle.addSentence(newSentence);
 			}
