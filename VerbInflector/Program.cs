@@ -27,55 +27,10 @@ namespace VerbInflector
 			//load the corpus
 			//this line takes time
 			ValencyDicManager.RefreshVerbList("../../VerbList.txt", "../../valency list.txt");
-			
 
-			//testMongo();
-
-			VerbInflector_OneFile(sourceFile, destinationFile, verbDicPath);
+			//VerbInflector_OneFile(sourceFile, destinationFile, verbDicPath);
+			VerbInflector_All(sourceDir, destinationDir, verbDicPath);
 		}
-
-		private static void testMongo()
-		{
-			string connectionString = "mongodb://localhost";
-			MongoServer server = MongoServer.Create(connectionString);
-
-			string[] databaseNames = server.GetDatabaseNames().ToArray();
-
-			
-			
-			MongoDatabase db = server.GetDatabase("crawler");
-			string[] collectionNames = db.GetCollectionNames().ToArray();
-
-			MongoCollection<BsonDocument> collection = db.GetCollection<BsonDocument>("verbs");
-
-			BsonDocument seenOn1 = new BsonDocument().Add("article", 4563456663).Add("sentence_index", 13).Add("verb_index", 3);
-			BsonDocument seenOn2 = new BsonDocument().Add("article", 345345345).Add("sentence_index", 12).Add("verb_index", 0);
-			BsonDocument seenOn3 = new BsonDocument().Add("article", 5656).Add("sentence_index", 34).Add("verb_index", 1);
-
-			BsonArray seenOn = new BsonArray();
-			seenOn.Add(seenOn1).Add(seenOn2);
-
-			BsonDocument bd = new BsonDocument { { "verb", "رفت#رو~_~_" }, {"count" , 0}, {"seen_on_sentence", seenOn}};
-
-			//collection.Insert(bd);
-
-			
-
-			QueryComplete qc = Query.EQ("verb", "sdfsdfws");
-			
-			//UpdateDocument ua = new UpdateDocument("$set", new BsonDocument("count", 2));
-			UpdateBuilder ua = Update.Inc("count", 1).Push("seen_on_sentence", seenOn3);
-
-			collection.Update(qc, ua, UpdateFlags.Upsert);
-
-			MongoCursor<BsonDocument> mc = collection.Find(qc);
-			BsonDocument[] bds = mc.ToArray<BsonDocument>();
-
-			
-
-			Console.WriteLine("End of monogDB test");
-		}
-		
 
 		public static void VerbInflector_OneFile(string sourceFile, string destinationFile, string verbDicPath){
 			Article currentArticle = ArticleUtils.getArticle(sourceFile);
@@ -84,7 +39,31 @@ namespace VerbInflector
 
 			ArticleUtils.putArticle(newArticle, destinationFile);
 
-			System.Console.WriteLine(newArticle);
+			System.Console.WriteLine(newArticle.getArticleNumber());
+		}
+
+		public static void VerbInflector_All(string sourceDirectory, string destinationDirectory, string verbDicPath)
+		{
+			string[] files = Directory.GetFiles(sourceDirectory);
+			Directory.CreateDirectory(destinationDirectory);
+
+			string destinationFile;
+			string sourceFile;
+			int lastIndex;
+			string fileName;
+			int len;
+
+			for (int i = 0; i < files.Length; i++)
+			{
+				sourceFile = files[i];
+
+				lastIndex = sourceFile.LastIndexOf('\\');
+				len = sourceFile.Length;
+				fileName = sourceFile.Substring(lastIndex + 1, len - lastIndex - 1);
+				destinationFile = destinationDirectory + fileName;
+
+				VerbInflector_OneFile(sourceFile, destinationFile, verbDicPath);
+			}
 		}
 
 		private static Article generateNewArticle(Article currentArticle, string verbDicPath)
@@ -99,13 +78,13 @@ namespace VerbInflector
 			MorphoSyntacticFeatures[] currentFeatures = null;
 
 			//generating new Sentence
-			for(int i = 0; i < currentArticle.getSentences().Length; i++) //for each sentence in this article.
+			for(int sentence_index = 0; sentence_index < currentArticle.getSentences().Length; sentence_index++) //for each sentence in this article.
 			{
 				//initialize the new sentence
 				newSentence = new Sentence();
 
 				//load the current sentence
-				currentSentence = currentArticle.getSentence(i);
+				currentSentence = currentArticle.getSentence(sentence_index);
 
 				//load info about that sentence
 				currentLexemes = currentSentence.getLexemes();
@@ -116,7 +95,6 @@ namespace VerbInflector
 				
 				VerbBasedSentence currentSentenceVBS = SentenceAnalyzer.MakeVerbBasedSentence(currentLexemes, currentPOSTags, currentLemmas, currentFeatures, verbDicPath);
 				List<DependencyBasedToken> list = currentSentenceVBS.SentenceTokens;
-
 
 				//for each verb in sentence
 				foreach(var currentVerbInSentence in currentSentenceVBS.VerbsInSentence)
@@ -136,7 +114,6 @@ namespace VerbInflector
 							}
 						}
 					}
-					//counting the verb in sentence
 				}
 
 				//fitting one base structure
@@ -149,9 +126,9 @@ namespace VerbInflector
 				Word currentWord = null;
 				Word newWord = null;
 				DependencyBasedToken currentDBT;
-				for(int j = 0; j < list.Count() ; j++)
+				for(int word_index = 0; word_index < list.Count() ; word_index++)
 				{
-					currentDBT = list[j];
+					currentDBT = list[word_index];
 
 					newWord = new Word();
 
@@ -195,10 +172,58 @@ namespace VerbInflector
 					newSentence.addWord(newWord);
 					wordIndexInCurrentSentence += currentDBT.TokenCount;
 				}
+				//sentence is now upgraded and more filled with information
+
+				////////////////////////
+				//// Counting the Verbs
+				////    -----------
+
+				List<VerbInSentence> verbsInSentence = currentSentenceVBS.VerbsInSentence;
+				for(int verb_index = 0; verb_index < verbsInSentence.Count ; verb_index++)
+				{
+					string verbStringRepresentation = getVerbStringRepresentation(verbsInSentence[verb_index], newSentence);
+					long article = currentArticle.getArticleNumber();
+					//sentence_index is already set
+					//verb_index is already set
+					mongoCountVerb(verbStringRepresentation, article, sentence_index, verb_index);
+				}
+
+				////
+				////////////////////////
 				newArticle.addSentence(newSentence);
 			}
 
 			return newArticle;
+		}
+
+		private static string getVerbStringRepresentation(VerbInSentence currentVerbInSentence, Sentence currentSentence)
+		{
+			string representation = "";
+			Word[] words = currentSentence.getWords();
+			string LightVerbIndexLemma = words[currentVerbInSentence.LightVerbIndex].lemma;
+			string NonVerbalElementLexeme = (currentVerbInSentence.NonVerbalElementIndex != -1) ? words[currentVerbInSentence.NonVerbalElementIndex].lexeme : "_";
+			string VerbalPreposiotionLexeme = (currentVerbInSentence.VerbalPrepositionIndex != -1) ? words[currentVerbInSentence.VerbalPrepositionIndex].lexeme : "_";
+
+			representation = LightVerbIndexLemma + "~" + NonVerbalElementLexeme + "~" + VerbalPreposiotionLexeme;
+			return representation;
+		}
+
+		private static void mongoCountVerb(string verbStringRepresentation, long article, int sentence_index, int verb_index)
+		{
+			string connectionString = "mongodb://localhost";
+			string databaseName = "crawler";
+			string collectionName = "verbs";
+
+			MongoServer server = MongoServer.Create(connectionString);
+			MongoDatabase database = server.GetDatabase(databaseName);
+			MongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>(collectionName);
+
+			BsonDocument seenOn = new BsonDocument().Add("article", article).Add("sentence_index", sentence_index).Add("verb_index", verb_index);
+			QueryComplete whereQuery = Query.EQ("verb", verbStringRepresentation);
+			UpdateBuilder updateQuery = Update.Inc("count", 1).Push("seen_on_sentence", seenOn);
+			collection.Update(whereQuery, updateQuery, UpdateFlags.Upsert);
+
+			server.Disconnect();
 		}
 
 	}
