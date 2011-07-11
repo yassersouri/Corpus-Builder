@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using VerbInflector;
+using SentenceRecognizer;
 
 namespace VerbInflector
 {
@@ -16,13 +18,12 @@ namespace VerbInflector
 			string destinationDir = sourceDir + "again\\";
 			string file = "1088245.txt";
 
-			//Directory.CreateDirectory(destinationDir);
 			string sourceFile = sourceDir + file;
 			string destinationFile = destinationDir + file;
-
+			ValencyDicManager.RefreshVerbList("../../VerbList.txt", "../../valency list.txt");
+						
 			VerbInflector_OneFile(sourceFile, destinationFile, verbDicPath);
 		}
-
 		
 
 		public static void VerbInflector_OneFile(string sourceFile, string destinationFile, string verbDicPath){
@@ -31,6 +32,7 @@ namespace VerbInflector
 			Article newArticle = generateNewArticle(currentArticle, verbDicPath);
 
 			ArticleUtils.putArticle(newArticle, destinationFile);
+
 			System.Console.WriteLine(newArticle);
 		}
 
@@ -42,15 +44,20 @@ namespace VerbInflector
 			Sentence newSentence = null;
 			String[] currentLexemes = null;
 			String[] currentPOSTags = null;
-			for(int i = 0; i < currentArticle.getSentences().Length; i++)
+			String[] currentLemmas = null;
+			MorphoSyntacticFeatures[] currentFeatures = null;
+
+			for(int i = 0; i < currentArticle.getSentences().Length; i++) //for each sentence in this article.
 			{
 				//initialize the new sentence
 				newSentence = new Sentence();
 
 				//load the current sentence
 				currentSentence = currentArticle.getSentence(i);
-				currentLexemes = currentSentence.getLexeme();
-				currentPOSTags = currentSentence.getPOSTag();
+				currentLexemes = currentSentence.getLexemes();
+				currentPOSTags = currentSentence.getPOSTags();
+				currentLemmas = currentSentence.getLemmas();
+				currentFeatures = currentSentence.getFeatures();
 
 				//test input, 
 				string[] testSentence = "به گردش درآمده است این مسائل".Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
@@ -61,9 +68,38 @@ namespace VerbInflector
 				List<DependencyBasedToken> list;
 				//list = VerbPartTagger.MakePartialDependencyTree(currentLexemes, currentPOSTags, verbDicPath);
 				
-				VerbBasedSentence vbs = SentenceAnalyzer.MakeVerbBasedSentence(currentLexemes, currentPOSTags, verbDicPath);
+				VerbBasedSentence vbs = SentenceAnalyzer.MakeVerbBasedSentence(currentLexemes, currentPOSTags, currentLemmas, currentFeatures, verbDicPath);
 				list = vbs.SentenceTokens;
+
+
+				////////////////////////////////////
+				//           TEST CODE
+				////////////////////////////////////
+
+				foreach(var verbInSentence in vbs.VerbsInSentence)
+				{
+					//special string representation of the verb
+					String currentVerbString = ValencyDicManager.GetVerbString(ref vbs, verbInSentence); 
+
+					List<BaseStructure> basestruct = new List<BaseStructure>();
+					if (ValencyDicManager.BaseStrucDic.ContainsKey(currentVerbString))
+					{
+						basestruct = ValencyDicManager.BaseStrucDic[currentVerbString];
+						foreach (var baseStructure in basestruct)
+						{
+							bool istrue = baseStructure.Satisfy(vbs, verbInSentence);
+							//if true then 
+						}
+					}
+				}
+
+				////////////////////////////////////
 				
+				//Counting the verbs
+				//++++++++++++++++++++++++++++++++
+
+				//++++++++++++++++++++++++++++++++
+				//\\Counting the verbs
 
 				//word index pointer in the current sentence
 				int sentenceIndex = 0;
@@ -122,5 +158,6 @@ namespace VerbInflector
 
 			return newArticle;
 		}
+
 	}
 }

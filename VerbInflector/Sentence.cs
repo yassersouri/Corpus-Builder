@@ -13,19 +13,19 @@ namespace VerbInflector
 			words = new List<Word>(60);
 		}
 
-		public string[] getLexeme(){
-			string[] sentence;
+		public string[] getLexemes(){
+			string[] lexemes;
 			List<string> al = new List<string>(this.words.Count);
 			
 			for(int i = 0; i < this.words.Count; i++){
 				al.Add((this.words[i]).lexeme);
 			}
-			sentence = al.ToArray();
+			lexemes = al.ToArray();
 
-			return sentence;
+			return lexemes;
 		}
 
-		public string[] getPOSTag(){
+		public string[] getPOSTags(){
 			string[] postag;
 			List<string> al = new List<string>(this.words.Count);
 			for (int i = 0; i < this.words.Count; i++)
@@ -35,6 +35,34 @@ namespace VerbInflector
 			postag =al.ToArray();
 
 			return postag;
+		}
+
+		public string[] getLemmas()
+		{
+			string[] lemmalist;
+			List<string> al = new List<string>(this.words.Count);
+
+			for (int i = 0; i < this.words.Count; i++)
+			{
+				al.Add((this.words[i]).lemma);
+			}
+			lemmalist = al.ToArray();
+
+			return lemmalist;
+		}
+
+		public MorphoSyntacticFeatures[] getFeatures()
+		{
+			MorphoSyntacticFeatures[] featurelist;
+			List<MorphoSyntacticFeatures> al = new List<MorphoSyntacticFeatures>(this.words.Count);
+
+			for (int i = 0; i < this.words.Count; i++)
+			{
+				al.Add(new MorphoSyntacticFeatures(this.words[i].number, this.words[i].person, this.words[i].tma));
+			}
+			featurelist = al.ToArray();
+
+			return featurelist;
 		}
 
 		public Word[] getWords(){
