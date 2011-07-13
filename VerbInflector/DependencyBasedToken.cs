@@ -4,7 +4,7 @@ namespace VerbInflector
 {
 	public class DependencyBasedToken
 	{
-		public DependencyBasedToken(int pos, string word, string lemm, string cpos, string fpos, int head, string depRel, int wCount, MorphoSyntacticFeatures feats)
+		public DependencyBasedToken(int pos, string word, string lemm, string cpos, string fpos, int head, string depRel, int wCount, MorphoSyntacticFeatures feats, Chasbidegi chasbidegi)
 		{
 			Position = pos;
 			WordForm = word;
@@ -15,6 +15,7 @@ namespace VerbInflector
 			DependencyRelation = depRel;
 			TokenCount = wCount;
 			MorphoSyntacticFeats = feats;
+			ChasbidegiType = chasbidegi;
 		}
 
 		public override string ToString()
@@ -25,7 +26,7 @@ namespace VerbInflector
 			result.Append("lemma: ").Append(Lemma.ToString()).Append(" | ");
 			result.Append("cpos: ").Append(CPOSTag.ToString()).Append(" | ");
 			result.Append("parent: ").Append(HeadNumber.ToString()).Append(" | ");
-			result.Append("count: ").Append(TokenCount.ToString());
+			result.Append("count: ").Append(TokenCount.ToString()).Append(" | ").Append("chasbidegi:").Append(ChasbidegiType.ToString());
 			return result.ToString();
 		}
 
@@ -37,6 +38,7 @@ namespace VerbInflector
 		public int HeadNumber { set; get; }
 		public string DependencyRelation { set; get; }
 		public int TokenCount { set; get; }
+		public Chasbidegi ChasbidegiType { set; get; }
 		public MorphoSyntacticFeatures MorphoSyntacticFeats { set; get; }
 	}
 }

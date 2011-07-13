@@ -45,7 +45,7 @@ namespace VerbInflector
 		private static List<string> GetGozashtehNaghliSadehInflections(VerbInflection inflection)
 		{
 			var lstInflections = new List<string>();
-			var verbInflection = new VerbInflection(inflection.VerbStem, ZamirPeyvastehType.ZamirPeyvasteh_NONE,
+			var verbInflection = new VerbInflection(inflection.VerbStem, ZamirPeyvastehType.ZamirPeyvasteh_NONE, "",
 													ShakhsType.Shakhs_NONE, TenseFormationType.PAYEH_MAFOOLI,
 													inflection.Positivity);
 			var tempLst = GetPayehFelInflections(verbInflection);
@@ -68,7 +68,7 @@ namespace VerbInflector
 					fel += "‌ایم";
 					break;
 			}
-			lstInflections.Add(AddZamirPeyvasteh(fel, inflection.ZamirPeyvasteh));
+			lstInflections.Add(AddZamirPeyvasteh(fel, inflection));
 			return lstInflections;
 		}
 		private static List<string> GetGozashtehNaghliEstemraiSadehInflections(VerbInflection inflection)
@@ -89,7 +89,7 @@ namespace VerbInflector
 								 inflection.VerbStem.HastehMozareh, "",
 								 "", inflection.VerbStem.Transitivity, VerbType.SADEH,
 								 inflection.VerbStem.AmrShodani, inflection.VerbStem.HastehMozarehConsonantVowelEndStem, inflection.VerbStem.HastehMaziVowelStart, inflection.VerbStem.HastehMozarehVowelStart);
-			var verbInflection = new VerbInflection(verb, ZamirPeyvastehType.ZamirPeyvasteh_NONE,
+			var verbInflection = new VerbInflection(verb, ZamirPeyvastehType.ZamirPeyvasteh_NONE, "",
 													ShakhsType.Shakhs_NONE, TenseFormationType.PAYEH_MAFOOLI,
 													TensePositivity.POSITIVE);
 			var tempLst = GetPayehFelInflections(verbInflection);
@@ -112,7 +112,7 @@ namespace VerbInflector
 					verbBuilder.Append("‌ایم");
 					break;
 			}
-			lstInflections.Add(AddZamirPeyvasteh(verbBuilder.ToString(), inflection.ZamirPeyvasteh));
+			lstInflections.Add(AddZamirPeyvasteh(verbBuilder.ToString(), inflection));
 			return lstInflections;
 		}
 		private static List<string> GetGozashtehEstemrariInflections(VerbInflection inflection)
@@ -156,7 +156,7 @@ namespace VerbInflector
 					verbBuilder.Append("ند");
 					break;
 			}
-			lstInflections.Add(AddZamirPeyvasteh(verbBuilder.ToString(), inflection.ZamirPeyvasteh));
+			lstInflections.Add(AddZamirPeyvasteh(verbBuilder.ToString(), inflection));
 			return lstInflections;
 		}
 		private static List<string> GetGozashtehSadehInflections(VerbInflection inflection)
@@ -210,7 +210,7 @@ namespace VerbInflector
 					verbBuilder.Append("ند");
 					break;
 			}
-			lstInflections.Add(AddZamirPeyvasteh(verbBuilder.ToString(), inflection.ZamirPeyvasteh));
+			lstInflections.Add(AddZamirPeyvasteh(verbBuilder.ToString(), inflection));
 			return lstInflections;
 		}
 		private static List<string> GetHaalSaadehEkhbaariInflections(VerbInflection inflection)
@@ -284,7 +284,7 @@ namespace VerbInflector
 						verbBuilder.Append("د");
 					break;
 			}
-			lstInflections.Add(AddZamirPeyvasteh(verbBuilder.ToString(), inflection.ZamirPeyvasteh));
+			lstInflections.Add(AddZamirPeyvasteh(verbBuilder.ToString(), inflection));
 			return lstInflections;
 		}
 		private static List<string> GetHaalEltezamiInflections(VerbInflection inflection)
@@ -383,9 +383,9 @@ namespace VerbInflector
 					verbBuilder2.Append("د");
 					break;
 			}
-			lstInflections.Add(AddZamirPeyvasteh(verbBuilder.ToString(), inflection.ZamirPeyvasteh));
+			lstInflections.Add(AddZamirPeyvasteh(verbBuilder.ToString(), inflection));
 			if (inflection.Positivity == TensePositivity.POSITIVE && (inflection.VerbStem.HastehMozareh.Length > 2 || inflection.VerbStem.Type == VerbType.PISHVANDI))
-				lstInflections.Add(AddZamirPeyvasteh(verbBuilder2.ToString(), inflection.ZamirPeyvasteh));
+				lstInflections.Add(AddZamirPeyvasteh(verbBuilder2.ToString(), inflection));
 			return lstInflections;
 		}
 		private static List<string> GetHaalSaadehInflections(VerbInflection inflection)
@@ -437,7 +437,7 @@ namespace VerbInflector
 							verbBuilder.Append("د");
 						break;
 				}
-				lstInflections.Add(AddZamirPeyvasteh(verbBuilder.ToString(), inflection.ZamirPeyvasteh));
+				lstInflections.Add(AddZamirPeyvasteh(verbBuilder.ToString(), inflection));
 			}
 			return lstInflections;
 		}
@@ -560,15 +560,15 @@ namespace VerbInflector
 			else
 			{
 				if (!(inflection.VerbStem.HastehMozareh == "نه" && inflection.Positivity == TensePositivity.NEGATIVE))
-					lstInflections.Add(AddZamirPeyvasteh(verbBuilder1.ToString(), inflection.ZamirPeyvasteh));
+					lstInflections.Add(AddZamirPeyvasteh(verbBuilder1.ToString(), inflection));
 				if (inflection.Positivity == TensePositivity.NEGATIVE)
-					lstInflections.Add(AddZamirPeyvasteh(verbBuilder3.ToString(), inflection.ZamirPeyvasteh));
+					lstInflections.Add(AddZamirPeyvasteh(verbBuilder3.ToString(), inflection));
 				if (inflection.VerbStem.Type == VerbType.PISHVANDI && inflection.Positivity == TensePositivity.POSITIVE)
-					lstInflections.Add(AddZamirPeyvasteh(verbBuilder2.ToString(), inflection.ZamirPeyvasteh));
+					lstInflections.Add(AddZamirPeyvasteh(verbBuilder2.ToString(), inflection));
 				if (inflection.VerbStem.Type == VerbType.PISHVANDI && inflection.Shakhs == ShakhsType.DOVVOMSHAKHS_MOFRAD && inflection.Positivity == TensePositivity.POSITIVE &&
 					inflection.VerbStem.HastehMozarehConsonantVowelEndStem != "?")
 				{
-					lstInflections.Add(AddZamirPeyvasteh(verbBuilder2.Append("ی").ToString(), inflection.ZamirPeyvasteh));
+					lstInflections.Add(AddZamirPeyvasteh(verbBuilder2.Append("ی").ToString(), inflection));
 				}
 			}
 			return lstInflections;
@@ -603,115 +603,139 @@ namespace VerbInflector
 			}
 			return lstInflections;
 		}
-		private static string AddZamirPeyvasteh(string verb, ZamirPeyvastehType zamirPeyvastehType)
+		private static string AddZamirPeyvasteh(string verb, VerbInflection inflection)
 		{
 			string inflectedVerb = verb;
-			switch (zamirPeyvastehType)
+			switch (inflection.ZamirPeyvasteh)
 			{
 				case ZamirPeyvastehType.SEVVOMSHAKHS_MOFRAD:
 					if (verb.EndsWith("آ") || verb.EndsWith("ا") || verb.EndsWith("و"))
 					{
+						inflection.ZamirPeyvastehString = "یش";
 						inflectedVerb += "یش";
 					}
 					else if (verb.EndsWith("ه") && !verb.EndsWith("اه") && !verb.EndsWith("وه"))
 					{
+						inflection.ZamirPeyvastehString = "‌اش";
 						inflectedVerb += "‌اش";
 					}
 					else if (verb.EndsWith("ی") && !verb.EndsWith("ای") && !verb.EndsWith("وی"))
 					{
+						inflection.ZamirPeyvastehString = "‌اش";
 						inflectedVerb += "‌اش";
 					}
 					else if (verb.EndsWith("‌ای"))
 					{
+						inflection.ZamirPeyvastehString = "‌اش";
 						inflectedVerb += "‌اش";
 					}
 					else
 					{
+						inflection.ZamirPeyvastehString = "ش";
 						inflectedVerb += "ش";
 					}
 					break;
 				case ZamirPeyvastehType.SEVVOMSHAKHS_JAM:
 					if (verb.EndsWith("آ") || verb.EndsWith("ا") || verb.EndsWith("و"))
 					{
+						inflection.ZamirPeyvastehString = "یشان";
 						inflectedVerb += "یشان";
 					}
 					else if (verb.EndsWith("ه") && !verb.EndsWith("اه") && !verb.EndsWith("وه"))
 					{
+						inflection.ZamirPeyvastehString = "‌شان";
 						inflectedVerb += "‌شان";
 					}
 					else
 					{
+						inflection.ZamirPeyvastehString = "شان";
 						inflectedVerb += "شان";
 					}
 					break;
 				case ZamirPeyvastehType.DOVVOMSHAKHS_JAM:
 					if (verb.EndsWith("آ") || verb.EndsWith("ا") || verb.EndsWith("و"))
 					{
+						inflection.ZamirPeyvastehString = "یتان";
 						inflectedVerb += "یتان";
 					}
 					else if (verb.EndsWith("ه") && !verb.EndsWith("اه") && !verb.EndsWith("وه"))
 					{
+						inflection.ZamirPeyvastehString = "‌تان";
 						inflectedVerb += "‌تان";
 					}
 					else
 					{
+						inflection.ZamirPeyvastehString = "تان";
 						inflectedVerb += "تان";
 					} break;
 				case ZamirPeyvastehType.DOVVOMSHAKHS_MOFRAD:
 					if (verb.EndsWith("آ") || verb.EndsWith("ا") || verb.EndsWith("و"))
 					{
+						inflection.ZamirPeyvastehString = "یت";
 						inflectedVerb += "یت";
 					}
 					else if (verb.EndsWith("ه") && !verb.EndsWith("اه") && !verb.EndsWith("وه"))
 					{
+						inflection.ZamirPeyvastehString = "‌ات";
 						inflectedVerb += "‌ات";
 					}
 					else if (verb.EndsWith("ی") && !verb.EndsWith("ای") && !verb.EndsWith("وی"))
 					{
+						inflection.ZamirPeyvastehString = "‌ات";
 						inflectedVerb += "‌ات";
 					}
 					else if (verb.EndsWith("‌ای"))
 					{
+						inflection.ZamirPeyvastehString = "‌ات";
 						inflectedVerb += "‌ات";
 					}
 					else
 					{
+						inflection.ZamirPeyvastehString = "ت";
 						inflectedVerb += "ت";
 					}
 					break;
 				case ZamirPeyvastehType.AVALSHAKHS_JAM:
 					if (verb.EndsWith("آ") || verb.EndsWith("ا") || verb.EndsWith("و"))
 					{
+						inflection.ZamirPeyvastehString = "یمان";
 						inflectedVerb += "یمان";
 					}
 					else if (verb.EndsWith("ه") && !verb.EndsWith("اه") && !verb.EndsWith("وه"))
 					{
+						inflection.ZamirPeyvastehString = "‌مان";
 						inflectedVerb += "‌مان";
 					}
 					else
 					{
+						inflection.ZamirPeyvastehString = "مان";
 						inflectedVerb += "مان";
 					}
 					break;
 				case ZamirPeyvastehType.AVALSHAKHS_MOFRAD:
 					if (verb.EndsWith("آ") || verb.EndsWith("ا") || verb.EndsWith("و"))
 					{
+						inflection.ZamirPeyvastehString = "یم";
 						inflectedVerb += "یم";
 					}
 					else if (verb.EndsWith("ه") && !verb.EndsWith("اه") && !verb.EndsWith("وه"))
 					{
+						inflection.ZamirPeyvastehString = "‌ام";
 						inflectedVerb += "‌ام";
 					}
 					else if (verb.EndsWith("ی") && !verb.EndsWith("ای") && !verb.EndsWith("وی"))
 					{
+						inflection.ZamirPeyvastehString = "‌ام";
 						inflectedVerb += "‌ام";
 					}
 					else if (verb.EndsWith("‌ای"))
 					{
+						inflection.ZamirPeyvastehString = "‌ام";
 						inflectedVerb += "‌ام";
 					}
 					else
 					{
+						inflection.ZamirPeyvastehString = "م";
 						inflectedVerb += "م";
 					}
 					break;

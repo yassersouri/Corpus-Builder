@@ -103,6 +103,8 @@ namespace VerbInflector
 				//for each verb in sentence
 				foreach(var currentVerbInSentence in currentSentenceVBS.VerbsInSentence)
 				{
+					bool noSatisfiedBaseStructureExists = false;
+
 					List<BaseStructure> satisfiedBaseStructuresOfCurrentVerb = new List<BaseStructure>();
 					//special string representation of the verb
 					String currentVerbString = ValencyDicManager.GetVerbString(ref currentSentenceVBS, currentVerbInSentence);
@@ -118,12 +120,16 @@ namespace VerbInflector
 						}
 					}
 
+					if(satisfiedBaseStructuresOfCurrentVerb.Count == 0) noSatisfiedBaseStructureExists = true;
+					
 					List<BaseStructure> candidateBaseStructuresOfCurrentVerb;
-
+					
 					#region select one base structure of this verb
 
 					bool finishedChoosingPickedBaseStructure = false;
-
+					
+					//no need to choose because nothing is there
+					if (noSatisfiedBaseStructureExists) finishedChoosingPickedBaseStructure = true;
 					#region HasPrepositionalObject2
 					candidateBaseStructuresOfCurrentVerb = new List<BaseStructure>();
 
@@ -253,11 +259,13 @@ namespace VerbInflector
 					#endregion
 
 					#region Choose Randomly
-
-					int randomNumberIndex = randomNumberGenerator.Next(0, satisfiedBaseStructuresOfCurrentVerb.Count);
-					pickedBasedStructures.Add(currentVerbInSentence, satisfiedBaseStructuresOfCurrentVerb[randomNumberIndex]);
-					finishedChoosingPickedBaseStructure = true;
-
+					if(!finishedChoosingPickedBaseStructure)
+					{
+						int randomNumberIndex = randomNumberGenerator.Next(0, satisfiedBaseStructuresOfCurrentVerb.Count);
+						pickedBasedStructures.Add(currentVerbInSentence, satisfiedBaseStructuresOfCurrentVerb[randomNumberIndex]);
+						finishedChoosingPickedBaseStructure = true;
+					}
+					
 					#endregion
 
 					#endregion
@@ -266,11 +274,18 @@ namespace VerbInflector
 
 
 				#region select one base structure for the whole sentence from pickedBaseStructures
-
+				
 				bool finishedChoosingBaseStructure = false;
+				bool nothingPicked = false;
 
+				//don't choose base structure.
+				if(pickedBasedStructures.Count == 0) 
+				{
+					finishedChoosingBaseStructure = true;
+					nothingPicked = true;
+				}
 				List<KeyValuePair<VerbInSentence, BaseStructure>> candidatesOfCurrentSentence;
-				KeyValuePair<VerbInSentence, BaseStructure> SelectedKVP;
+				KeyValuePair<VerbInSentence, BaseStructure> SelectedKVP = new KeyValuePair<VerbInSentence,BaseStructure>();
 
 				#region choose HasPrepositionalObject2
 
@@ -463,8 +478,27 @@ namespace VerbInflector
 				#endregion
 
 				//fitting one base structure
-				SelectedKVP.Value.FitIntoBaseStructure(ref currentSentenceVBS, SelectedKVP.Key);
 				
+				
+				if(nothingPicked)
+				{
+					//nothing really picked.
+					if(currentSentenceVBS.VerbsInSentence.Count == 0)
+					{
+						//no verb exists in the sentense
+						//do nothing
+					}
+					else
+					{
+						VerbInSentence lastVerbInTheSentence = currentSentenceVBS.VerbsInSentence.Last();
+						BaseStructure emptyBaseStructure = new BaseStructure();
+						SelectedKVP = new KeyValuePair<VerbInSentence,BaseStructure>(lastVerbInTheSentence, emptyBaseStructure);
+						nothingPicked = false;
+					}
+				}
+
+				if(!nothingPicked)
+					SelectedKVP.Value.FitIntoBaseStructure(ref currentSentenceVBS, SelectedKVP.Key);
 
 				//word index pointer in the current sentence
 				int wordIndexInCurrentSentence = 0;
@@ -528,7 +562,8 @@ namespace VerbInflector
 
 
 				//adding the fitted base structure to the database as the main verb
-				mongoSaveMainVerb();
+				//add the selectedKVP's Verb to database
+				//mongoSaveMainVerb();
 
 				////////////////////////
 				//// Counting the Verbs
@@ -542,10 +577,10 @@ namespace VerbInflector
 					//sentence_index is already set
 					//verb_index is already set
 
-					//if (verbStringRepresentation.Equals("شدند~_~_"))
-					//{
-					//    mongoCountVerb(verbStringRepresentation, article, sentence_index, verb_index);
-					//}
+					if (verbStringRepresentation.Equals("شوند~_~_"))
+					{
+						mongoCountVerb(verbStringRepresentation, article, sentence_index, verb_index);
+					}
 					mongoCountVerb(verbStringRepresentation, article, sentence_index, verb_index);
 				}
 

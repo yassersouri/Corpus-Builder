@@ -176,10 +176,6 @@ namespace SentenceRecognizer
 			while ((sentence = reader.ReadLine()) != null)
 			{
 				sentence = StringUtil.RefineAndFilterPersianWord(sentence);
-				if (sentence.Contains("گردش"))
-				{
-
-				}
 				mainCatList.Add(sentence.Trim().Split("\t".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList());
 			}
 			while ((sentence = newVerbReader.ReadLine()) != null)
@@ -191,10 +187,7 @@ namespace SentenceRecognizer
 				string prefix = split[2];
 				string nonVerbalElement = split[3];
 				string preposition = split[4];
-				if (bonMazi == "آمد" && nonVerbalElement == "گردش")
-				{
 
-				}
 				foreach (List<string> list in mainCatList)
 				{
 					if (bonMazi == list[2] && bonMozare == list[3] && prefix == list[5] && nonVerbalElement == list[4] && preposition == list[6])

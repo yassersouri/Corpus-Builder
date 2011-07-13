@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
+using System.Text;
 
 namespace VerbInflector
 {
@@ -203,24 +202,24 @@ namespace VerbInflector
 					}
 				}
 				var verbtext = new StringBuilder();
-				var mitavanInflection = new VerbInflection(new Verb("", "", "می‌توان", "", "", VerbTransitivity.NAGOZAR, VerbType.SADEH, false, "?", "@", "!"), ZamirPeyvastehType.ZamirPeyvasteh_NONE,
+				var mitavanInflection = new VerbInflection(new Verb("", "", "می‌توان", "", "", VerbTransitivity.NAGOZAR, VerbType.SADEH, false, "?", "@", "!"), ZamirPeyvastehType.ZamirPeyvasteh_NONE, "",
 																		 ShakhsType.Shakhs_NONE,
 																		 TenseFormationType.HAAL_SAADEH, TensePositivity.POSITIVE);
 				VerbShapes.Add("می‌توان", new List<VerbInflection>());
 				VerbShapes["می‌توان"].Add(mitavanInflection);
-				var nemitavanInflection = new VerbInflection(new Verb("", "", "می‌توان", "", "", VerbTransitivity.NAGOZAR, VerbType.SADEH, false, "?", "@", "!"), ZamirPeyvastehType.ZamirPeyvasteh_NONE,
+				var nemitavanInflection = new VerbInflection(new Verb("", "", "می‌توان", "", "", VerbTransitivity.NAGOZAR, VerbType.SADEH, false, "?", "@", "!"), ZamirPeyvastehType.ZamirPeyvasteh_NONE, "",
 																		 ShakhsType.Shakhs_NONE,
 																		 TenseFormationType.HAAL_SAADEH, TensePositivity.POSITIVE);
 				VerbShapes.Add("نمی‌توان", new List<VerbInflection>());
 				VerbShapes["نمی‌توان"].Add(nemitavanInflection);
 
-				var betavanInflection = new VerbInflection(new Verb("", "", "بتوان", "", "", VerbTransitivity.NAGOZAR, VerbType.SADEH, false, "?", "@", "!"), ZamirPeyvastehType.ZamirPeyvasteh_NONE,
+				var betavanInflection = new VerbInflection(new Verb("", "", "بتوان", "", "", VerbTransitivity.NAGOZAR, VerbType.SADEH, false, "?", "@", "!"), ZamirPeyvastehType.ZamirPeyvasteh_NONE, "",
 																	   ShakhsType.Shakhs_NONE,
 																	   TenseFormationType.HAAL_ELTEZAMI, TensePositivity.POSITIVE);
 				VerbShapes.Add("بتوان", new List<VerbInflection>());
 				VerbShapes["بتوان"].Add(betavanInflection);
 
-				var naitavanInflection = new VerbInflection(new Verb("", "", "نتوان", "", "", VerbTransitivity.NAGOZAR, VerbType.SADEH, false, "?", "@", "!"), ZamirPeyvastehType.ZamirPeyvasteh_NONE,
+				var naitavanInflection = new VerbInflection(new Verb("", "", "نتوان", "", "", VerbTransitivity.NAGOZAR, VerbType.SADEH, false, "?", "@", "!"), ZamirPeyvastehType.ZamirPeyvasteh_NONE, "",
 																		 ShakhsType.Shakhs_NONE,
 																		 TenseFormationType.HAAL_ELTEZAMI, TensePositivity.POSITIVE);
 				VerbShapes.Add("نتوان", new List<VerbInflection>());
@@ -244,7 +243,7 @@ namespace VerbInflector
 											Enum.GetValues(typeof(ZamirPeyvastehType)))
 									{
 
-										var inflection = new VerbInflection(verb, zamirPeyvastehType,
+										var inflection = new VerbInflection(verb, zamirPeyvastehType, "",
 																			shakhsType,
 																			tenseFormationType, positivity);
 										if (inflection.IsValid())

@@ -342,38 +342,44 @@ namespace VerbInflector
 											bestDic[j - 1].Key))
 									{
 										var item1 = new KeyValuePair<string, object>(bestDic[j].Key,
-																						new KeyValuePair<string, int>(
-																					 "NON-VERBAL-ELEMENT", i));
+																					 new KeyValuePair<string, int>(
+																						 "NON-VERBAL-ELEMENT", i));
 										bestDic[j] = item1;
 										var item2 = new KeyValuePair<string, object>(bestDic[j - 1].Key,
 																					 new KeyValuePair<string, int>(
-																					 "VERBAL-PREPOSIOTION", i));
+																						 "VERBAL-PREPOSIOTION", i));
 										bestDic[j - 1] = item2;
 										i = j - 2;
 										break;
 									}
-									else if ((VerbList.CompoundVerbDic[verbValue][bestDic[j].Key].ContainsKey("") || VerbList.CompoundVerbDic[verbValue][outlemmas[j]].ContainsKey("")) &&
+									else if ((VerbList.CompoundVerbDic[verbValue][bestDic[j].Key].ContainsKey("") ||
+											  VerbList.CompoundVerbDic[verbValue][outlemmas[j]].ContainsKey("")) &&
 											 posTokens[j] != "P")
 									{
 										var item1 = new KeyValuePair<string, object>(bestDic[j].Key,
-																					   new KeyValuePair<string, int>(
-																					 "NON-VERBAL-ELEMENT", i));
+																					 new KeyValuePair
+																						 <string, int>(
+																						 "NON-VERBAL-ELEMENT", i));
 										bestDic[j] = item1;
 										i = j - 1;
 										break;
 									}
 								}
-								else if (VerbList.CompoundVerbDic[verbValue][outlemmas[j]].ContainsKey(""))
+								else if (VerbList.CompoundVerbDic[verbValue].ContainsKey(outlemmas[j]))
 								{
-									if (VerbList.CompoundVerbDic[verbValue][outlemmas[j]].ContainsKey("") &&
-											  posTokens[j] != "P")
+									if (VerbList.CompoundVerbDic[verbValue][outlemmas[j]].ContainsKey(""))
 									{
-										var item1 = new KeyValuePair<string, object>(bestDic[j].Key,
-																					   new KeyValuePair<string, int>(
-																					 "NON-VERBAL-ELEMENT", i));
-										bestDic[j] = item1;
-										i = j - 1;
-										break;
+										if (VerbList.CompoundVerbDic[verbValue][outlemmas[j]].ContainsKey("") &&
+											posTokens[j] != "P")
+										{
+											var item1 = new KeyValuePair<string, object>(bestDic[j].Key,
+																						 new KeyValuePair
+																							 <string, int>(
+																							 "NON-VERBAL-ELEMENT", i));
+											bestDic[j] = item1;
+											i = j - 1;
+											break;
+										}
 									}
 								}
 							}
@@ -3532,6 +3538,7 @@ namespace VerbInflector
 				ShakhsType shakhsType;
 				TenseFormationType tenseFormationType;
 				ZamirPeyvastehType zamirPeyvastehType;
+				string zamirString;
 				List<VerbInflection> tempInfleclist;
 				VerbInflection tempInflec;
 				string[] tokens = output[i].Key.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
@@ -3554,9 +3561,10 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						zamirString = tempInflec.ZamirPeyvastehString;
 						shakhsType = tempInflec.Shakhs;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
 													   positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
@@ -3580,10 +3588,11 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						zamirString = tempInflec.ZamirPeyvastehString;
 						shakhsType = tempInflec.Shakhs;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-													   positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -3606,10 +3615,11 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirString = tempInflec.ZamirPeyvastehString;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 						shakhsType = tempInflec.Shakhs;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-													   positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -3632,10 +3642,12 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						zamirString = tempInflec.ZamirPeyvastehString;
 						shakhsType = tempInflec.Shakhs;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-													   positivity, passivity);
+						zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+															 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -3658,10 +3670,11 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						zamirString = tempInflec.ZamirPeyvastehString;
 						shakhsType = tempInflec.Shakhs;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-													   positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -3684,10 +3697,11 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 						shakhsType = tempInflec.Shakhs;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-													   positivity, passivity);
+						zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -3710,10 +3724,10 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 						shakhsType = tempInflec.Shakhs;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-													   positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -3739,9 +3753,9 @@ namespace VerbInflector
 						verb.HastehMozareh = "کن";
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -3767,9 +3781,9 @@ namespace VerbInflector
 						verb.HastehMozareh = "کن";
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -3795,9 +3809,9 @@ namespace VerbInflector
 						verb.HastehMozareh = "کن";
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -3823,9 +3837,9 @@ namespace VerbInflector
 						verb.HastehMozareh = "کن";
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -3851,9 +3865,9 @@ namespace VerbInflector
 						verb.HastehMozareh = "کن";
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -3887,9 +3901,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -3923,9 +3937,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -3959,9 +3973,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -3995,9 +4009,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4031,9 +4045,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4072,9 +4086,9 @@ namespace VerbInflector
 						{
 							positivity = TensePositivity.POSITIVE;
 						}
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4108,9 +4122,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4144,9 +4158,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4180,9 +4194,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4206,7 +4220,7 @@ namespace VerbInflector
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
 						tempInfleclist = VerbList.VerbShapes[tokens[1]];
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 						verb = new Verb("", tempInflec.VerbStem.HastehMazi, tempInflec.VerbStem.HastehMozareh,
 										tempInflec.VerbStem.Pishvand, "", VerbTransitivity.GOZARA,
 										tempInflec.VerbStem.Type, true,
@@ -4230,9 +4244,9 @@ namespace VerbInflector
 						verb.HastehMaziVowelStart = tempInflec.VerbStem.HastehMaziVowelStart;
 						verb.HastehMozarehVowelStart = tempInflec.VerbStem.HastehMozarehVowelStart;
 						if (zamirPeyvastehType == ZamirPeyvastehType.ZamirPeyvasteh_NONE)
-							zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+							zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4256,7 +4270,7 @@ namespace VerbInflector
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
 						tempInfleclist = VerbList.VerbShapes[tokens[1]];
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 						verb = new Verb("", tempInflec.VerbStem.HastehMazi, tempInflec.VerbStem.HastehMozareh,
 										tempInflec.VerbStem.Pishvand, "", VerbTransitivity.GOZARA,
 										tempInflec.VerbStem.Type, true,
@@ -4280,9 +4294,9 @@ namespace VerbInflector
 						verb.HastehMaziVowelStart = tempInflec.VerbStem.HastehMaziVowelStart;
 						verb.HastehMozarehVowelStart = tempInflec.VerbStem.HastehMozarehVowelStart;
 						if (zamirPeyvastehType == ZamirPeyvastehType.ZamirPeyvasteh_NONE)
-							zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+							zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4305,11 +4319,11 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 
 						shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4333,11 +4347,11 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 
 						shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4371,9 +4385,9 @@ namespace VerbInflector
 							}
 						}
 						shakhsType = tempInflec.Shakhs;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4407,9 +4421,9 @@ namespace VerbInflector
 							}
 						}
 						shakhsType = tempInflec.Shakhs;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4443,7 +4457,7 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 
 						tempInfleclist = VerbList.VerbShapes[tokens[2]];
 						tempInflec = null;
@@ -4458,8 +4472,8 @@ namespace VerbInflector
 						if (shakhsType == ShakhsType.Shakhs_NONE)
 							shakhsType = tempInflec.Shakhs;
 
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4497,10 +4511,10 @@ namespace VerbInflector
 						{
 							positivity = TensePositivity.POSITIVE;
 						}
-						zamirPeyvastehType = ZamirPeyvastehType.ZamirPeyvasteh_NONE;
+						zamirPeyvastehType = ZamirPeyvastehType.ZamirPeyvasteh_NONE; zamirString = "";
 
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4534,9 +4548,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = TensePositivity.POSITIVE;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4570,9 +4584,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = TensePositivity.POSITIVE;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4610,10 +4624,10 @@ namespace VerbInflector
 						{
 							positivity = TensePositivity.POSITIVE;
 						}
-						zamirPeyvastehType = ZamirPeyvastehType.ZamirPeyvasteh_NONE;
+						zamirPeyvastehType = ZamirPeyvastehType.ZamirPeyvasteh_NONE; zamirString = "";
 
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4647,9 +4661,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = TensePositivity.NEGATIVE;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4683,9 +4697,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = TensePositivity.NEGATIVE;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4707,12 +4721,12 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 						verb = new Verb(verb.HarfeEzafeh, "کرد", "کن", verb.Pishvand, verb.Felyar, VerbTransitivity.GOZARA, verb.Type, true, "?", "@", "!");
 
 						shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 					#endregion
@@ -4736,9 +4750,9 @@ namespace VerbInflector
 						verb = new Verb(verb.HarfeEzafeh, "کرد", "کن", verb.Pishvand, verb.Felyar, VerbTransitivity.GOZARA, verb.Type, true, "?", "@", "!");
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4763,9 +4777,9 @@ namespace VerbInflector
 						verb = new Verb(verb.HarfeEzafeh, "کرد", "کن", verb.Pishvand, verb.Felyar, VerbTransitivity.GOZARA, verb.Type, true, "?", "@", "!");
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4790,9 +4804,9 @@ namespace VerbInflector
 						verb = new Verb(verb.HarfeEzafeh, "کرد", "کن", verb.Pishvand, verb.Felyar, VerbTransitivity.GOZARA, verb.Type, true, "?", "@", "!");
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4817,9 +4831,9 @@ namespace VerbInflector
 						verb = new Verb(verb.HarfeEzafeh, "کرد", "کن", verb.Pishvand, verb.Felyar, VerbTransitivity.GOZARA, verb.Type, true, "?", "@", "!");
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4844,9 +4858,9 @@ namespace VerbInflector
 						verb = new Verb(verb.HarfeEzafeh, "کرد", "کن", verb.Pishvand, verb.Felyar, VerbTransitivity.GOZARA, verb.Type, true, "?", "@", "!");
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4882,10 +4896,10 @@ namespace VerbInflector
 						}
 
 						shakhsType = tempInflec.Shakhs;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4911,10 +4925,10 @@ namespace VerbInflector
 
 						shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
 
-						zamirPeyvastehType = ZamirPeyvastehType.ZamirPeyvasteh_NONE;
+						zamirPeyvastehType = ZamirPeyvastehType.ZamirPeyvasteh_NONE; zamirString = "";
 
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -4939,11 +4953,11 @@ namespace VerbInflector
 							}
 							verb = tempInflec.VerbStem.Clone();
 							positivity = tempInflec.Positivity;
-							zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+							zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 
 							shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
-							inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-															positivity, passivity);
+							inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+															 positivity, passivity);
 							outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						}
 						else if (i == output.Count - 1 && output[i].Value == 5)
@@ -4962,11 +4976,11 @@ namespace VerbInflector
 							}
 							verb = tempInflec.VerbStem.Clone();
 							positivity = tempInflec.Positivity;
-							zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+							zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 
 							shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
-							inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-															positivity, passivity);
+							inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+															 positivity, passivity);
 							outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						}
 						else if (i == output.Count - 1 && output[i].Value == 4)
@@ -4985,11 +4999,11 @@ namespace VerbInflector
 							}
 							verb = tempInflec.VerbStem.Clone();
 							positivity = tempInflec.Positivity;
-							zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+							zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 
 							shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
-							inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-															positivity, passivity);
+							inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+															 positivity, passivity);
 							outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						}
 						else if (i == output.Count - 1 && output[i].Value == 7)
@@ -5019,11 +5033,11 @@ namespace VerbInflector
 								}
 							}
 							positivity = tempInflec.Positivity;
-							zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+							zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 
 							shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
-							inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-															positivity, passivity);
+							inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+															 positivity, passivity);
 							outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						}
 						else if (i == output.Count - 1 && output[i].Value == 6)
@@ -5042,11 +5056,11 @@ namespace VerbInflector
 							}
 							verb = tempInflec.VerbStem.Clone();
 							positivity = tempInflec.Positivity;
-							zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+							zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 
 							shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
-							inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-															positivity, passivity);
+							inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+															 positivity, passivity);
 							outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						}
 						else if (i == output.Count - 1 && output[i].Value == 9)
@@ -5065,12 +5079,12 @@ namespace VerbInflector
 							}
 							verb = tempInflec.VerbStem.Clone();
 							positivity = tempInflec.Positivity;
-							zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+							zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 							verb = new Verb(verb.HarfeEzafeh, "کرد", "کن", verb.Pishvand, verb.Felyar, VerbTransitivity.GOZARA, verb.Type, true, "?", "@", "!");
 
 							shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
-							inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-															positivity, passivity);
+							inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+															 positivity, passivity);
 							outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						}
 						else
@@ -5091,6 +5105,7 @@ namespace VerbInflector
 			for (int i = 0; i < output.Count; i++)
 			{
 				var values = output[i];
+				string zamirString;
 				VerbInflection inflection;
 				TensePassivity passivity;
 				TensePositivity positivity;
@@ -5121,9 +5136,10 @@ namespace VerbInflector
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
 						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirString = tempInflec.ZamirPeyvastehString;
 						shakhsType = tempInflec.Shakhs;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-													   positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5146,10 +5162,11 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						zamirString = tempInflec.ZamirPeyvastehString;
 						shakhsType = tempInflec.Shakhs;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-													   positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5172,10 +5189,11 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						zamirString = tempInflec.ZamirPeyvastehString;
 						shakhsType = tempInflec.Shakhs;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-													   positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5198,10 +5216,11 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 						shakhsType = tempInflec.Shakhs;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-													   positivity, passivity);
+						zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5224,10 +5243,10 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 						shakhsType = tempInflec.Shakhs;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-													   positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5250,10 +5269,10 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 						shakhsType = tempInflec.Shakhs;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-													   positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5276,10 +5295,10 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 						shakhsType = tempInflec.Shakhs;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-													   positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5305,9 +5324,9 @@ namespace VerbInflector
 						verb.HastehMozareh = "کن";
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5333,9 +5352,9 @@ namespace VerbInflector
 						verb.HastehMozareh = "کن";
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5361,9 +5380,9 @@ namespace VerbInflector
 						verb.HastehMozareh = "کن";
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5389,9 +5408,9 @@ namespace VerbInflector
 						verb.HastehMozareh = "کن";
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5417,9 +5436,9 @@ namespace VerbInflector
 						verb.HastehMozareh = "کن";
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5453,9 +5472,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5489,9 +5508,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5525,9 +5544,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5561,9 +5580,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5597,9 +5616,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5638,9 +5657,9 @@ namespace VerbInflector
 						{
 							positivity = TensePositivity.POSITIVE;
 						}
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5674,9 +5693,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5710,9 +5729,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5746,9 +5765,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5772,7 +5791,7 @@ namespace VerbInflector
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
 						tempInfleclist = VerbList.VerbShapes[tokens[1]];
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 						verb = new Verb("", tempInflec.VerbStem.HastehMazi, tempInflec.VerbStem.HastehMozareh,
 										tempInflec.VerbStem.Pishvand, "", VerbTransitivity.GOZARA,
 										tempInflec.VerbStem.Type, true,
@@ -5796,9 +5815,9 @@ namespace VerbInflector
 						verb.HastehMaziVowelStart = tempInflec.VerbStem.HastehMaziVowelStart;
 						verb.HastehMozarehVowelStart = tempInflec.VerbStem.HastehMozarehVowelStart;
 						if (zamirPeyvastehType == ZamirPeyvastehType.ZamirPeyvasteh_NONE)
-							zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+							zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5822,7 +5841,7 @@ namespace VerbInflector
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
 						tempInfleclist = VerbList.VerbShapes[tokens[1]];
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 						verb = new Verb("", tempInflec.VerbStem.HastehMazi, tempInflec.VerbStem.HastehMozareh,
 										tempInflec.VerbStem.Pishvand, "", VerbTransitivity.GOZARA,
 										tempInflec.VerbStem.Type, true,
@@ -5846,9 +5865,9 @@ namespace VerbInflector
 						verb.HastehMaziVowelStart = tempInflec.VerbStem.HastehMaziVowelStart;
 						verb.HastehMozarehVowelStart = tempInflec.VerbStem.HastehMozarehVowelStart;
 						if (zamirPeyvastehType == ZamirPeyvastehType.ZamirPeyvasteh_NONE)
-							zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+							zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5871,11 +5890,11 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 
 						shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5899,11 +5918,11 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 
 						shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5937,9 +5956,9 @@ namespace VerbInflector
 							}
 						}
 						shakhsType = tempInflec.Shakhs;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -5973,9 +5992,9 @@ namespace VerbInflector
 							}
 						}
 						shakhsType = tempInflec.Shakhs;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -6009,7 +6028,7 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 
 						tempInfleclist = VerbList.VerbShapes[tokens[2]];
 						tempInflec = null;
@@ -6024,8 +6043,8 @@ namespace VerbInflector
 						if (shakhsType == ShakhsType.Shakhs_NONE)
 							shakhsType = tempInflec.Shakhs;
 
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -6063,10 +6082,10 @@ namespace VerbInflector
 						{
 							positivity = TensePositivity.POSITIVE;
 						}
-						zamirPeyvastehType = ZamirPeyvastehType.ZamirPeyvasteh_NONE;
+						zamirPeyvastehType = ZamirPeyvastehType.ZamirPeyvasteh_NONE; zamirString = "";
 
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -6100,9 +6119,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = TensePositivity.POSITIVE;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -6136,9 +6155,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = TensePositivity.POSITIVE;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -6176,10 +6195,10 @@ namespace VerbInflector
 						{
 							positivity = TensePositivity.POSITIVE;
 						}
-						zamirPeyvastehType = ZamirPeyvastehType.ZamirPeyvasteh_NONE;
+						zamirPeyvastehType = ZamirPeyvastehType.ZamirPeyvasteh_NONE; zamirString = "";
 
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -6213,9 +6232,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = TensePositivity.NEGATIVE;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -6249,9 +6268,9 @@ namespace VerbInflector
 						}
 						shakhsType = tempInflec.Shakhs;
 						positivity = TensePositivity.NEGATIVE;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -6273,12 +6292,12 @@ namespace VerbInflector
 						}
 						verb = tempInflec.VerbStem.Clone();
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 						verb = new Verb(verb.HarfeEzafeh, "کرد", "کن", verb.Pishvand, verb.Felyar, VerbTransitivity.GOZARA, verb.Type, true, "?", "@", "!");
 
 						shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 					#endregion
@@ -6302,9 +6321,9 @@ namespace VerbInflector
 						verb = new Verb(verb.HarfeEzafeh, "کرد", "کن", verb.Pishvand, verb.Felyar, VerbTransitivity.GOZARA, verb.Type, true, "?", "@", "!");
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -6329,9 +6348,9 @@ namespace VerbInflector
 						verb = new Verb(verb.HarfeEzafeh, "کرد", "کن", verb.Pishvand, verb.Felyar, VerbTransitivity.GOZARA, verb.Type, true, "?", "@", "!");
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -6356,9 +6375,9 @@ namespace VerbInflector
 						verb = new Verb(verb.HarfeEzafeh, "کرد", "کن", verb.Pishvand, verb.Felyar, VerbTransitivity.GOZARA, verb.Type, true, "?", "@", "!");
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -6383,9 +6402,9 @@ namespace VerbInflector
 						verb = new Verb(verb.HarfeEzafeh, "کرد", "کن", verb.Pishvand, verb.Felyar, VerbTransitivity.GOZARA, verb.Type, true, "?", "@", "!");
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -6410,9 +6429,9 @@ namespace VerbInflector
 						verb = new Verb(verb.HarfeEzafeh, "کرد", "کن", verb.Pishvand, verb.Felyar, VerbTransitivity.GOZARA, verb.Type, true, "?", "@", "!");
 						shakhsType = tempInflec.Shakhs;
 						positivity = tempInflec.Positivity;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -6448,10 +6467,10 @@ namespace VerbInflector
 						}
 
 						shakhsType = tempInflec.Shakhs;
-						zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+						zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -6477,10 +6496,10 @@ namespace VerbInflector
 
 						shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
 
-						zamirPeyvastehType = ZamirPeyvastehType.ZamirPeyvasteh_NONE;
+						zamirPeyvastehType = ZamirPeyvastehType.ZamirPeyvasteh_NONE; zamirString = "";
 
-						inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-														positivity, passivity);
+						inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+														 positivity, passivity);
 						outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						break;
 
@@ -6505,11 +6524,11 @@ namespace VerbInflector
 							}
 							verb = tempInflec.VerbStem.Clone();
 							positivity = tempInflec.Positivity;
-							zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+							zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 
 							shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
-							inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-															positivity, passivity);
+							inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+															 positivity, passivity);
 							outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						}
 						else if (i == output.Count - 1 && output[i].Value == 5)
@@ -6528,11 +6547,11 @@ namespace VerbInflector
 							}
 							verb = tempInflec.VerbStem.Clone();
 							positivity = tempInflec.Positivity;
-							zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+							zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 
 							shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
-							inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-															positivity, passivity);
+							inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+															 positivity, passivity);
 							outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						}
 						else if (i == output.Count - 1 && output[i].Value == 4)
@@ -6551,11 +6570,11 @@ namespace VerbInflector
 							}
 							verb = tempInflec.VerbStem.Clone();
 							positivity = tempInflec.Positivity;
-							zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+							zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 
 							shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
-							inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-															positivity, passivity);
+							inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+															 positivity, passivity);
 							outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						}
 						else if (i == output.Count - 1 && output[i].Value == 7)
@@ -6585,11 +6604,11 @@ namespace VerbInflector
 								}
 							}
 							positivity = tempInflec.Positivity;
-							zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+							zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 
 							shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
-							inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-															positivity, passivity);
+							inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+															 positivity, passivity);
 							outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						}
 						else if (i == output.Count - 1 && output[i].Value == 6)
@@ -6608,11 +6627,11 @@ namespace VerbInflector
 							}
 							verb = tempInflec.VerbStem.Clone();
 							positivity = tempInflec.Positivity;
-							zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+							zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 
 							shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
-							inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-															positivity, passivity);
+							inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+															 positivity, passivity);
 							outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						}
 						else if (i == output.Count - 1 && output[i].Value == 9)
@@ -6631,12 +6650,12 @@ namespace VerbInflector
 							}
 							verb = tempInflec.VerbStem.Clone();
 							positivity = tempInflec.Positivity;
-							zamirPeyvastehType = tempInflec.ZamirPeyvasteh;
+							zamirPeyvastehType = tempInflec.ZamirPeyvasteh; zamirString = tempInflec.ZamirPeyvastehString;
 							verb = new Verb(verb.HarfeEzafeh, "کرد", "کن", verb.Pishvand, verb.Felyar, VerbTransitivity.GOZARA, verb.Type, true, "?", "@", "!");
 
 							shakhsType = ShakhsType.SEVVOMSHAKHS_MOFRAD;
-							inflection = new VerbInflection(verb, zamirPeyvastehType, shakhsType, tenseFormationType,
-															positivity, passivity);
+							inflection = new VerbInflection(verb, zamirPeyvastehType, zamirString, shakhsType, tenseFormationType,
+															 positivity, passivity);
 							outputResults.Add(i, new KeyValuePair<string, VerbInflection>(output[i].Key, inflection));
 						}
 						else
