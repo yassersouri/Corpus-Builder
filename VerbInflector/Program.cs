@@ -97,14 +97,15 @@ namespace VerbInflector
 				
 				VerbBasedSentence currentSentenceVBS = SentenceAnalyzer.MakeVerbBasedSentence(currentLexemes, currentPOSTags, currentLemmas, currentFeatures, verbDicPath);
 				List<DependencyBasedToken> list = currentSentenceVBS.SentenceTokens;
+				Random randomNumberGenerator = new Random();
+				Dictionary<VerbInSentence, BaseStructure> pickedBasedStructures = new Dictionary<VerbInSentence,BaseStructure>();
 
-				Dictionary<VerbInSentence, BaseStructure> satisfiedBaseStructures = new Dictionary<VerbInSentence,BaseStructure>();
 				//for each verb in sentence
 				foreach(var currentVerbInSentence in currentSentenceVBS.VerbsInSentence)
 				{
+					List<BaseStructure> satisfiedBaseStructuresOfCurrentVerb = new List<BaseStructure>();
 					//special string representation of the verb
-					String currentVerbString = ValencyDicManager.GetVerbString(ref currentSentenceVBS, currentVerbInSentence); 
-
+					String currentVerbString = ValencyDicManager.GetVerbString(ref currentSentenceVBS, currentVerbInSentence);
 					if (ValencyDicManager.BaseStrucDic.ContainsKey(currentVerbString))
 					{
 						List<BaseStructure> baseStructuresForTheCurrentVerb = ValencyDicManager.BaseStrucDic[currentVerbString];
@@ -112,15 +113,357 @@ namespace VerbInflector
 						{
 							if(currentBaseStructure.Satisfy(currentSentenceVBS, currentVerbInSentence))
 							{
-								satisfiedBaseStructures.Add(currentVerbInSentence, currentBaseStructure);
+								satisfiedBaseStructuresOfCurrentVerb.Add(currentBaseStructure);
 							}
 						}
 					}
+
+					List<BaseStructure> candidateBaseStructuresOfCurrentVerb;
+
+					#region select one base structure of this verb
+
+					bool finishedChoosingPickedBaseStructure = false;
+
+					#region HasPrepositionalObject2
+					candidateBaseStructuresOfCurrentVerb = new List<BaseStructure>();
+
+					if(!finishedChoosingPickedBaseStructure)
+					{
+						foreach (var currentSatisfiedBaseStructure in satisfiedBaseStructuresOfCurrentVerb)
+						{
+							if(currentSatisfiedBaseStructure.HasPrepositionalObject2)
+								candidateBaseStructuresOfCurrentVerb.Add(currentSatisfiedBaseStructure);
+						}
+						if(candidateBaseStructuresOfCurrentVerb.Count > 1)
+						{
+							int randomIndex = randomNumberGenerator.Next(0, candidateBaseStructuresOfCurrentVerb.Count);
+							pickedBasedStructures.Add(currentVerbInSentence, candidateBaseStructuresOfCurrentVerb[randomIndex]);
+							finishedChoosingPickedBaseStructure = true;
+						}
+						else if(candidateBaseStructuresOfCurrentVerb.Count == 1)
+						{
+							pickedBasedStructures.Add(currentVerbInSentence, candidateBaseStructuresOfCurrentVerb[0]);
+							finishedChoosingPickedBaseStructure = true;
+						}
+						else if(candidateBaseStructuresOfCurrentVerb.Count == 0)
+						{
+							finishedChoosingPickedBaseStructure = false;
+						}
+						else
+						{
+							throw new Exception("Error in picking BaseStructures for Verbs");
+						}
+					}
+					#endregion
+
+					#region HasPrepositionalObject1
+					candidateBaseStructuresOfCurrentVerb = new List<BaseStructure>();
+
+					if (!finishedChoosingPickedBaseStructure)
+					{
+						foreach (var currentSatisfiedBaseStructure in satisfiedBaseStructuresOfCurrentVerb)
+						{
+							if (currentSatisfiedBaseStructure.HasPrepositionalObject1)
+								candidateBaseStructuresOfCurrentVerb.Add(currentSatisfiedBaseStructure);
+						}
+						if (candidateBaseStructuresOfCurrentVerb.Count > 1)
+						{
+							int randomIndex = randomNumberGenerator.Next(0, candidateBaseStructuresOfCurrentVerb.Count);
+							pickedBasedStructures.Add(currentVerbInSentence, candidateBaseStructuresOfCurrentVerb[randomIndex]);
+							finishedChoosingPickedBaseStructure = true;
+						}
+						else if (candidateBaseStructuresOfCurrentVerb.Count == 1)
+						{
+							pickedBasedStructures.Add(currentVerbInSentence, candidateBaseStructuresOfCurrentVerb[0]);
+							finishedChoosingPickedBaseStructure = true;
+						}
+						else if (candidateBaseStructuresOfCurrentVerb.Count == 0)
+						{
+							finishedChoosingPickedBaseStructure = false;
+						}
+						else
+						{
+							throw new Exception("Error in picking BaseStructures for Verbs");
+						}
+					}
+					#endregion
+
+					#region HasRa
+					candidateBaseStructuresOfCurrentVerb = new List<BaseStructure>();
+
+					if (!finishedChoosingPickedBaseStructure)
+					{
+						foreach (var currentSatisfiedBaseStructure in satisfiedBaseStructuresOfCurrentVerb)
+						{
+							if (currentSatisfiedBaseStructure.HasRa)
+								candidateBaseStructuresOfCurrentVerb.Add(currentSatisfiedBaseStructure);
+						}
+						if (candidateBaseStructuresOfCurrentVerb.Count > 1)
+						{
+							int randomIndex = randomNumberGenerator.Next(0, candidateBaseStructuresOfCurrentVerb.Count);
+							pickedBasedStructures.Add(currentVerbInSentence, candidateBaseStructuresOfCurrentVerb[randomIndex]);
+							finishedChoosingPickedBaseStructure = true;
+						}
+						else if (candidateBaseStructuresOfCurrentVerb.Count == 1)
+						{
+							pickedBasedStructures.Add(currentVerbInSentence, candidateBaseStructuresOfCurrentVerb[0]);
+							finishedChoosingPickedBaseStructure = true;
+						}
+						else if (candidateBaseStructuresOfCurrentVerb.Count == 0)
+						{
+							finishedChoosingPickedBaseStructure = false;
+						}
+						else
+						{
+							throw new Exception("Error in picking BaseStructures for Verbs");
+						}
+					}
+					#endregion
+
+					#region HasBandMotammemi
+					candidateBaseStructuresOfCurrentVerb = new List<BaseStructure>();
+
+					if (!finishedChoosingPickedBaseStructure)
+					{
+						foreach (var currentSatisfiedBaseStructure in satisfiedBaseStructuresOfCurrentVerb)
+						{
+							if (currentSatisfiedBaseStructure.HasBandMotammemi || currentSatisfiedBaseStructure.HasBandMotemmemiAgreement || currentSatisfiedBaseStructure.HasBandMotemmemiEltezami)
+								candidateBaseStructuresOfCurrentVerb.Add(currentSatisfiedBaseStructure);
+						}
+						if (candidateBaseStructuresOfCurrentVerb.Count > 1)
+						{
+							int randomIndex = randomNumberGenerator.Next(0, candidateBaseStructuresOfCurrentVerb.Count);
+							pickedBasedStructures.Add(currentVerbInSentence, candidateBaseStructuresOfCurrentVerb[randomIndex]);
+							finishedChoosingPickedBaseStructure = true;
+						}
+						else if (candidateBaseStructuresOfCurrentVerb.Count == 1)
+						{
+							pickedBasedStructures.Add(currentVerbInSentence, candidateBaseStructuresOfCurrentVerb[0]);
+							finishedChoosingPickedBaseStructure = true;
+						}
+						else if (candidateBaseStructuresOfCurrentVerb.Count == 0)
+						{
+							finishedChoosingPickedBaseStructure = false;
+						}
+						else
+						{
+							throw new Exception("Error in picking BaseStructures for Verbs");
+						}
+					}
+					#endregion
+
+					#region Choose Randomly
+
+					int randomNumberIndex = randomNumberGenerator.Next(0, satisfiedBaseStructuresOfCurrentVerb.Count);
+					pickedBasedStructures.Add(currentVerbInSentence, satisfiedBaseStructuresOfCurrentVerb[randomNumberIndex]);
+					finishedChoosingPickedBaseStructure = true;
+
+					#endregion
+
+					#endregion
+
 				}
 
-				//fitting one base structure
 
-				//adding the fitted base structure to the database as the main verb
+				#region select one base structure for the whole sentence from pickedBaseStructures
+
+				bool finishedChoosingBaseStructure = false;
+
+				List<KeyValuePair<VerbInSentence, BaseStructure>> candidatesOfCurrentSentence;
+				KeyValuePair<VerbInSentence, BaseStructure> SelectedKVP;
+
+				#region choose HasPrepositionalObject2
+
+				if(!finishedChoosingBaseStructure){
+					candidatesOfCurrentSentence = new List<KeyValuePair<VerbInSentence,BaseStructure>>();
+
+					foreach(var currentKeyValuePair in pickedBasedStructures)
+					{
+						if(currentKeyValuePair.Value.HasPrepositionalObject2)
+							candidatesOfCurrentSentence.Add(currentKeyValuePair);
+					}
+					
+					if(candidatesOfCurrentSentence.Count > 1)
+					{
+						//select the one which is at the end of the sentence
+						int maxLightVerbIndex = 0;
+						foreach(var currentKeyValuePair in candidatesOfCurrentSentence)
+						{
+							if(currentKeyValuePair.Key.LightVerbIndex >= maxLightVerbIndex){
+								maxLightVerbIndex = currentKeyValuePair.Key.LightVerbIndex;
+								SelectedKVP = currentKeyValuePair;
+							}
+						}
+						finishedChoosingBaseStructure = true;
+					}
+					else if(candidatesOfCurrentSentence.Count == 1)
+					{
+						SelectedKVP = candidatesOfCurrentSentence[0];
+						finishedChoosingBaseStructure = true;
+					}
+					else if (candidatesOfCurrentSentence.Count == 0)
+					{
+						finishedChoosingBaseStructure = false;
+					}
+					else
+					{
+						throw new Exception("Error in picking BaseStructures for Verbs");
+					}
+				
+				}
+				#endregion
+
+				#region choose HasPrepositionalObject1
+
+				if (!finishedChoosingBaseStructure)
+				{
+					candidatesOfCurrentSentence = new List<KeyValuePair<VerbInSentence, BaseStructure>>();
+
+					foreach (var currentKeyValuePair in pickedBasedStructures)
+					{
+						if (currentKeyValuePair.Value.HasPrepositionalObject1)
+							candidatesOfCurrentSentence.Add(currentKeyValuePair);
+					}
+
+					if (candidatesOfCurrentSentence.Count > 1)
+					{
+						//select the one which is at the end of the sentence
+						int maxLightVerbIndex = 0;
+						foreach (var currentKeyValuePair in candidatesOfCurrentSentence)
+						{
+							if (currentKeyValuePair.Key.LightVerbIndex >= maxLightVerbIndex)
+							{
+								maxLightVerbIndex = currentKeyValuePair.Key.LightVerbIndex;
+								SelectedKVP = currentKeyValuePair;
+							}
+						}
+						finishedChoosingBaseStructure = true;
+					}
+					else if (candidatesOfCurrentSentence.Count == 1)
+					{
+						SelectedKVP = candidatesOfCurrentSentence[0];
+						finishedChoosingBaseStructure = true;
+					}
+					else if (candidatesOfCurrentSentence.Count == 0)
+					{
+						finishedChoosingBaseStructure = false;
+					}
+					else
+					{
+						throw new Exception("Error in picking BaseStructures for Verbs");
+					}
+
+				}
+				#endregion
+
+				#region choose HasRa
+
+				if (!finishedChoosingBaseStructure)
+				{
+					candidatesOfCurrentSentence = new List<KeyValuePair<VerbInSentence, BaseStructure>>();
+
+					foreach (var currentKeyValuePair in pickedBasedStructures)
+					{
+						if (currentKeyValuePair.Value.HasRa)
+							candidatesOfCurrentSentence.Add(currentKeyValuePair);
+					}
+
+					if (candidatesOfCurrentSentence.Count > 1)
+					{
+						//select the one which is at the end of the sentence
+						int maxLightVerbIndex = 0;
+						foreach (var currentKeyValuePair in candidatesOfCurrentSentence)
+						{
+							if (currentKeyValuePair.Key.LightVerbIndex >= maxLightVerbIndex)
+							{
+								maxLightVerbIndex = currentKeyValuePair.Key.LightVerbIndex;
+								SelectedKVP = currentKeyValuePair;
+							}
+						}
+						finishedChoosingBaseStructure = true;
+					}
+					else if (candidatesOfCurrentSentence.Count == 1)
+					{
+						SelectedKVP = candidatesOfCurrentSentence[0];
+						finishedChoosingBaseStructure = true;
+					}
+					else if (candidatesOfCurrentSentence.Count == 0)
+					{
+						finishedChoosingBaseStructure = false;
+					}
+					else
+					{
+						throw new Exception("Error in picking BaseStructures for Verbs");
+					}
+
+				}
+				#endregion
+
+				#region choose HasBandMotammemi
+
+				if (!finishedChoosingBaseStructure)
+				{
+					candidatesOfCurrentSentence = new List<KeyValuePair<VerbInSentence, BaseStructure>>();
+
+					foreach (var currentKeyValuePair in pickedBasedStructures)
+					{
+						if (currentKeyValuePair.Value.HasBandMotammemi || currentKeyValuePair.Value.HasBandMotemmemiAgreement || currentKeyValuePair.Value.HasBandMotemmemiEltezami)
+							candidatesOfCurrentSentence.Add(currentKeyValuePair);
+					}
+
+					if (candidatesOfCurrentSentence.Count > 1)
+					{
+						//select the one which is at the end of the sentence
+						int maxLightVerbIndex = 0;
+						foreach (var currentKeyValuePair in candidatesOfCurrentSentence)
+						{
+							if (currentKeyValuePair.Key.LightVerbIndex >= maxLightVerbIndex)
+							{
+								maxLightVerbIndex = currentKeyValuePair.Key.LightVerbIndex;
+								SelectedKVP = currentKeyValuePair;
+							}
+						}
+						finishedChoosingBaseStructure = true;
+					}
+					else if (candidatesOfCurrentSentence.Count == 1)
+					{
+						SelectedKVP = candidatesOfCurrentSentence[0];
+						finishedChoosingBaseStructure = true;
+					}
+					else if (candidatesOfCurrentSentence.Count == 0)
+					{
+						finishedChoosingBaseStructure = false;
+					}
+					else
+					{
+						throw new Exception("Error in picking BaseStructures for Verbs");
+					}
+
+				}
+				#endregion
+
+				#region choose the last verb
+
+				if(!finishedChoosingBaseStructure)
+				{
+					int maxLightVerbIndex = 0;
+					foreach(var currentKeyValuePair in pickedBasedStructures)
+					{
+						if(currentKeyValuePair.Key.LightVerbIndex >= maxLightVerbIndex)
+						{
+							SelectedKVP = currentKeyValuePair;
+							maxLightVerbIndex = currentKeyValuePair.Key.LightVerbIndex;
+						}
+					}
+					finishedChoosingBaseStructure = true;
+				}
+
+				#endregion
+
+				#endregion
+
+				//fitting one base structure
+				SelectedKVP.Value.FitIntoBaseStructure(ref currentSentenceVBS, SelectedKVP.Key);
 				
 
 				//word index pointer in the current sentence
@@ -130,7 +473,7 @@ namespace VerbInflector
 				Word newWord = null;
 				DependencyBasedToken currentDBT;
 
-				//upgrading the current sentence to a new sentence.
+				#region upgrading the current sentence to a new sentence.
 				for(int word_index = 0; word_index < list.Count() ; word_index++)
 				{
 					currentDBT = list[word_index];
@@ -181,6 +524,11 @@ namespace VerbInflector
 					wordIndexInCurrentSentence += currentDBT.TokenCount;
 				}
 				//sentence is now upgraded and more filled with information
+				#endregion
+
+
+				//adding the fitted base structure to the database as the main verb
+				mongoSaveMainVerb();
 
 				////////////////////////
 				//// Counting the Verbs
@@ -207,6 +555,11 @@ namespace VerbInflector
 			}
 
 			return newArticle;
+		}
+
+		private static void mongoSaveMainVerb()
+		{
+			throw new NotImplementedException();
 		}
 
 		private static string getVerbStringRepresentation(VerbInSentence currentVerbInSentence, Sentence currentSentence)
