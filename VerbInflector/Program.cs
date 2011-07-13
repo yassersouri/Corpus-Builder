@@ -36,6 +36,7 @@ namespace VerbInflector
 			Article currentArticle = ArticleUtils.getArticle(sourceFile);
 
 			Article newArticle = generateNewArticle(currentArticle, verbDicPath);
+			newArticle.setArticleNumber(currentArticle.getArticleNumber());
 
 			ArticleUtils.putArticle(newArticle, destinationFile);
 
@@ -93,9 +94,11 @@ namespace VerbInflector
 				currentFeatures = currentSentence.getFeatures();
 
 				
+				
 				VerbBasedSentence currentSentenceVBS = SentenceAnalyzer.MakeVerbBasedSentence(currentLexemes, currentPOSTags, currentLemmas, currentFeatures, verbDicPath);
 				List<DependencyBasedToken> list = currentSentenceVBS.SentenceTokens;
 
+				Dictionary<VerbInSentence, BaseStructure> satisfiedBaseStructures = new Dictionary<VerbInSentence,BaseStructure>();
 				//for each verb in sentence
 				foreach(var currentVerbInSentence in currentSentenceVBS.VerbsInSentence)
 				{
@@ -105,18 +108,18 @@ namespace VerbInflector
 					if (ValencyDicManager.BaseStrucDic.ContainsKey(currentVerbString))
 					{
 						List<BaseStructure> baseStructuresForTheCurrentVerb = ValencyDicManager.BaseStrucDic[currentVerbString];
-						List<BaseStructure> satisfiedBaseStructures = new List<BaseStructure>();
 						foreach (var currentBaseStructure in baseStructuresForTheCurrentVerb)
 						{
 							if(currentBaseStructure.Satisfy(currentSentenceVBS, currentVerbInSentence))
 							{
-								satisfiedBaseStructures.Add(currentBaseStructure);
+								satisfiedBaseStructures.Add(currentVerbInSentence, currentBaseStructure);
 							}
 						}
 					}
 				}
 
 				//fitting one base structure
+
 				//adding the fitted base structure to the database as the main verb
 				
 
@@ -126,6 +129,8 @@ namespace VerbInflector
 				Word currentWord = null;
 				Word newWord = null;
 				DependencyBasedToken currentDBT;
+
+				//upgrading the current sentence to a new sentence.
 				for(int word_index = 0; word_index < list.Count() ; word_index++)
 				{
 					currentDBT = list[word_index];
@@ -150,8 +155,11 @@ namespace VerbInflector
 							newWord.number = currentDBT.MorphoSyntacticFeats.Number.ToString();
 						else
 							newWord.number = "_";
-						
-						newWord.tma = currentDBT.MorphoSyntacticFeats.TenseMoodAspect.ToString();
+
+						if(currentDBT.MorphoSyntacticFeats.TenseMoodAspect != TenseFormationType.TenseFormationType_NONE)
+							newWord.tma = currentDBT.MorphoSyntacticFeats.TenseMoodAspect.ToString();
+						else
+							newWord.tma = "_";
 					}
 					else{
 						//lemma is unchanged
@@ -185,6 +193,11 @@ namespace VerbInflector
 					long article = currentArticle.getArticleNumber();
 					//sentence_index is already set
 					//verb_index is already set
+
+					//if (verbStringRepresentation.Equals("شدند~_~_"))
+					//{
+					//    mongoCountVerb(verbStringRepresentation, article, sentence_index, verb_index);
+					//}
 					mongoCountVerb(verbStringRepresentation, article, sentence_index, verb_index);
 				}
 
