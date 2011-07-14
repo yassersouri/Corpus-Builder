@@ -498,6 +498,9 @@ namespace VerbInflector
 
 				#endregion
 
+
+				string verbsStringRepresentation = null;
+
 				//fitting one base structure
 				if(nothingPicked)
 				{
@@ -505,6 +508,10 @@ namespace VerbInflector
 					{
 						//no verb exists in the sentense
 						//do nothing
+
+						//empty string representation for sentences with no verb
+						verbsStringRepresentation = "_";
+						SelectedKVP = new KeyValuePair<VerbInSentence,BaseStructure>(null, new BaseStructure());
 					}
 					else
 					{
@@ -582,10 +589,14 @@ namespace VerbInflector
 
 				//adding the fitted base structure to the database as the main verb
 				//add the selectedKVP's Verb to database
-				string verbsStringRepresentation = getVerbStringRepresentation(SelectedKVP.Key, newSentence);
+
+				if(!nothingPicked && currentSentenceVBS.VerbsInSentence.Count != 0)
+				{
+					verbsStringRepresentation = getVerbStringRepresentation(SelectedKVP.Key, newSentence);
+				}
 
 
-				                  //representation           //number of the article           //which sentence //which base structuer
+									//representation           //number of the article           //which sentence //which base structuer
 				mongoSaveMainVerb(collection, verbsStringRepresentation, currentArticle.getArticleNumber(), sentence_index, SelectedKVP.Value);
 
 				////////////////////////
@@ -597,9 +608,7 @@ namespace VerbInflector
 				{
 					string verbStringRepresentation = getVerbStringRepresentation(verbsInSentence[verb_index], newSentence);
 					long article = currentArticle.getArticleNumber();
-					//sentence_index is already set
-					//verb_index is already set
-
+					
 					//if (verbStringRepresentation.Equals("شوند~_~_"))
 					//{
 					//    mongoCountVerb(verbStringRepresentation, article, sentence_index, verb_index);
@@ -609,8 +618,14 @@ namespace VerbInflector
 
 				////
 				////////////////////////
+
+
+
+
 				newArticle.addSentence(newSentence);
 			}
+			
+			
 
 			return newArticle;
 		}
@@ -643,9 +658,9 @@ namespace VerbInflector
 													.Add("HasSecondObject",						baseStructure.HasSecondObject)
 													.Add("HasSubject",							baseStructure.HasSubject)
 													.Add("HasTammeez",							baseStructure.HasTammeez)
-													.Add("MoqType",								baseStructure.MoqType)
-													.Add("PrepositionalObjectPreposition1",		baseStructure.PrepositionalObjectPreposition1)
-													.Add("PrepositionalObjectPreposition2",		baseStructure.PrepositionalObjectPreposition2);
+													.Add("MoqType",								(baseStructure.MoqType == null) ? "_" : baseStructure.MoqType)
+													.Add("PrepositionalObjectPreposition1",		(baseStructure.PrepositionalObjectPreposition1 == null) ? "_" : baseStructure.PrepositionalObjectPreposition1)
+													.Add("PrepositionalObjectPreposition2",		(baseStructure.PrepositionalObjectPreposition2 == null) ? "_" : baseStructure.PrepositionalObjectPreposition2);
 			
 			BsonDocument mainVerbOn = new BsonDocument().Add("article", article).Add("sentence_index", sentence_index).Add("base_structure", baseS);
 
