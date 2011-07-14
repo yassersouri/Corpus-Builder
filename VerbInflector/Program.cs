@@ -15,7 +15,8 @@ namespace VerbInflector
 	{
 		static string connectionString = "mongodb://localhost";
 		static string databaseName = "crawler";
-		static string collectionName = "verbs";
+		static string verbsCollectionName = "verbs";
+		static string sentencesCollectionName = "sentences";
 
 		static void Main(string[] args)
 		{
@@ -38,10 +39,11 @@ namespace VerbInflector
 			try
 			{
 				MongoDatabase database = server.GetDatabase(databaseName);
-				MongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>(collectionName);
+				MongoCollection<BsonDocument> verbsCollection = database.GetCollection<BsonDocument>(verbsCollectionName);
+				MongoCollection<BsonDocument> sentencesCollection = database.GetCollection<BsonDocument>(sentencesCollectionName);
 
 				//VerbInflector_OneFile(sourceFile, destinationFile, verbDicPath);
-				VerbInflector_All(collection, sourceDir, destinationDir, verbDicPath);
+				VerbInflector_All(verbsCollection, sentencesCollection, sourceDir, destinationDir, verbDicPath);
 			}
 			catch(Exception e)
 			{
@@ -54,11 +56,11 @@ namespace VerbInflector
 			}
 		}
 
-		public static void VerbInflector_OneFile(MongoCollection<BsonDocument> collection, string sourceFile, string destinationFile, string verbDicPath)
+		public static void VerbInflector_OneFile(MongoCollection<BsonDocument> verbsCollection, MongoCollection<BsonDocument> sentencesCollection, string sourceFile, string destinationFile, string verbDicPath)
 		{
 			Article currentArticle = ArticleUtils.getArticle(sourceFile);
 
-			Article newArticle = generateNewArticle(collection, currentArticle, verbDicPath);
+			Article newArticle = generateNewArticle(verbsCollection, sentencesCollection, currentArticle, verbDicPath);
 			newArticle.setArticleNumber(currentArticle.getArticleNumber());
 
 			ArticleUtils.putArticle(newArticle, destinationFile);
@@ -66,7 +68,7 @@ namespace VerbInflector
 			System.Console.WriteLine(newArticle.getArticleNumber());
 		}
 
-		public static void VerbInflector_All(MongoCollection<BsonDocument> collection, string sourceDirectory, string destinationDirectory, string verbDicPath)
+		public static void VerbInflector_All(MongoCollection<BsonDocument> verbsCollection, MongoCollection<BsonDocument> sentencesCollection, string sourceDirectory, string destinationDirectory, string verbDicPath)
 		{
 			string[] files = Directory.GetFiles(sourceDirectory);
 			Directory.CreateDirectory(destinationDirectory);
@@ -86,11 +88,11 @@ namespace VerbInflector
 				fileName = sourceFile.Substring(lastIndex + 1, len - lastIndex - 1);
 				destinationFile = destinationDirectory + fileName;
 
-				VerbInflector_OneFile(collection, sourceFile, destinationFile, verbDicPath);
+				VerbInflector_OneFile(verbsCollection, sentencesCollection, sourceFile, destinationFile, verbDicPath);
 			}
 		}
 
-		private static Article generateNewArticle(MongoCollection<BsonDocument> collection, Article currentArticle, string verbDicPath)
+		private static Article generateNewArticle(MongoCollection<BsonDocument> verbsCollection, MongoCollection<BsonDocument> sentencesCollection, Article currentArticle, string verbDicPath)
 		{
 			Article newArticle = new Article();
 
@@ -597,7 +599,7 @@ namespace VerbInflector
 
 
 									//representation           //number of the article           //which sentence //which base structuer
-				mongoSaveMainVerb(collection, verbsStringRepresentation, currentArticle.getArticleNumber(), sentence_index, SelectedKVP.Value);
+				mongoSaveMainVerb(verbsCollection, verbsStringRepresentation, currentArticle.getArticleNumber(), sentence_index, SelectedKVP.Value);
 
 				////////////////////////
 				//// Counting the Verbs
@@ -613,19 +615,17 @@ namespace VerbInflector
 					//{
 					//    mongoCountVerb(verbStringRepresentation, article, sentence_index, verb_index);
 					//}
-					mongoCountVerb(collection, verbStringRepresentation, article, sentence_index, verb_index);
+					mongoCountVerb(verbsCollection, verbStringRepresentation, article, sentence_index, verb_index);
 				}
 
 				////
 				////////////////////////
 
-
-
+				//loggin some information about a sentence into the database
+				mongoSentence(sentencesCollection, currentArticle.getArticleNumber(), sentence_index, newSentence.getWords().Length, false);
 
 				newArticle.addSentence(newSentence);
 			}
-			
-			
 
 			return newArticle;
 		}
@@ -640,6 +640,12 @@ namespace VerbInflector
 
 			representation = LightVerbIndexLemma + "~" + NonVerbalElementLexeme + "~" + VerbalPreposiotionLexeme;
 			return representation;
+		}
+
+		private static void mongoSentence(MongoCollection<BsonDocument> collection, long article, int sentence_index, int sentence_length, bool in_corpus)
+		{
+			BsonDocument doc = new BsonDocument().Add("article", article).Add("sentence_index", sentence_index).Add("sentence_length", sentence_length).Add("in_corpus", in_corpus);
+			collection.Insert(doc);
 		}
 
 		private static void mongoSaveMainVerb(MongoCollection<BsonDocument> collection ,string verbStringRepresentation, long article, int sentence_index, BaseStructure baseStructure)
@@ -662,6 +668,7 @@ namespace VerbInflector
 													.Add("PrepositionalObjectPreposition1",		(baseStructure.PrepositionalObjectPreposition1 == null) ? "_" : baseStructure.PrepositionalObjectPreposition1)
 													.Add("PrepositionalObjectPreposition2",		(baseStructure.PrepositionalObjectPreposition2 == null) ? "_" : baseStructure.PrepositionalObjectPreposition2);
 			
+
 			BsonDocument mainVerbOn = new BsonDocument().Add("article", article).Add("sentence_index", sentence_index).Add("base_structure", baseS);
 
 			QueryComplete whereQuery = Query.EQ("verb", verbStringRepresentation);
