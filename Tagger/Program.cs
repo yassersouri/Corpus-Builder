@@ -12,11 +12,13 @@ namespace Tagger
 	{
 		static Tagger tagger = new Tagger();
 		static Token token;
+		static Dictionary<string, Token> lemdic;
 
 		static void Main(string[] args)
 		{
-			string sDir = "D:\\sample\\corpus\\";
-			string dDir = "D:\\sample\\corpus_tagged\\";
+			lemdic = new Dictionary<string,Token>();
+			string sDir = @"D:\crawler\sites\mehrnews1\";
+			string dDir = @"D:\crawler\sites\mehrnews2\";
 			string file = "1244.txt";
 			string sFile = sDir + file;
 			string dFile = dDir + file;
@@ -67,7 +69,15 @@ namespace Tagger
 					pos = line.IndexOf('\t');
 					word = line.Substring(pos).Trim();
 
-					token = tagger.TaggerHelper(word);
+					if(lemdic.ContainsKey(word))
+					{
+						token = lemdic[word];
+					}
+					else
+					{
+						token = tagger.TaggerHelper(word);
+						lemdic.Add(word, token);
+					}
 
 					//if INVALID print "_" instead
 					if(token.Person == ENUM_TENSE_PERSON.INVALID) tense_person_string = "_";
