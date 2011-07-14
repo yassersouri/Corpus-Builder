@@ -14,8 +14,8 @@ namespace Corpus_Builder
         {
             try
             {
-				string dir = "D:\\sample\\";
-				string destinationDir = dir + "corpus\\";
+				string dir = @"D:\crawler\sites\mehrnews\";
+				string destinationDir = @"D:\crawler\sites\mehrnews1\";
 
 				RefineAllFiles(dir);
 				SeparateAllSentencesAndWords(dir,destinationDir);
@@ -95,7 +95,8 @@ namespace Corpus_Builder
 			string[] files = Directory.GetFiles(dir);
 			for(int i = 0; i < files.Length; i++){
 				RefineFile(files[i]);
-				Console.WriteLine("Refined file: " + files[i]);
+				if(i%1000==0)
+				Console.WriteLine("Refined file: " + i);
 			}
         }
 
