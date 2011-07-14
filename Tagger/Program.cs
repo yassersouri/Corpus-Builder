@@ -45,8 +45,13 @@ namespace Tagger
 				fileName = sourceFile.Substring(lastIndex+1, len-lastIndex-1);
 				destinationFile = destinationDirectory + fileName;
 
+				if (i % 100 == 0)
+					Console.WriteLine("Tagged file: " + sourceFile);
+
+				if(File.Exists(destinationFile)) continue;
+
 				TagFile(sourceFile, destinationFile);
-				Console.WriteLine("Tagged file: " + sourceFile);
+				
 			}
 		}
 
