@@ -13,6 +13,10 @@ namespace VerbInflector
 {
 	class Program
 	{
+		static string connectionString = "mongodb://localhost";
+		static string databaseName = "crawler";
+		static string collectionName = "verbs";
+
 		static void Main(string[] args)
 		{
 			string verbDicPath = "../../VerbList.txt";
@@ -28,14 +32,33 @@ namespace VerbInflector
 			//this line takes time
 			ValencyDicManager.RefreshVerbList("../../VerbList.txt", "../../valency list.txt");
 
-			//VerbInflector_OneFile(sourceFile, destinationFile, verbDicPath);
-			VerbInflector_All(sourceDir, destinationDir, verbDicPath);
+			//create mongodb server, database and collection
+			//try-catch-finally is for disconnecting the server
+			MongoServer server = MongoServer.Create(connectionString);
+			try
+			{
+				MongoDatabase database = server.GetDatabase(databaseName);
+				MongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>(collectionName);
+
+				//VerbInflector_OneFile(sourceFile, destinationFile, verbDicPath);
+				VerbInflector_All(collection, sourceDir, destinationDir, verbDicPath);
+			}
+			catch(Exception e)
+			{
+				throw e;
+			}
+			finally
+			{
+				//disconnecting the server
+				server.Disconnect();
+			}
 		}
 
-		public static void VerbInflector_OneFile(string sourceFile, string destinationFile, string verbDicPath){
+		public static void VerbInflector_OneFile(MongoCollection<BsonDocument> collection, string sourceFile, string destinationFile, string verbDicPath)
+		{
 			Article currentArticle = ArticleUtils.getArticle(sourceFile);
 
-			Article newArticle = generateNewArticle(currentArticle, verbDicPath);
+			Article newArticle = generateNewArticle(collection, currentArticle, verbDicPath);
 			newArticle.setArticleNumber(currentArticle.getArticleNumber());
 
 			ArticleUtils.putArticle(newArticle, destinationFile);
@@ -43,7 +66,7 @@ namespace VerbInflector
 			System.Console.WriteLine(newArticle.getArticleNumber());
 		}
 
-		public static void VerbInflector_All(string sourceDirectory, string destinationDirectory, string verbDicPath)
+		public static void VerbInflector_All(MongoCollection<BsonDocument> collection, string sourceDirectory, string destinationDirectory, string verbDicPath)
 		{
 			string[] files = Directory.GetFiles(sourceDirectory);
 			Directory.CreateDirectory(destinationDirectory);
@@ -63,11 +86,11 @@ namespace VerbInflector
 				fileName = sourceFile.Substring(lastIndex + 1, len - lastIndex - 1);
 				destinationFile = destinationDirectory + fileName;
 
-				VerbInflector_OneFile(sourceFile, destinationFile, verbDicPath);
+				VerbInflector_OneFile(collection, sourceFile, destinationFile, verbDicPath);
 			}
 		}
 
-		private static Article generateNewArticle(Article currentArticle, string verbDicPath)
+		private static Article generateNewArticle(MongoCollection<BsonDocument> collection, Article currentArticle, string verbDicPath)
 		{
 			Article newArticle = new Article();
 
@@ -93,8 +116,6 @@ namespace VerbInflector
 				currentLemmas = currentSentence.getLemmas();
 				currentFeatures = currentSentence.getFeatures();
 
-				
-				
 				VerbBasedSentence currentSentenceVBS = SentenceAnalyzer.MakeVerbBasedSentence(currentLexemes, currentPOSTags, currentLemmas, currentFeatures, verbDicPath);
 				List<DependencyBasedToken> list = currentSentenceVBS.SentenceTokens;
 				Random randomNumberGenerator = new Random();
@@ -478,11 +499,8 @@ namespace VerbInflector
 				#endregion
 
 				//fitting one base structure
-				
-				
 				if(nothingPicked)
 				{
-					//nothing really picked.
 					if(currentSentenceVBS.VerbsInSentence.Count == 0)
 					{
 						//no verb exists in the sentense
@@ -490,6 +508,7 @@ namespace VerbInflector
 					}
 					else
 					{
+						//choose the last verb in sentence and fit it with an empty base structure.
 						VerbInSentence lastVerbInTheSentence = currentSentenceVBS.VerbsInSentence.Last();
 						BaseStructure emptyBaseStructure = new BaseStructure();
 						SelectedKVP = new KeyValuePair<VerbInSentence,BaseStructure>(lastVerbInTheSentence, emptyBaseStructure);
@@ -563,7 +582,11 @@ namespace VerbInflector
 
 				//adding the fitted base structure to the database as the main verb
 				//add the selectedKVP's Verb to database
-				//mongoSaveMainVerb();
+				string verbsStringRepresentation = getVerbStringRepresentation(SelectedKVP.Key, newSentence);
+
+
+				                  //representation           //number of the article           //which sentence //which base structuer
+				mongoSaveMainVerb(collection, verbsStringRepresentation, currentArticle.getArticleNumber(), sentence_index, SelectedKVP.Value);
 
 				////////////////////////
 				//// Counting the Verbs
@@ -577,11 +600,11 @@ namespace VerbInflector
 					//sentence_index is already set
 					//verb_index is already set
 
-					if (verbStringRepresentation.Equals("شوند~_~_"))
-					{
-						mongoCountVerb(verbStringRepresentation, article, sentence_index, verb_index);
-					}
-					mongoCountVerb(verbStringRepresentation, article, sentence_index, verb_index);
+					//if (verbStringRepresentation.Equals("شوند~_~_"))
+					//{
+					//    mongoCountVerb(verbStringRepresentation, article, sentence_index, verb_index);
+					//}
+					mongoCountVerb(collection, verbStringRepresentation, article, sentence_index, verb_index);
 				}
 
 				////
@@ -590,11 +613,6 @@ namespace VerbInflector
 			}
 
 			return newArticle;
-		}
-
-		private static void mongoSaveMainVerb()
-		{
-			throw new NotImplementedException();
 		}
 
 		private static string getVerbStringRepresentation(VerbInSentence currentVerbInSentence, Sentence currentSentence)
@@ -609,22 +627,39 @@ namespace VerbInflector
 			return representation;
 		}
 
-		private static void mongoCountVerb(string verbStringRepresentation, long article, int sentence_index, int verb_index)
+		private static void mongoSaveMainVerb(MongoCollection<BsonDocument> collection ,string verbStringRepresentation, long article, int sentence_index, BaseStructure baseStructure)
 		{
-			string connectionString = "mongodb://localhost";
-			string databaseName = "crawler";
-			string collectionName = "verbs";
+			//creating a BSON document from the BaseStructure
+			BsonDocument baseS = new BsonDocument()	.Add("HasBandMotammemi",					baseStructure.HasBandMotammemi)
+													.Add("HasBandMotemmemiAgreement",			baseStructure.HasBandMotemmemiAgreement)
+													.Add("HasBandMotemmemiEltezami",			baseStructure.HasBandMotemmemiEltezami)
+													.Add("HasEzafehObject",						baseStructure.HasEzafehObject)
+													.Add("HasMoq",								baseStructure.HasMoq)
+													.Add("HasMosnad",							baseStructure.HasMosnad)
+													.Add("HasObject",							baseStructure.HasObject)
+													.Add("HasPrepositionalObject1",				baseStructure.HasPrepositionalObject1)
+													.Add("HasPrepositionalObject2",				baseStructure.HasPrepositionalObject2)
+													.Add("HasRa",								baseStructure.HasRa)
+													.Add("HasSecondObject",						baseStructure.HasSecondObject)
+													.Add("HasSubject",							baseStructure.HasSubject)
+													.Add("HasTammeez",							baseStructure.HasTammeez)
+													.Add("MoqType",								baseStructure.MoqType)
+													.Add("PrepositionalObjectPreposition1",		baseStructure.PrepositionalObjectPreposition1)
+													.Add("PrepositionalObjectPreposition2",		baseStructure.PrepositionalObjectPreposition2);
+			
+			BsonDocument mainVerbOn = new BsonDocument().Add("article", article).Add("sentence_index", sentence_index).Add("base_structure", baseS);
 
-			MongoServer server = MongoServer.Create(connectionString);
-			MongoDatabase database = server.GetDatabase(databaseName);
-			MongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>(collectionName);
+			QueryComplete whereQuery = Query.EQ("verb", verbStringRepresentation);
+			UpdateBuilder updateQuery = Update.Inc("main_verb_count", 1).Push("main_verb_on", mainVerbOn);
+			collection.Update(whereQuery, updateQuery, UpdateFlags.Upsert);
+		}
 
+		private static void mongoCountVerb(MongoCollection<BsonDocument> collection, string verbStringRepresentation, long article, int sentence_index, int verb_index)
+		{
 			BsonDocument seenOn = new BsonDocument().Add("article", article).Add("sentence_index", sentence_index).Add("verb_index", verb_index);
 			QueryComplete whereQuery = Query.EQ("verb", verbStringRepresentation);
 			UpdateBuilder updateQuery = Update.Inc("count", 1).Push("seen_on_sentence", seenOn);
 			collection.Update(whereQuery, updateQuery, UpdateFlags.Upsert);
-
-			server.Disconnect();
 		}
 
 	}
