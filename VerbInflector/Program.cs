@@ -36,24 +36,24 @@ namespace VerbInflector
 			//create mongodb server, database and collection
 			//try-catch-finally is for disconnecting the server
 			MongoServer server = MongoServer.Create(connectionString);
-			//try
-			//{
+			try
+			{
 				MongoDatabase database = server.GetDatabase(databaseName);
 				MongoCollection<BsonDocument> verbsCollection = database.GetCollection<BsonDocument>(verbsCollectionName);
 				MongoCollection<BsonDocument> sentencesCollection = database.GetCollection<BsonDocument>(sentencesCollectionName);
 
 				//VerbInflector_OneFile(sourceFile, destinationFile, verbDicPath);
 				VerbInflector_All(verbsCollection, sentencesCollection, sourceDir, destinationDir, verbDicPath);
-			//}
-			//catch(Exception e)
-			//{
-			//    throw e;
-			//}
-			//finally
-			//{
+			}
+			catch(Exception e)
+			{
+			    throw e;
+			}
+			finally
+			{
 				//disconnecting the server
 				server.Disconnect();
-			//}
+			}
 		}
 
 		public static void VerbInflector_OneFile(MongoCollection<BsonDocument> verbsCollection, MongoCollection<BsonDocument> sentencesCollection, string sourceFile, string destinationFile, string verbDicPath)
@@ -720,7 +720,7 @@ namespace VerbInflector
 					{
 						//add all the previous ones
 						BsonValue curren_main_verb_on = main_verb_on_element.Value.AsBsonArray.ToArray()[i];
-						Console.WriteLine();
+						
 						if(AreTheyEqual(curren_main_verb_on.AsBsonDocument, currentBaseStructure))
 						{
 							//get the seen_on part
