@@ -22,8 +22,8 @@ namespace VerbInflector
 		{
 			string verbDicPath = "../../VerbList.txt";
 
-			string sourceDir = "D:\\sample\\corpus_tagged\\";
-			string destinationDir = sourceDir + "again\\";
+			string sourceDir = @"D:\crawler\sites\mehrnews2\";
+			string destinationDir = @"D:\crawler\sites\mehrnews3\";
 			string file = "1088245.txt";
 
 			string sourceFile = sourceDir + file;
@@ -36,24 +36,24 @@ namespace VerbInflector
 			//create mongodb server, database and collection
 			//try-catch-finally is for disconnecting the server
 			MongoServer server = MongoServer.Create(connectionString);
-			try
-			{
+			//try
+			//{
 				MongoDatabase database = server.GetDatabase(databaseName);
 				MongoCollection<BsonDocument> verbsCollection = database.GetCollection<BsonDocument>(verbsCollectionName);
 				MongoCollection<BsonDocument> sentencesCollection = database.GetCollection<BsonDocument>(sentencesCollectionName);
 
 				//VerbInflector_OneFile(sourceFile, destinationFile, verbDicPath);
 				VerbInflector_All(verbsCollection, sentencesCollection, sourceDir, destinationDir, verbDicPath);
-			}
-			catch(Exception e)
-			{
-				throw e;
-			}
-			finally
-			{
+			//}
+			//catch(Exception e)
+			//{
+			//    throw e;
+			//}
+			//finally
+			//{
 				//disconnecting the server
 				server.Disconnect();
-			}
+			//}
 		}
 
 		public static void VerbInflector_OneFile(MongoCollection<BsonDocument> verbsCollection, MongoCollection<BsonDocument> sentencesCollection, string sourceFile, string destinationFile, string verbDicPath)
@@ -64,8 +64,6 @@ namespace VerbInflector
 			newArticle.setArticleNumber(currentArticle.getArticleNumber());
 
 			ArticleUtils.putArticle(newArticle, destinationFile);
-
-			System.Console.WriteLine(newArticle.getArticleNumber());
 		}
 
 		public static void VerbInflector_All(MongoCollection<BsonDocument> verbsCollection, MongoCollection<BsonDocument> sentencesCollection, string sourceDirectory, string destinationDirectory, string verbDicPath)
@@ -89,6 +87,11 @@ namespace VerbInflector
 				destinationFile = destinationDirectory + fileName;
 
 				VerbInflector_OneFile(verbsCollection, sentencesCollection, sourceFile, destinationFile, verbDicPath);
+
+				if(i%100 == 0)
+				{
+					System.Console.WriteLine(i);
+				}
 			}
 		}
 
@@ -598,7 +601,7 @@ namespace VerbInflector
 				}
 
 
-									//representation           //number of the article           //which sentence //which base structuer
+									              //representation           //number of the article           //which sentence //which base structuer
 				mongoSaveMainVerb(verbsCollection, verbsStringRepresentation, currentArticle.getArticleNumber(), sentence_index, SelectedKVP.Value);
 
 				////////////////////////
@@ -651,29 +654,108 @@ namespace VerbInflector
 		private static void mongoSaveMainVerb(MongoCollection<BsonDocument> collection ,string verbStringRepresentation, long article, int sentence_index, BaseStructure baseStructure)
 		{
 			//creating a BSON document from the BaseStructure
-			BsonDocument baseS = new BsonDocument()	.Add("HasBandMotammemi",					baseStructure.HasBandMotammemi)
-													.Add("HasBandMotemmemiAgreement",			baseStructure.HasBandMotemmemiAgreement)
-													.Add("HasBandMotemmemiEltezami",			baseStructure.HasBandMotemmemiEltezami)
-													.Add("HasEzafehObject",						baseStructure.HasEzafehObject)
-													.Add("HasMoq",								baseStructure.HasMoq)
-													.Add("HasMosnad",							baseStructure.HasMosnad)
-													.Add("HasObject",							baseStructure.HasObject)
-													.Add("HasPrepositionalObject1",				baseStructure.HasPrepositionalObject1)
-													.Add("HasPrepositionalObject2",				baseStructure.HasPrepositionalObject2)
-													.Add("HasRa",								baseStructure.HasRa)
-													.Add("HasSecondObject",						baseStructure.HasSecondObject)
-													.Add("HasSubject",							baseStructure.HasSubject)
-													.Add("HasTammeez",							baseStructure.HasTammeez)
-													.Add("MoqType",								(baseStructure.MoqType == null) ? "_" : baseStructure.MoqType)
-													.Add("PrepositionalObjectPreposition1",		(baseStructure.PrepositionalObjectPreposition1 == null) ? "_" : baseStructure.PrepositionalObjectPreposition1)
-													.Add("PrepositionalObjectPreposition2",		(baseStructure.PrepositionalObjectPreposition2 == null) ? "_" : baseStructure.PrepositionalObjectPreposition2);
+			BsonDocument currentBaseStructure = new BsonDocument()	.Add("HasBandMotammemi",					baseStructure.HasBandMotammemi)
+																	.Add("HasBandMotemmemiAgreement",			baseStructure.HasBandMotemmemiAgreement)
+																	.Add("HasBandMotemmemiEltezami",			baseStructure.HasBandMotemmemiEltezami)
+																	.Add("HasEzafehObject",						baseStructure.HasEzafehObject)
+																	.Add("HasMoq",								baseStructure.HasMoq)
+																	.Add("HasMosnad",							baseStructure.HasMosnad)
+																	.Add("HasObject",							baseStructure.HasObject)
+																	.Add("HasPrepositionalObject1",				baseStructure.HasPrepositionalObject1)
+																	.Add("HasPrepositionalObject2",				baseStructure.HasPrepositionalObject2)
+																	.Add("HasRa",								baseStructure.HasRa)
+																	.Add("HasSecondObject",						baseStructure.HasSecondObject)
+																	.Add("HasSubject",							baseStructure.HasSubject)
+																	.Add("HasTammeez",							baseStructure.HasTammeez)
+																	.Add("MoqType",								(baseStructure.MoqType == null) ? "_" : baseStructure.MoqType)
+																	.Add("PrepositionalObjectPreposition1",		(baseStructure.PrepositionalObjectPreposition1 == null) ? "_" : baseStructure.PrepositionalObjectPreposition1)
+																	.Add("PrepositionalObjectPreposition2",		(baseStructure.PrepositionalObjectPreposition2 == null) ? "_" : baseStructure.PrepositionalObjectPreposition2);
 			
 
-			BsonDocument mainVerbOn = new BsonDocument().Add("article", article).Add("sentence_index", sentence_index).Add("base_structure", baseS);
+			BsonDocument mainVerbOn = new BsonDocument().Add("article", article).Add("sentence_index", sentence_index).Add("base_structure", currentBaseStructure);
+
+			//QueryComplete whereQuery = Query.EQ("verb", verbStringRepresentation);
+			//UpdateBuilder updateQuery = Update.Inc("main_verb_count", 1).Push("main_verb_on", mainVerbOn);
+			//collection.Update(whereQuery, updateQuery, UpdateFlags.Upsert);
 
 			QueryComplete whereQuery = Query.EQ("verb", verbStringRepresentation);
-			UpdateBuilder updateQuery = Update.Inc("main_verb_count", 1).Push("main_verb_on", mainVerbOn);
+			UpdateBuilder updateQuery = Update.Inc("main_verb_count", 1);
 			collection.Update(whereQuery, updateQuery, UpdateFlags.Upsert);
+
+			//updating base_structure
+			BsonDocument currentDocument = collection.FindOne(whereQuery).AsBsonDocument;
+			BsonElement possibleMainVerbOn;
+			if (currentDocument.TryGetElement("main_verb_on", out possibleMainVerbOn))
+			{
+				BsonArray arrayOfMainVerbOn = possibleMainVerbOn.Value.AsBsonArray;
+				bool beenThere = false;
+				foreach (var currentMainVerbOn in arrayOfMainVerbOn)
+				{
+					BsonDocument base_structure_document = currentMainVerbOn.AsBsonDocument;
+					if(AreTheyEqual(base_structure_document,currentBaseStructure))
+					{
+						beenThere = true;
+					}
+				}
+
+				if(!beenThere)
+				{
+					//this verb has been main verb but not with this base structure
+					BsonElement main_verb_on_element = currentDocument.GetElement("main_verb_on");
+					BsonArray seen_on = new BsonArray().Add(new BsonDocument().Add("article", article).Add("sentence_index", sentence_index));
+					currentBaseStructure.Add("seen_on", seen_on).Add("count", 1);
+					main_verb_on_element.Value.AsBsonArray.Add(currentBaseStructure);
+
+					collection.Update(whereQuery, Update.Set("main_verb_on", main_verb_on_element.Value));
+				}
+				else
+				{
+					//this verb has been main verb with same base structure
+					//save main_verb_on
+					BsonElement main_verb_on_element = currentDocument.GetElement("main_verb_on");
+
+					//build the new main_verb_on
+					BsonArray new_main_verb_on = new BsonArray();
+					for (int i = 0; i < main_verb_on_element.Value.AsBsonArray.Count; i++)
+					{
+						//add all the previous ones
+						BsonValue curren_main_verb_on = main_verb_on_element.Value.AsBsonArray.ToArray()[i];
+						Console.WriteLine();
+						if(AreTheyEqual(curren_main_verb_on.AsBsonDocument, currentBaseStructure))
+						{
+							//get the seen_on part
+							BsonArray seen_on = curren_main_verb_on.AsBsonDocument.GetElement("seen_on").Value.AsBsonArray;
+							//update the seen on part just add to it
+							seen_on.Add(new BsonDocument().Add("article", article).Add("sentence_index", sentence_index));
+							//get the count part
+							int count = curren_main_verb_on.AsBsonDocument.GetElement("count").Value.AsInt32;
+							//build a new base_structure asBsonDocument
+							//add it to new_main_verb_on
+							currentBaseStructure.Add("seen_on", seen_on).Set("count", count+1);
+							new_main_verb_on.Add(currentBaseStructure);
+						}
+						else
+						{
+							new_main_verb_on.Add(curren_main_verb_on);
+						}
+					}
+
+
+					//int count = base_structure_document.GetElement("count").Value.AsBsonBinaryData.AsInt32;
+					//write it back
+
+					collection.Update(whereQuery, Update.Set("main_verb_on", new_main_verb_on));
+				}
+			}
+			else{
+				//this verb has never been a main verb this is the first time
+				BsonDocument seen_on_doc = new BsonDocument().Add("article", article).Add("sentence_index", sentence_index);
+				BsonArray seen_on_array = new BsonArray().Add(seen_on_doc);
+				BsonDocument base_structure_doc = currentBaseStructure.Add("seen_on", seen_on_array).Add("count" , 1);
+				BsonArray main_verb_on_doc = new BsonArray().Add(base_structure_doc);
+				collection.Update(whereQuery, Update.Set("main_verb_on", main_verb_on_doc));
+			}
+
 		}
 
 		private static void mongoCountVerb(MongoCollection<BsonDocument> collection, string verbStringRepresentation, long article, int sentence_index, int verb_index)
@@ -682,6 +764,26 @@ namespace VerbInflector
 			QueryComplete whereQuery = Query.EQ("verb", verbStringRepresentation);
 			UpdateBuilder updateQuery = Update.Inc("count", 1).Push("seen_on_sentence", seenOn);
 			collection.Update(whereQuery, updateQuery, UpdateFlags.Upsert);
+		}
+
+		private static bool AreTheyEqual(BsonDocument withextra, BsonDocument noextra)
+		{
+			string[] elements = {"HasBandMotammemi","HasBandMotemmemiAgreement", "HasBandMotemmemiEltezami", "HasEzafehObject", "HasMoq", "HasMosnad",				
+																	"HasObject" ,"HasPrepositionalObject1",	"HasPrepositionalObject2","HasRa",	"HasSecondObject",					
+																	"HasSubject","HasTammeez",	"MoqType",	"PrepositionalObjectPreposition1","PrepositionalObjectPreposition2"	};
+			try{
+				foreach(string s in elements)
+				{
+					if(!withextra.GetElement(s).Equals(noextra.GetElement(s)))
+						return false;
+				}
+				
+			}
+			catch(Exception e)
+			{
+				return false;
+			}
+			return true;
 		}
 
 	}
